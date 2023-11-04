@@ -1,0 +1,14 @@
+{{- $url := urls.Parse .Destination -}}
+{{- $scheme := $url.Scheme -}}
+
+<!-- <a href="/{{- $url.Path | safeURL -}}"> test</a> -->
+<!-- <p>{{- printf "/%s%s" .Page.File.Dir .Destination | safeURL -}}</p> -->
+<img
+src="{{- $url.Path | safeURL -}}"
+	{{- with .Title }} title="{{ . | safeHTML }}"{{- end -}}
+	{{- with .Text }} alt="{{ . | safeHTML }}"
+	{{- end -}}
+/>
+
+
+{{- /* whitespace stripped here to avoid trailing newline in rendered result caused by file EOL */ -}}
