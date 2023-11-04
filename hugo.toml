@@ -6,12 +6,6 @@ theme = "Doit"
 # website title
 title = "Codee的博客"
 
-# language code ["en", "zh-CN", "fr", "pl", ...]
-languageCode = "en"
-# language name ["English", "简体中文", "Français", "Polski", ...]
-languageName = "English"
-
-
 ignorefiles = [ ".obsidian/.*","_template/*"]
 
 
