@@ -1,7 +1,7 @@
 ---
 title: Ubuntu安装Samba
 date: 2023-11-05T03:09:00.000+08:00
-draft: "true"
+draft: "false"
 tags:
   - ubuntu
   - samba

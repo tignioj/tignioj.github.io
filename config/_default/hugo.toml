@@ -1,7 +1,7 @@
 baseURL = "https://hugodoit.pages.dev"
 # [en, zh-cn, fr, pl, ...] determines default content language
 # [en, zh-cn, fr, pl, ...] 设置默认的语言
-defaultContentLanguage = "en"
+defaultContentLanguage = "zh-cn"
 # website title
 # 网站标题
 title = "Codee的博客"
