@@ -1,7 +1,7 @@
 ---
 title: obsidian插件开发-文件操作
 date: 2023-11-06T00:55:00.000+08:00
-draft: "true"
+draft: "false"
 tags:
   - obsidian
   - obsidian插件
