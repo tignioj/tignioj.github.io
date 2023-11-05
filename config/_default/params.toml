@@ -494,7 +494,7 @@ cacheRemoteImages = false
     # Publisher info
     # 出版者信息
     [page.seo.publisher]
-      name = "xxxx"
+      name = "codee"
       logoUrl = "/imgs/avatar.jpg"
   # Related content config
   # 相关文章推荐配置
