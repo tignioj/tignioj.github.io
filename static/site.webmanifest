@@ -1,6 +1,8 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "Codee bolg",
+    "short_name": "codee blog",
+    "start_url": "/",
+    "description": "codee's blog.",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
