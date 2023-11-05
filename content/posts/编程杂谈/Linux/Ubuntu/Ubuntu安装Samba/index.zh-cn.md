@@ -5,9 +5,12 @@ draft: "false"
 tags:
   - ubuntu
   - samba
-lastmod: 2023-11-05T03:12:00.000+08:00
+lastmod: 2023-11-05T09:38:56.478Z
+categories:
+  - 编程杂谈
+  - Linux
+  - Ubuntu
 ---
-
 
 
 # 一、安装 `samba`
@@ -22,7 +25,7 @@ sudo apt install samba
 硬盘将要挂载的目录 `mkdir /home/<username>/sambashare/`
 
 确定挂载的硬盘：
-![](attachments/Pasted%20image%2020231105031112.png)
+![](Pasted%20image%2020231105173854.png)
 
 
 把硬盘挂载到刚刚创建的目录
@@ -32,7 +35,7 @@ sudo mount /dev/sdb1 home/<username>/sambashare/
 ```
 
 检查是否挂载成功 `lsblk`
-![](attachments/Pasted%20image%2020231105031132.png)
+![](Pasted%20image%2020231105031132.png)
 
 # 三、编写配置文件并创建用户
 

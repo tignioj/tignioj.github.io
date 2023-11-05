@@ -5,11 +5,11 @@ draft: "false"
 tags:
   - 刷机
   - 小米
-lastmod: 2023-11-05T03:22:00.000+08:00
-categories: []
+lastmod: 2023-11-04T19:24:06.619Z
+categories:
+  - 玩机
+  - 刷机
 ---
-
-
 
 # 一、准备：1.线刷包 2. fastboot.exe
 
@@ -55,12 +55,12 @@ fastboot: usage: no command
 关机后，长按开机键+音量下，出现一个安卓机器人
 
 ## 2. 解压线刷包，进入firmware目录
-![](attachments/Pasted%20image%2020231105022910.png)
+![](Pasted%20image%2020231105022910.png)
 
 
 打开终端，执行这个flash_all_expect_storage.bat脚本（不清理用户数据）
 
-![](attachments/Pasted%20image%2020231105032144.png)
+![](Pasted%20image%2020231105032144.png)
 成功完整日志
 
 ```powershell
