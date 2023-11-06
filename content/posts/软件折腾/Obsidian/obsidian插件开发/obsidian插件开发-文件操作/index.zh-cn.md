@@ -6,7 +6,7 @@ tags:
   - obsidian
   - obsidian插件
   - api
-lastmod: 2023-11-05T16:55:25.902Z
+lastmod: 2023-11-05T17:18:37.225Z
 categories:
   - 软件折腾
   - Obsidian

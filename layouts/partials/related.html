@@ -1,0 +1,21 @@
+{{- $params := .Scratch.Get "params" -}}
+
+{{ $related := first $params.related.count (where (where .Site.Pages ".Params.tags" "intersect" .Params.tags) "Permalink" "!=" .Permalink) }}
+
+
+{{ with $related }}
+<h3>{{- T "relatedContent" -}}</h3>
+<div>
+    {{ range . }}
+        {{- $params := .Params | merge .Site.Params.page -}}
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>  <br/>
+        <!-- <div class="related-item-container">
+            <h2 class="related-title">
+                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            </h2>
+        </div> -->
+    {{ end }}
+
+</div>
+{{ end }}
+

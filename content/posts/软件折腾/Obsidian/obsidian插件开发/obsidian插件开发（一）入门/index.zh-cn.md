@@ -71,7 +71,6 @@ import { Notice, Plugin } from "obsidian";
 
 找到  `async onload()`  方法，添加以下代码
 ```js
-await this.loadSettings();
 this.addRibbonIcon('dice', 'Greet',
 () => { new Notice('Hello, world!'); });
 ```
