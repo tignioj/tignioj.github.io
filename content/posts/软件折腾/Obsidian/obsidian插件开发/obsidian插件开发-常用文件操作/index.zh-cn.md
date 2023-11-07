@@ -1,6 +1,6 @@
 ---
 date: 2023-11-05T16:55:11.038Z
-lastmod: 2023-11-07T06:29:37.693Z
+lastmod: 2023-11-07T16:26:43.227Z
 categories:
   - 软件折腾
   - Obsidian
@@ -74,83 +74,59 @@ getAbstractFileByPath(path: string): TAbstractFile | null;
 ```
 
 示例：获取posts下的所有文件
->	`TAbstractFile`虽然没有`children`这个属性，但是却能够调用，很奇怪？请查阅
+>	`TAbstractFile`虽然没有`children`这个属性，但是却能够调用，很奇怪?
 
 ```js
 this.app.vault.getAbstractFileByPath("content/posts").children
 ```
 ![](Pasted%20image%2020231106011354.png)
-这段代码在obsidian的控制台上可以直接运行，然而当我们呢调用`npm run build` 的时候缺报错了.
+这段代码在obsidian的控制台上可以直接运行，然而当我们调用`npm run build` 的时候却报错了.
+经过查阅源码得知，`TAbstractFile`确实没有`children`属性，但是在运行过程中，控制台自动转换成了 `TFolder`对象，所以没有报错。
 
-经过查阅源码得知，`TAbstractFile`确实没有`children`属性，但是在运行过程中，控制台自动转换成了 `TFolder`对象，所以没有报错，然而编译的时候却难以确定到底是`TFolder`还是`TFile`，因此我们需要手动强转
-`TAbstractFile`属性 继承于`TAbstractFile`
+然而编译的时候却难以确定到底是`TFolder`还是`TFile`，因此我们需要手动强转成TFolder
+> 强转的语法是在变量前面加上尖括号指定类型名称:  ``<类型>obj`
+
+ `TAbstractFile`是一个抽象类
 ```js
-/**
- * @public
- */
 export abstract class TAbstractFile {
-    /**
-     * @public
-     */
     vault: Vault;
-    /**
-     * @public
-     */
     path: string;
-    /**
-     * @public
-     */
     name: string;
-    /**
-     * @public
-     */
     parent: TFolder;
-
 }
 
 ```
 
-`TFile`继承于`TAbstractFile
+`TFile`也继承于`TAbstractFile
 ```js
-/**
- * @public
- */
 export class TFile extends TAbstractFile {
-    /**
-     * @public
-     */
     stat: FileStats;
-    /**
-     * @public
-     */
     basename: string;
-    /**
-     * @public
-     */
     extension: string;
 
 }
 ```
-
-`TFile`和`TFolder`继承于`TAbstractFile`，因此他们都可以调用`TAbstractFile`的方法，同时拥有自己独特的方法，而`children`是`TFolder`独特的方法，因此我们将其需要转换成`TFolder`
+`TFolder`也继承于`TAbstractFile
 ```js
-/**  
- * @public */export class TFolder extends TAbstractFile {  
-    /**  
-     * @public     */    children: TAbstractFile[];  
-  
-    /**  
-     * @public     */    isRoot(): boolean;  
+ export class TFolder extends TAbstractFile {  
+	children: TAbstractFile[];   
+	isRoot(): boolean;  
 }
 ```
 
+`TFile`和`TFolder`都继承于`TAbstractFile`，因此他们都可以调用`TAbstractFile`的方法，同时拥有自己独特的方法，而`children`是`TFolder`独特的方法，因此我们需要将`TAbstractFile`转换成`TFolder`
 
-示例：获取指定目录下的所有目录，封装成字符串数组并返回
+示例：获取指定目录下的所有目录，封装成Series对象数组并返回
 ```js
+
+interface Series {  
+    title: string;  
+    description: string;  
+}
 /**  
  ** @returns 获取系列，即content/series/下一级的所有目录名称。  
  */  
-getSeries() :Series[] {  
+getSeries() :Series[] { 
   
     const p = this.app.vault?.getAbstractFileByPath("content/series")  
     console.log(p);  
