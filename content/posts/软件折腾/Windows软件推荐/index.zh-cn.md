@@ -1,15 +1,15 @@
 ---
 title: Windows软件推荐
 date: 2023-11-06T10:25:00.000+08:00
-draft: "true"
+draft: "false"
 tags:
   - 软件推荐
-lastmod: 2023-11-06T02:26:08.403Z
+lastmod: 2023-11-07T09:03:43.172Z
 categories:
   - 软件折腾
 ---
 
-# Windows实用程序推荐(长期更新）2023-11-6
+# Windows实用程序推荐(长期更新)
 
 # 一、常用软件
 
@@ -32,7 +32,7 @@ categories:
     2. [FreePlane](https://www.freeplane.org/): 开源强大！基于Java swing，可以编写脚本批量处理，正则查找，适合程序员。
     3. MindManager：重量级，强大！收费。功能齐全！
 8. 终端：
-	1. MobaXTerm个人版，最好用
+	1. [MobaXTerm](https://mobaxterm.mobatek.net/download.html)个人版，最好用
 	2. XShell家庭版
 	3. FinalShell(云同步)，免费的功能也够用，自带的图形化显示系统信息还不错
 9. 下载器
@@ -57,10 +57,10 @@ categories:
 15. 亮度调节: 可以通过软件方式快速调节显示器亮度
     1. Twinkle Tray
 
-# 二、学渣篇
+# 二、学习篇
 
-1. 笔记软件：对于需要绘图的，用自带的OneNote，对于需要记录代码的，可以用Notion。其它的笔记软件太多了，就不一一说了。
-2. 背书：[Anki](https://github.com/ankitects/anki)，主打记忆！全平台通用，iOS要163元购买，安卓和桌面端免费[ttps://github.com/ankitects/anki](https://github.com/ankitects/anki)
+1. 笔记软件：对于需要绘图的，用自带的`OneNote`。笔记软件太多了，到时候专门出一期讲讲。
+2. 记忆：[Anki](https://github.com/ankitects/anki)，主打记忆！全平台通用，iOS要163元购买，安卓和桌面端免费[ttps://github.com/ankitects/anki](https://github.com/ankitects/anki)
 3. 翻译：有道云笔记，比谷歌翻译好，谷歌机翻准确率不太好。
 4. 计算与绘图
     1. Mathematica 可以计算可以画图，首推
