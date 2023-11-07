@@ -1,15 +1,15 @@
 # site description
 # 网站描述
-description = "Hugo DoIt 主题官方文档"
+description = "codee的博客"
 # site keywords
 # 网站关键词
-keywords = ["Theme", "Hugo"]
+keywords = ["博客", "技术分享", "软件", "开发", "Codee", "Hugo", "编程"]
 # App icon config
 # 应用图标配置
 [app]
   # optional site title override for the app when added to an iOS home screen or Android launcher
   # 当添加到 iOS 主屏幕或者 Android 启动器时的标题, 覆盖默认标题
-  title = "DoIt"
+  title = "Codee"
   # whether to omit favicon resource links
   # 是否隐藏网站图标资源链接
   noFavicon = false
@@ -77,13 +77,13 @@ keywords = ["Theme", "Hugo"]
     gravatarEmail = ""
     # URL of avatar shown in home page
     # 主页显示头像的 URL
-    avatarURL = "/imgs/avatar.jpg"
+    avatarURL = "/imgs/avatar.webp"
     # URL the avatar links to
     # 头像的链接指向的 URL
     avatarLinkURL = ""
     # title shown in home page (HTML format is supported)
     # 主页显示的网站标题 (支持 HTML 格式)
-    title = ""
+    title = "Codee的博客"
     # subtitle shown in home page
     # 主页显示的网站副标题
     subtitle = "你好，欢迎来到Codee的博客"

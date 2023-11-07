@@ -48,7 +48,7 @@ cacheRemoteImages = false
     # URL of the LOGO
     # LOGO 的 URL
     # logo = "https://hugodoit.pages.dev/images/avatar.webp"
-    logo = "/imgs/avatar.jpg"
+    logo = "/imgs/avatar.webp"
     # title name
     # 标题名称
     name = "Codee"
@@ -495,9 +495,9 @@ cacheRemoteImages = false
     # 出版者信息
     [page.seo.publisher]
       name = "codee"
-      logoUrl = "/imgs/avatar.jpg"
+      logoUrl = "/imgs/avatar.webp"
   # Related content config
-  # 相关文章推荐配置
+  # 相关文章推荐配置
   [page.related]
     enable = true
     count = 5

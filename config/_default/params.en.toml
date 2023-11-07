@@ -77,7 +77,7 @@ keywords = ["Theme", "Hugo"]
     gravatarEmail = ""
     # URL of avatar shown in home page
     # 主页显示头像的 URL
-    avatarURL = "/imgs/avatar.jpg"
+    avatarURL = "/imgs/avatar.webp"
     # URL the avatar links to
     # 头像的链接指向的 URL
     avatarLinkURL = ""
