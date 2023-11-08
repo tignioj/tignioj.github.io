@@ -21,3 +21,29 @@ series: []
 但是由于hugo的文章的文件名不作为标题，如何显示标题呢？只需要加上title就可以，例如。
 非常好用的小技巧！
 ![](Pasted%20image%2020231109053435.png)
+
+
+# 二、发布技巧
+
+使用shell commands插件一键发布文档到github
+例如我们原本需要手动输入命令提交
+```shell
+git add content/posts/xxxx.md
+git commit -m "xxx"
+git push origin main
+```
+我们可以把这些命令放进一个按钮里面，点击就可以立马提交。
+```shell
+git add {{folder_path:relative}}
+git commit -m "{{folder_name}}"
+git push origin main
+```
+设置如下：
+
+![](Pasted%20image%2020231109072252.png)
+为了明确我们当前提交的文档，最好来个确认框。找到Preactions，新建一个Prompts提示框。打开`review shell command in prompt`,表示预览当前命令
+
+![](Pasted%20image%2020231109072425.png)
+
+
+
