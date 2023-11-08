@@ -38,12 +38,23 @@ git add {{folder_path:relative}}
 git commit -m "{{folder_name}}"
 git push origin main
 ```
-设置如下：
 
+设置如下。
 ![](Pasted%20image%2020231109072252.png)
-为了明确我们当前提交的文档，最好来个确认框。找到Preactions，新建一个Prompts提示框。打开`review shell command in prompt`,表示预览当前命令
+点击小齿轮，在General那里设置Alias别名
+![](Pasted%20image%2020231109074724.png)
+
+为了明确我们当前提交的文档，最好来个确认框。
+
+首先找到Preactions，新建一个Prompts提示框。打开`review shell command in prompt`,表示预览当前命令
 
 ![](Pasted%20image%2020231109072425.png)
 
+接着让刚刚创建的命令关联这个prompt，找到命令，先点击小齿轮
+![](Pasted%20image%2020231109074021.png)
+找到Preactions，选中我们刚刚创建的promot
+![](Pasted%20image%2020231109074121.png)
 
 
+然后我们通过快捷命令就可以发布文章了。打开文档后，按下快捷键`Ctrl + p`，弹出输入框，输入`发布文档`，点击它，就会弹出确认框
+![](Pasted%20image%2020231109074556.png)
