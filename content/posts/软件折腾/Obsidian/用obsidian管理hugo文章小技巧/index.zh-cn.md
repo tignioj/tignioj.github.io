@@ -5,11 +5,12 @@ draft: "false"
 tags:
   - hugo博客
   - obsidian
+  - shell-command
 lastmod: 2023-11-08T21:50:42.602Z
 categories:
   - 软件折腾
   - Obsidian
-series: []
+series:
 ---
 
 # 一、搜索技巧
@@ -58,3 +59,14 @@ git push origin main
 
 然后我们通过快捷命令就可以发布文章了。打开文档后，按下快捷键`Ctrl + p`，弹出输入框，输入`发布文档`，点击它，就会弹出确认框
 ![](Pasted%20image%2020231109074556.png)
+
+![](Pasted%20image%2020231109074858.png)
+
+但是此时会发现没有输出，这是因为默认情况下，正常执行不输出，为了能看到提交的情况，我们打开输出。
+
+点击命令对应的小齿轮，找到Output，在Output channel for stdout中选择Notification ballon。也就是说标准输出都会弹出一个小气球显示结果信息
+![](Pasted%20image%2020231109075055.png)
+
+于是我们再次执行代码后，成功输出了信息。
+
+![](Pasted%20image%2020231109075008.png)
