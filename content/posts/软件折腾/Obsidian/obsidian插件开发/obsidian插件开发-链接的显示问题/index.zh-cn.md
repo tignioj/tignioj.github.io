@@ -57,6 +57,8 @@ obj.fun1 = function (arg1) {
     // 调用原始方法, 第一个参数是调用的对象，后面是原始函数的参数，要用数组形式传进去  
     origin_fun.apply(obj, [arg1])  
 }
+// 此时调用对象的方法 
+obj.fun1("hello") // 输出hello, world!
 ```
 
 对于`selectSuggestion`，里面有两个参数，一个是泛型`T`, 一个是`MouseEvent`，我们就可以写成下面这样
@@ -72,7 +74,7 @@ this.app.workspace.editorSuggest.suggests[0].selectSuggestion =
     }
 ```
 
-为什么selectSuggestion 藏的这么深？obsidian官方文档中我没有查询到任何有关如何获取的方法，而是在社区论坛求助中得到了这位网友的指点 https://forum-zh.obsidian.md/t/topic/25546/6
+为什么`selectSuggestion` 藏的这么深？obsidian官方文档中我没有查询到任何有关如何获取的方法，而是在社区论坛求助中得到了这位网友的指点 https://forum-zh.obsidian.md/t/topic/25546/6
 
 
 
