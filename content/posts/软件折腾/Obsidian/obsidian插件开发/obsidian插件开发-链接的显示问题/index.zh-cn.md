@@ -20,7 +20,7 @@ series:
 
 
 为了解决这个问题，我想到了两个办法。
-## 1. 在插入链接的时候，修改链接标题
+## 在插入链接的时候，修改链接标题
 obsidian按下`[[`时，会弹窗让你选择你要插入的文件，这个弹窗类对象我不清除具体是什么对象，但是参阅官方文档知道这是一个`SuggestModal`相关的窗口
 ```js
 export abstract class SuggestModal<T> extends Modal implements ISuggestOwner<T> {
@@ -77,7 +77,7 @@ this.app.workspace.editorSuggest.suggests[0].selectSuggestion =
 
 
 
-## 2. 不修改标题，而是修改显示效果（仅阅读模式生效）
+## 不修改标题，而是修改显示效果（仅阅读模式生效）
 官方示例 https://docs.obsidian.md/Plugins/Editor/Markdown+post+processing
 
 点击右上角的书本图标进入阅读模式，通过`Ctrl + I` 找到链接的dom，发现链接里面是这样的
