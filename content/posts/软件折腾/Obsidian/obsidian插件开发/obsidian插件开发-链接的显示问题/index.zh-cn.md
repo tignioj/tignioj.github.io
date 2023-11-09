@@ -89,9 +89,8 @@ this.app.workspace.editorSuggest.suggests[0].selectSuggestion =
    target="_blank" rel="noopener">index.zh-cn</a>
 ```
 
-那我们只需要获取到这个internal-link，把值设置成`data-href`里面的`index.zh-cn.md`的上一级目录，也就是该文档的名称。
-用正则表达式把 `../../../编程/Linux2/Ubuntu/Ubuntu安装Samba/index.zh-cn.md` 保留 Ubuntu安装Samba 用到组匹配，一个括号一组，那么
-
+我们可以根据`internal-link`获取到a标签，然后把标签的值设置成`data-href`里面文档的名称。
+可以看到`data-href`中指向的目录为`../../../编程/Linux2/Ubuntu/Ubuntu安装Samba/index.zh-cn.md` ，利用正则表达式就可以提取标题。这里用到了组匹配。
 
 - `.*\/` 对应了 `../../../编程/Linux2/Ubuntu/` ，因为没有加问好，所以会贪婪匹配
 - `(.*)` 对应了`Ubuntu安装Samba`的内容
