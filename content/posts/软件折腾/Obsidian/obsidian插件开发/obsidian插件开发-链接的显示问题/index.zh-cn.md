@@ -16,8 +16,7 @@ series:
 # 问题
 由于obsidian中插入的链接都是以文件名称作为显示，而hugo博客大部分页面都是index.zh-cn.md，真正的名称保存在front-matter以及父类名称里面。那么带来的问题就是所有插入的链接显示都是 index.zh-cn.md而不是真正的名称。
 
-例如 `[index.zh-cn](../../用obsidian管理hugo文章小技巧/index.zh-cn.md)`, 显示效果就是 index.zh-cn
-
+例如 `[index.zh-cn](../../用obsidian管理hugo文章小技巧/index.zh-cn.md)`, 显示效果就是 index.zh-cn，但是实际上我们想要显示的名称是`用obsidian管理hugo文章小技巧`。
 
 为了解决这个问题，我想到了两个办法。
 ## 在插入链接的时候，修改链接标题
