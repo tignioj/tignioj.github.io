@@ -5,13 +5,13 @@ categories:
   - 玩机
   - 虚拟机
 title: Vmware17创建Windows11虚拟机
-draft: "true"
+draft: "false"
 tags:
   - 虚拟机
   - Windows11
   - Windows
   - Vmware
-series: 
+series:
 ---
 # 准备Windows11安装包和虚拟机安装包
 
