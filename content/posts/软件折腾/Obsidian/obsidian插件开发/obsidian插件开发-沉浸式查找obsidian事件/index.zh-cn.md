@@ -6,7 +6,7 @@ categories:
   - Obsidian
   - obsidian插件开发
 title: obsidian插件开发-沉浸式查找obsidian事件
-draft: "false"
+draft: "true"
 tags:
   - obsidian
   - obsidian插件
