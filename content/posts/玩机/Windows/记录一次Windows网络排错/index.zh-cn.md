@@ -5,7 +5,7 @@ categories:
   - 玩机
   - Windows
 title: 记录一次Windows网络排错
-draft: "true"
+draft: "false"
 tags:
   - 断网
   - Windows
