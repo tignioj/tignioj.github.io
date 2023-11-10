@@ -1,10 +1,10 @@
 ---
 date: 2023-11-09T23:33:58.181Z
-lastmod: 2023-11-09T23:53:33.983Z
+lastmod: 2023-11-10T04:47:55.099Z
 categories:
   - 软件折腾
   - hugo博客
-title: obsidian从零开始搭建hugo博客（一）安装git和hugo以及obsidian
+title: obsidian从零开始搭建hugo博客（一）安装git和hugo以及Obsidian
 draft: "false"
 tags:
   - git
@@ -13,12 +13,8 @@ tags:
 series:
   - obsidian从零开始搭建hugo博客
 ---
-
-
-# 官网下载hugo
-- hugo https://github.com/gohugoio/hugo/releases/tag/v0.120.4
-
-
+# 安装hugo
+https://github.com/gohugoio/hugo/releases/tag/v0.120.4
 ## 配置hugo环境变量
 为什么要配置环境变量？配置的原因是使得这个二进制文件可以在终端任意地方执行该程序。如果你不配置环境变量，那么终端想要执行该软件，只能在该软件目录下执行。
 
@@ -43,7 +39,8 @@ PS C:\Users\pcvmm>
 ```
 
 # 安装git
-- git https://git-scm.com/downloads
+
+https://git-scm.com/downloads
 
 ![](Pasted%20image%2020231110114437.png)
 默认配置就行
