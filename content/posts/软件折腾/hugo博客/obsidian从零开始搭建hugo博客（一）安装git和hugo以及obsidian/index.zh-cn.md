@@ -4,7 +4,7 @@ lastmod: 2023-11-10T04:47:55.099Z
 categories:
   - 软件折腾
   - hugo博客
-title: obsidian从零开始搭建hugo博客（一）安装git和hugo以及Obsidian
+title: obsidian从零开始搭建hugo博客（一）安装git和hugo以及obsidian
 draft: "false"
 tags:
   - git
