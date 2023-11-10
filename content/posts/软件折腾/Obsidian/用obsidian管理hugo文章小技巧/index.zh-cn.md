@@ -3,9 +3,9 @@ title: 用obsidian管理hugo文章小技巧
 date: 2023-11-05T23:31:00.000+08:00
 draft: "false"
 tags:
-  - hugo博客
   - obsidian
   - shell-command
+  - hugo
 lastmod: 2023-11-08T21:50:42.602Z
 categories:
   - 软件折腾
@@ -70,3 +70,6 @@ git push origin main
 于是我们再次执行代码后，成功输出了信息。
 
 ![](Pasted%20image%2020231109075008.png)
+
+
+

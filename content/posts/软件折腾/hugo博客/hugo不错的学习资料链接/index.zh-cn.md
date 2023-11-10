@@ -5,9 +5,9 @@ categories:
   - 软件折腾
   - hugo博客
 title: hugo不错的学习资料链接
-draft: "false"
+draft: "true"
 tags:
-  - hugo博客
+  - hugo
 series:
 ---
 
