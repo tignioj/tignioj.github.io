@@ -1,6 +1,6 @@
 ---
 date: 2023-11-09T23:33:58.181Z
-lastmod: 2023-11-10T05:24:21.976Z
+lastmod: 2023-11-10T06:58:19.679Z
 categories:
   - 软件折腾
   - Obsidian
@@ -16,7 +16,7 @@ series:
 https://github.com/gohugoio/hugo/releases/tag/v0.120.4
 ## 配置hugo环境变量
 
-为什么要配置环境变量？配置的原因是使得这个二进制文件可以在终端任意地方执行该程序。如果你不配置环境变量，那么终端想要执行该软件，只能在该软件目录下执行。
+为什么要配置环境变量？配置的原因是使得这个二进制文件可以在终端任意地方执行，如果你不配置环境变量，那么终端只能在软件所在目录下执行该程序。
 
 下载完成hugo之后，解压，找到`hugo.exe`目录所在的位置，复制上面的路径，例如我把它解压到了
 `C:\Users\pcvmm\Desktop\software\mybin\hugo_extended_0.120.4_windows-amd64`
