@@ -5,9 +5,9 @@ categories:
   - 软件折腾
   - hugo博客
 title: hugo的bug-标题太长出错
-draft: "true"
-tags: []
-series: []
+draft: "false"
+tags: 
+series:
 ---
 ## 错误描述
 原本我在系列`利用obsidian从零开始搭建hugo博客` 的第一篇文章标题是`obsidian从零开始搭建hugo博客（一）安装git和hugo以及obsidian` 但是在服务器上总是不显示，发布到github上也是不显示这篇文章
