@@ -1,6 +1,6 @@
 ---
 date: 2023-11-10T07:05:46.542Z
-lastmod: 2023-11-10T07:05:46.542Z
+lastmod: 2023-11-10T15:29:39.524Z
 categories:
   - 软件折腾
   - Obsidian
@@ -13,7 +13,7 @@ series:
   - 利用obsidian从零开始搭建hugo博客
 ---
 在这个教程中，你将：
-1. 生成站点
+1. 生成站点  
 2. 添加文档
 3. 配置站点
 4. 发布文档
@@ -42,6 +42,7 @@ PS C:\Users\pcvmm\Desktop\data\blog>
 生成quickstart时，hugo甚至还贴心的给出了接下来的步骤。
 我们命令行先进入终端 `cd quickstart`，发现其目录结构如下 
 ![](Pasted%20image%2020231110210410.png)
+每个目录的详细信息请查看 [Directory structure | Hugo (gohugo.io)](https://gohugo.io/getting-started/directory-structure/)
 
 接着执行git仓库初始化
 ```
