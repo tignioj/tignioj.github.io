@@ -12,7 +12,7 @@ series:
 ---
 今天在提交页面索引给bing的时候，给出了一些优化意见：
 1. 不能有多个h1标签
-```text {linenos=true}
+```text {linenos=false}
 More than one h1 tag
 
 - 4 instances found
@@ -25,8 +25,8 @@ How to fix?
 Remove redundant <h1> tags from the page source, so that only one <h1> tag exists.
 ```
 
-2. meta标签内容不能过长
-```text {linenos=inline}
+2. meta标签内容不能过长 
+```text {linenos=false}
 Meta Description too long or too short
 
 - 1 instance found

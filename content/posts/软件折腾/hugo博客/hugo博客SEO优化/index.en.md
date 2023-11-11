@@ -12,7 +12,7 @@ series:
 ---
 When submitting a page index to bing today, it gave some optimization advice:：
 1. More than one h1 tag
-```text {linenos=true}
+```text {linenos=false}
 More than one h1 tag
 
 - 4 instances found
@@ -27,7 +27,7 @@ Remove redundant <h1> tags from the page source, so that only one <h1> tag e
 ```
 
 2. Meta Description too long or too short
-```text {linenos=inline}
+```text {linenos=false}
 Meta Description too long or too short
 
 - 1 instance found
