@@ -6,14 +6,15 @@ tags:
   - obsidian
   - shell-command
   - hugo
-lastmod: 2023-11-08T21:50:42.602Z
+lastmod: 2023-11-12T16:01:44.682Z
 categories:
   - 软件折腾
   - Obsidian
-series:
+series: 
+description: obsidian管理hugo文章的一些技巧
 ---
 
-# 一、搜索技巧
+## 一、搜索技巧
 ![](Pasted%20image%2020231109053716.png)
 
 举例：查找所有草稿，即查找所有markdown文件中，属性draft为true的帖子。obsidian提供了一个 `[propertiees: value]` 的方法，于是我们输入 `["draft": true]`，于是显示出结果如下
@@ -24,7 +25,7 @@ series:
 ![](Pasted%20image%2020231109053435.png)
 
 
-# 二、发布技巧
+## 二、发布技巧
 
 使用shell commands插件一键发布文档到github
 例如我们原本需要手动输入命令提交
