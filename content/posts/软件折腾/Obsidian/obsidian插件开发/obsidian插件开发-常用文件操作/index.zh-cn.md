@@ -1,6 +1,6 @@
 ---
 date: 2023-11-05T16:55:11.038Z
-lastmod: 2023-11-07T16:26:43.227Z
+lastmod: 2023-11-12T08:51:17.738Z
 categories:
   - 软件折腾
   - Obsidian
