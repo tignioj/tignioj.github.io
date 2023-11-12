@@ -1,6 +1,6 @@
 ---
 date: 2023-11-10T00:01:25.146Z
-lastmod: 2023-11-10T01:20:57.855Z
+lastmod: 2023-11-12T09:15:47.570Z
 categories:
   - 玩机
   - 虚拟机
@@ -11,9 +11,9 @@ tags:
   - Windows11
   - Windows
   - Vmware
-series:
+series: 
 ---
-# 准备Windows11安装包和虚拟机安装包
+## 准备Windows11安装包和虚拟机安装包
 
 进入官网界面，找到**下载 Windows 11 磁盘映像 (ISO)**，选择下载项为**Windows11(multi-edition ISO)**
 [microsoft.com/zh-cn/software-download/windows11](https://www.microsoft.com/zh-cn/software-download/windows11)
@@ -24,7 +24,7 @@ series:
 [下载 VMware Workstation Pro | CN](https://www.vmware.com/cn/products/workstation-pro/workstation-pro-evaluation.html)
 
 
-# 初始化
+## 初始化
 打开虚拟机Vmware Workstation，依次点击文件->新建虚拟机，弹出新建虚拟机向导，选择典型安装，点击下一步
 ![](Pasted%20image%2020231110092554.png)
 
@@ -48,7 +48,7 @@ series:
 ![](Pasted%20image%2020231110081640.png)
 选择完毕后点击关闭自定义硬件的窗口，然后点击完成
 ![](Pasted%20image%2020231110093223.png)
-# 进入安装
+## 进入安装
 
 上面的步骤完成后，点击开启此虚拟机就会进入自动安装。然后会弹出Press any Key Boot from CD，在这个界面我们快速按下键盘任意按键即可，否则会进入黑屏显示"Time out", 不用担心，再等一会就会出现微软的Logo
 
@@ -74,7 +74,7 @@ series:
 之后什么也不用做，等几分钟左右就会自动进入系统了
 选择国家地区，后面根据自己的需要设定就好了
 ![](Pasted%20image%2020231110094629.png)
-# 安装虚拟机工具
+## 安装虚拟机工具
 这时候刚装好的虚拟机是很卡的，并且拖拽虚拟机窗口时，Win11显示大小不会跟着变化，而是留下黑边，这是还没安装虚拟机工具Vmware Tools导致的。
 我们找到虚拟机下面弹出的提示，点击**我已完成安装**后，会自动往系统插入一张虚拟光盘。
 ![](Pasted%20image%2020231110105008.png)
