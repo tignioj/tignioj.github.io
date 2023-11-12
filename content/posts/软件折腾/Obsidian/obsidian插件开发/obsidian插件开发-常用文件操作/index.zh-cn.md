@@ -10,13 +10,14 @@ draft: "false"
 tags:
   - obsidian
   - obsidian插件
+description: obsidian插件开发之文件操作
 ---
 
-目录结构如图所示
+将要操作的文件目录结构如图所示
 ![](Pasted%20image%2020231106010926.png)
 
-# 一、文件操作
-## 创建文件
+## 一、文件操作
+### 创建文件
 ```js
 /**
  * @public
@@ -33,7 +34,7 @@ this.app.vault.create("1.md", "hello");
 this.app.vault.create("demo/ok.md", "hello");
 ```
 
-## 重命名文件
+### 重命名文件
 
 调用`fileManager`可以让obsidian自动更新里面的链接！
 
@@ -55,7 +56,7 @@ this.app.fileManager(f, "2.md")
 ```
 
 如果仅仅修改文件名称可以调用`this.app.vault.rename()`方法
-## 获取所有文件
+### 获取所有文件
 ```js
 /**
  * @public
@@ -65,7 +66,7 @@ getFiles(): TFile[];
 示例：获取所有文件
 ![](Pasted%20image%2020231106011657.png)
 
-## 获取指定目录的文件列表
+### 获取指定目录的文件列表
 ```js
 /**
  * @public
@@ -144,15 +145,15 @@ getSeries() :Series[] {
 ```
 
 
-# 二、文件夹操作
+## 二、文件夹操作
 
-## 获取当前仓库系统目录
+### 获取当前仓库系统目录
 ```js
 this.app.vault.adapter.basePath
 ```
 ![](Pasted%20image%2020231106011106.png)
 
-## 创建文件夹
+### 创建文件夹
 
 ```js
 /**
@@ -186,7 +187,7 @@ this.app.vault.createFolder("a/b/c");
 
 
 
-# 结束语
+## 结束语
 
 在开发过程中遇到各种问题，可以去官网 [obsidian-api](https://github.com/obsidianmd/obsidian-api/tree/bde556afa033e909ebfb9fcee8f5ef288276f78f) 查看源码`obsidian-api/obsidian.d.ts` 获取帮助
 
