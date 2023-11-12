@@ -1,6 +1,6 @@
 ---
 date: 2023-11-10T07:05:46.542Z
-lastmod: 2023-11-10T15:29:39.524Z
+lastmod: 2023-11-12T08:52:07.212Z
 categories:
   - 软件折腾
   - Obsidian
@@ -19,7 +19,7 @@ series:
 4. 发布文档
 
 注意，官方文档表示Windows用户不能用powershell执行以下命令，但是我用powershell大部分步骤都是没问题的，有问题的步骤会特别指出。
-# 初始化站点
+## 初始化站点
 随便建立一个目录，用终端打开后输入`hugo new site quickstart`，就会生成一个文件夹quickstart
 
 ```powershell
@@ -49,13 +49,13 @@ PS C:\Users\pcvmm\Desktop\data\blog>
 git init # 执行git init对站点进行git仓库初始化以便于我们添加主题模块
 ```
 
-# 下载主题模块
+## 下载主题模块
 > 如果发现连不上github，就在终端用代理 $Env:http_proxy="http://127.0.0.1:7890";$Env:https_proxy="http://127.0.0.1:7890" 
 ```
 git submodule add https://github.com/theNewDynamic/gohugo-theme-ananke.git themes/ananke
 ```
 
-# 配置文件中启用主题
+## 配置文件中启用主题
 官网的命令是 `echo "theme = 'ananke'" >> hugo.toml`,但是powershell不能这样执行，实际上这句命令意思就是往`hugo.toml` 最后一行追加 theme = 'ananke'，也就是给站点指定主题。我们用vscode编辑这个文件。
 `hugo.toml`
 ```
@@ -83,14 +83,14 @@ PS C:\Users\pcvmm\Desktop\data\blog\quickstart>
 ```
 
 
-# 启动服务
+## 启动服务
 ```
 hugo server
 ```
 此时就可以打开 http://localhost:1313 查看页面了。
 ![](Pasted%20image%2020231110211616.png)
 
-# 创建第一篇帖子
+## 创建第一篇帖子
 先按下`Ctrl + C` 停止服务器，在网站根目录下输入 `hugo new content posts/helloworld.md`
 
 ```powershell
@@ -131,7 +131,7 @@ draft = true
 hugo server -D
 ```
 
-# 查看第一篇帖子
+## 查看第一篇帖子
 打开localhost:1313，看到我们的新文档已经生成
 ![](Pasted%20image%2020231110212746.png)
 点进去一看，非常完美
