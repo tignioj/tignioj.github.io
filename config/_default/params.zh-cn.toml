@@ -1,6 +1,6 @@
 # site description
 # 网站描述
-description = "codee的博客"
+description = "codee的博客，喜欢研究各种web技术，要不断学习才行，偶尔偷懒。"
 # site keywords
 # 网站关键词
 keywords = ["博客", "技术分享", "软件", "开发", "Codee", "Hugo", "编程"]
@@ -185,5 +185,5 @@ keywords = ["博客", "技术分享", "软件", "开发", "Codee", "Hugo", "编�
 [sponsor]
   enable = false
   bio = "如果你觉得这篇文章对你有所帮助，欢迎赞赏~"
-  link = "https://github.com/sponsors/HEIGE-PCloud"
+  link = "https://github.com/sponsors/tignioj"
   # custom = "<a href=\"https://www.buymeacoffee.com/PCloud\" target=\"_blank\"><img src=\"https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png\" alt=\"Buy Me A Coffee\" style=\"height: 40px !important;width: 145 !important;\" ></a>"
