@@ -33,4 +33,4 @@ theme = "DoIt"
 # path = "github.com/HEIGE-PCloud/DoIt"
 
 # summary
-summaryLength = 150
+summaryLength = 40
