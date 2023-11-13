@@ -1,6 +1,6 @@
 ---
 date: 2023-11-10T23:31:49.503Z
-lastmod: 2023-11-10T23:31:49.503Z
+lastmod: 2023-11-13T01:29:54.568Z
 categories:
   - 软件折腾
   - hugo博客
@@ -8,7 +8,7 @@ title: hugo博客SEO优化
 draft: "false"
 tags:
   - hugo
-series:
+series: 
 ---
 今天在提交页面索引给bing的时候，给出了一些优化意见：
 ## 不能有多个h1标签
@@ -27,7 +27,7 @@ Remove redundant <h1> tags from the page source, so that only one <h1> tag e
 之前还郁闷为什么hugo的目录为什么这么奇怪，当我把所有的h1都换成h2，发现hugo文章的目录也正常显示了。
 
 
-## meta标签内容不能过长 
+## meta标签description长度建议25~160
 ```text {linenos=false}
 Meta Description too long or too short
 
@@ -108,15 +108,35 @@ https://gohugo.io/content-management/summaries/
 
 > By default, Hugo automatically takes the first 70 words of your content as its summary and stores it into the `.Summary` page variable for use in your templates. You may customize the summary length by setting `summaryLength` in your [site configuration](https://gohugo.io/getting-started/configuration/).
 
-hugo会自动取文本的前70个字符作为摘要，你可以通过`summaryLength` 变量来调整摘要长度。这不就是我们想要调整的变量吗？那么这个变量在哪里调整呢，原文中旁边刚好有[site configuration链接]([Configure Hugo | Hugo (gohugo.io)](https://gohugo.io/getting-started/configuration/))，点进去按下`Ctrl + f`搜索 `summaryLength`，果然搜索到了
+hugo会自动取文本的前70个字符作为摘要，你可以通过`summaryLength` 变量来调整摘要长度。这不就是我们想要调整的变量吗？那么这个变量在哪里调整呢，原文中旁边刚好有[site configuration链接](https://gohugo.io/getting-started/configuration/)，点进去按下`Ctrl + f`搜索 `summaryLength`，果然搜索到了。
 
 - **Default value:** 70
 - The length of text in words to show in a [`.Summary`](https://gohugo.io/content-management/summaries/#automatic-summary-splitting).
 
+看到这里我就非常疑惑，默认配置明明是70,在25~160之间应该没问题的，难道是中文字符长度统计不一样，于是我在hugo.toml中分别实验了不同的长度
+```
+# meta标签name=description中摘要的长度，bing SEO建议在25~160之间  
+# summaryLength = 150
+# summaryLength = 50
+summaryLength = 25
+```
+最后仍然没有通过SEO的校验。我仔细看了下SEO的描述 `<meta description>`, 难道还有别的description？果不其然，再次`Ctrl+f` 发现了还有一个
+```
+<meta name="Description" content="codee的博客">
+```
+这不就是我网站的描述配置吗？长度猜不到10个字符，于是马上注释掉刚刚修改的`summaryLength`，因为默认70是没问题的，而我们只需要修改网站的description即可，在webstrom中双击`shift` 弹出搜索页面，输入`description =`   就能看到配置
 
+![](Pasted%20image%2020231113092604.png)
+
+注意是修改我们自己的config而不是theme下的config，找到params.zh-cn.toml，多加点字使得长度符合规范。
+```
+description = "codee的博客，喜欢研究各种web技术，要不断学习才行，偶尔偷懒。"
+```
+
+再次提交，果然ok了。
 
 
 
 ## 总结：
 1. 把h1换成h2
-2. 修改参数
+2. 如果单篇文章没有在front-matter设置description，hugo会读取站点的description，其长度应设置在25~160之间。
