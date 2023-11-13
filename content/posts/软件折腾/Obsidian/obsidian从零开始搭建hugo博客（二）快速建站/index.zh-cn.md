@@ -1,6 +1,6 @@
 ---
 date: 2023-11-10T07:05:46.542Z
-lastmod: 2023-11-12T16:00:42.491Z
+lastmod: 2023-11-13T00:22:08.961Z
 categories:
   - 软件折腾
   - Obsidian
@@ -11,7 +11,6 @@ tags:
   - obsidian
 series:
   - 利用obsidian从零开始搭建hugo博客
-description: hugo快速建站
 ---
 在这个教程中，你将：
 1. 生成站点  
