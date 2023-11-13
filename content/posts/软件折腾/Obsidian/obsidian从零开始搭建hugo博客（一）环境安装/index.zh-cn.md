@@ -1,6 +1,6 @@
 ---
 date: 2023-11-09T23:33:58.181Z
-lastmod: 2023-11-10T22:45:46.548Z
+lastmod: 2023-11-13T04:50:36.566Z
 categories:
   - 软件折腾
   - Obsidian
@@ -13,7 +13,7 @@ series:
   - 利用obsidian从零开始搭建hugo博客
 description: 安装obsidian,git,hugo,vscode
 ---
-## 安装hugo
+## 安装hugo（静态博客生成程序）
 https://github.com/gohugoio/hugo/releases/tag/v0.120.4
 ### 配置hugo环境变量
 
@@ -39,7 +39,7 @@ hugo v0.120.4-f11bca5fec2ebb3a02727fb2a5cfb08da96fd9df+extended windows/amd64 Bu
 PS C:\Users\pcvmm>
 ```
 
-## 安装git
+## 安装git（版本管理以及博客发布工具）
 
 https://git-scm.com/downloads
 
@@ -60,12 +60,13 @@ PS C:\Users\pcvmm> git version
 git version 2.42.0.windows.2
 ```
 
-## 安装obsidian
+## 安装obsidian（文章管理、md编辑器）
 https://obsidian.md/download
 
 下载好后，直接打开即可
 ![](Pasted%20image%2020231110115654.png)
 
 
-## 安装Vscode-用于修改配置
+## 安装Vscode（博客配置修改器）
+官网下载后安装即可
 https://code.visualstudio.com/docs/?dv=win64user
