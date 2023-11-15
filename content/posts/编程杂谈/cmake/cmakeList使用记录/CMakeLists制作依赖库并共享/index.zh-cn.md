@@ -14,7 +14,7 @@ series:
 
 
 目录结构如下
-![](Pasted%20image%2020231115191853.png)
+ 
 
 ### 子目录：静态库写法(会把依赖库编译进可执行文件中)
 `myutil/CMakeLists.txt`
@@ -102,8 +102,9 @@ Process finished with exit code 0
 
 
 ## 动态库写法(依赖库与可执行文件分离)
-由于dll文件和exe文件分离，我们需要指定dll生成目录到exe文件目录中，利用`set_target_properties`设置dll生成目录
-`myutil/CMakeLists.txt`
+由于dll文件和exe文件分离，我们需要指定dll生成目录到exe文件目录中，利用`set_target_properties`设置dll生成目录。
+
+- `myutil/CMakeLists.txt`
 ```cmake
 set(CMAKE_CXX_STANDARD 20)
 # 当前目录下所有.c文件保存到srcs变量里面去
