@@ -16,7 +16,7 @@ description: CLION实时模板使用groovyScript()命令调用groovy脚本生成
 
 tools.groovy
 
-```jsx
+```groovy
 def len= _1.substring(1) as int 
 // _1表示传进来的第一个参数，截取了第一个字母，后面就都是数字了。
 def str="";
