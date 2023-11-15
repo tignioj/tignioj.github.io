@@ -27,7 +27,7 @@ file(GLOB srcs CONFIGURE_DEPENDS
 
 message(${srcs})
 
-# 暴露自己：我是一个依赖库（STATIC：静态库，生成libmyutil.a和libmyutil.dll)
+# 暴露自己：我是一个依赖库（STATIC：静态库，生成libmyutil.a)
 add_library(myutil STATIC ${srcs})
 
 # 如果别人引用了我这个库，不需要你指定头文件，我这里帮你找到了。
@@ -92,7 +92,7 @@ int main() {
 ```
 
 ## 运行
-```
+```shell 
 G:\cmakeProject\libdemo\cmake-build-debug\main.exe
 Hello
 Process finished with exit code 0
