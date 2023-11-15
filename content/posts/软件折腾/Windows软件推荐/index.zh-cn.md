@@ -9,9 +9,7 @@ categories:
   - 软件折腾
 ---
 
-# Windows实用程序推荐(长期更新)
-
-# 一、常用软件
+## 一、常用软件
 
 1. 截图[Snipaste](https://www.snipaste.com/download.html)（推荐，全平台统用）、ShareX
 2. 文件快速查找：[everything](https://www.voidtools.com/zh-cn/)（推荐）、[Listary](https://www.listary.com/download)
@@ -57,7 +55,7 @@ categories:
 15. 亮度调节: 可以通过软件方式快速调节显示器亮度
     1. Twinkle Tray
 
-# 二、学习篇
+## 二、学习篇
 
 1. 笔记软件：对于需要绘图的，用自带的`OneNote`。笔记软件太多了，到时候专门出一期讲讲。
 2. 记忆：[Anki](https://github.com/ankitects/anki)，主打记忆！全平台通用，iOS要163元购买，安卓和桌面端免费[ttps://github.com/ankitects/anki](https://github.com/ankitects/anki)
