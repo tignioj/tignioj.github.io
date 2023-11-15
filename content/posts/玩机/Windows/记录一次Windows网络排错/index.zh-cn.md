@@ -11,7 +11,7 @@ tags:
   - Windows
 series:
 ---
-# 起因
+## 起因
 尽管已经打开了Hyper-V和Virtual machine Platform，台式机WSL和安卓子系统仍然无法开启，于是尝试谷歌，点进去这样一篇文章
 https://learn.microsoft.com/en-us/troubleshoot/windows-client/virtualization/cannot-create-hyper-v-virtual-switch
 
