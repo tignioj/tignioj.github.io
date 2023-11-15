@@ -6,7 +6,7 @@ categories:
   - cmake
   - cmakeList使用记录
 title: CMakeLists制作静态库与动态库并被使用
-draft: "true"
+draft: "false"
 tags:
   - cmake
 series:
