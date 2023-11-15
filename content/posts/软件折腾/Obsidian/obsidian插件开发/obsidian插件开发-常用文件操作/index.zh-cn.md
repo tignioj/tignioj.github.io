@@ -52,7 +52,7 @@ this.app.vault.create("demo/ok.md", "hello");
 示例：修改 仓库根目录下的`1.md`为`2.md`
 ```js
 const f = this.app.vault.getAbstractFileByPath("1.md")
-this.app.fileManager(f, "2.md")
+this.app.fileManager.renameFile(f, "2.md")
 ```
 
 如果仅仅修改文件名称可以调用`this.app.vault.rename()`方法
