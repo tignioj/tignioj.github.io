@@ -50,7 +50,7 @@ groovyScript("/Users/xxx/CLionProjects/MyProject/tools.groovy", variableForItera
 注意：Windows绝对路径要使用双反斜杠\\
 
 ```c
-groovyScript("G:\\\\ClionProject\\\\datastructures-c\\\\tools.groovy", variableForIteration());
+groovyScript("G:\\ClionProject\\datastructures-c\\tools.groovy", variableForIteration());
 ```
 
 确定生效区域
