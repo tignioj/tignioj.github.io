@@ -1,20 +1,20 @@
 ---
 date: 2023-11-15T09:25:50.765Z
-lastmod: 2023-11-15T12:00:12.545Z
+lastmod: 2023-11-17T15:03:58.681Z
 categories:
   - 编程杂谈
   - cmake
   - cmakeList使用记录
-title: CMakeLists制作静态库与动态库并被使用
+title: CMakeLists制作依赖库并共享
 draft: "false"
 tags:
   - cmake
-series:
+series: 
 ---
 
 
 目录结构如下
- 
+![Pasted image 20231115191853](Pasted%20image%2020231115191853.png)
 
 ### 子目录：静态库写法(会把依赖库编译进可执行文件中)
 `myutil/CMakeLists.txt`
