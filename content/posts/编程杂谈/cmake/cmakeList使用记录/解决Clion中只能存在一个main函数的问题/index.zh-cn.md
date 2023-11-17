@@ -1,6 +1,6 @@
 ---
 date: 2023-11-15T14:55:47.030Z
-lastmod: 2023-11-15T14:55:47.030Z
+lastmod: 2023-11-17T15:40:27.202Z
 categories:
   - 编程杂谈
   - cmake
@@ -9,7 +9,7 @@ title: 解决Clion中只能存在一个main函数的问题
 draft: "false"
 tags:
   - CLION
-series:
+series: 
 ---
 ## 方法1:手动
 
@@ -28,15 +28,23 @@ add_executable(main2 main2.cpp) // <--添加这个
 ## 方法2:自动
 
 ```cmake
-# 遍历项目根目录下所有的 .cpp 文件
-file (GLOB files *.cpp)
-foreach (file ${files})
-    string(REGEX REPLACE ".+/(.+)\\\\..*" "\\\\1" exe ${file})
-    add_executable (${exe} ${file})
-    message (\\ \\ \\ \\ --\\ src/${exe}.cpp\\ will\\ be\\ compiled\\ to\\ bin/${exe})
+
+cmake_minimum_required(VERSION 3.26)
+project(cmakeDemo1)
+
+set(CMAKE_CXX_STANDARD 17)
+
+file(GLOB files *.cpp) # 获取根目录的所有.cpp文件，保存到files变量中
+
+foreach (file ${files}) # 遍历files变量
+    message(${file}) # 此时会打印出绝对路径
+    string(REGEX REPLACE ".+/(.+)\\.cpp" "\\1" exe ${file})
+    message(${exe}) # 去掉路径和cpp后缀
+    add_executable(${exe} ${file}) # 编译
 endforeach ()
 ```
 
+读取多级目录的cpp
 ```
 # 同理，三层的话
 file (GLOB files *.cpp */*.cpp */*/*.cpp)
