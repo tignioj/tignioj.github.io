@@ -139,13 +139,38 @@ RSAAuthentication yes
 ```
 
 ## 配置新用户登录公钥
+客户端，先生成公钥文件
+```
+➜ ~ ✗ ssh-keygen  
+Generating public/private rsa key pair.  
+Enter file in which to save the key (C:\Users\lili/.ssh/id_rsa):  
+Enter passphrase (empty for no passphrase):  
+Enter same passphrase again:  
+Your identification has been saved in C:\Users\lili/.ssh/id_rsa.  
+Your public key has been saved in C:\Users\lili/.ssh/id_rsa.pub.  
+The key fingerprint is:  
+SHA256:OYxuMybC8nztn9ShSyhew9ybczOeB9fEH6wudvlAM3Y lili@DESKTOP-9IJNN32  
+The key's randomart image is:  
++---[RSA 3072]----+  
+| |  
+| |  
+| .. |  
+| o . oo |  
+| . S . B.E.|  
+| . + o +..+.= .|  
+|. o o.% = .o... |  
+| + o.*.*.=++.+. |  
+| o.....*+++o .. |  
++----[SHA256]----
+```
+
 先切换到新用户，在home目录下创建.ssh文件夹
 ```
 su tignioj
 mkdir .ssh
 cd .ssh
 ```
-创建authorized_keys文件，输入公钥。公钥是你登录的客户端.ssh目录下的`id_rsa.pub`里面的文件内容
+创建authorized_keys文件，输入公钥。公钥是你登录的客户端.ssh目录下的`id_rsa.pub`里面的文件内容。
 ```
 vim authorized_keys
 ```
@@ -175,9 +200,16 @@ systemctl restart sshd
 
 
 ## 远程登录
+
+windows terminal登录
 ```
 ssh tignioj@ip:port 
 ```
+
+xshel7登录
+注意要导入客户端（非linux服务器）的.ssh/id_rsa 文件
+![](Pasted%20image%2020231213122733.png)
+
 
 参考：
 https://www.cnblogs.com/my-first-blog-lgz/p/16385745.html
