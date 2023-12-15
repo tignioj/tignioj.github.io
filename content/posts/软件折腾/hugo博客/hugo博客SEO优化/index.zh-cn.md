@@ -11,7 +11,7 @@ tags:
 series: 
 ---
 今天在提交页面索引给bing的时候，给出了一些优化意见：
-## 不能有多个h1标签
+### 不能有多个h1标签
 ```text {linenos=false}
 More than one h1 tag
 
@@ -27,7 +27,7 @@ Remove redundant <h1> tags from the page source, so that only one <h1> tag e
 之前还郁闷为什么hugo的目录为什么这么奇怪，当我把所有的h1都换成h2，发现hugo文章的目录也正常显示了。
 
 
-## meta标签description长度建议25~160
+### meta标签description长度建议25~160
 ```text {linenos=false}
 Meta Description too long or too short
 
@@ -134,6 +134,7 @@ description = "codee的博客，喜欢研究各种web技术，要不断学习才
 ```
 
 再次提交，果然ok了。
+
 
 
 
