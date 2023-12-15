@@ -79,8 +79,8 @@ chsh -s /bin/bash
 以上命令可以用一行代替：`useradd -m tignioj -s /bin/bash -p "my_password"`
 
 ```shell
-[root@localhost:~]# useradd -m user1 -s /bin/bash -p "my_password"
-[root@localhost:~]# ls -la /home/user1/
+[root@localhost:~]# useradd -m tignioj -s /bin/bash -p "my_password"
+[root@localhost:~]# ls -la /home/tignioj/
 total 12
 drwx------. 2 tignioj tignioj  62 Dec 12 22:46 .
 drwxr-xr-x. 4 root  root   34 Dec 12 22:46 ..
