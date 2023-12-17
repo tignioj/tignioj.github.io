@@ -231,7 +231,13 @@ import puppeteer from 'puppeteer-core'
 
 ```
 
+### 乱码解决
+```
+yum groupinstall fonts -y
+```
 ### 重启启动miao-yunzai
 ```
 LD_LIBRARY_PATH=$PATH:/opt/gcc-10.2.1/usr/lib64/ node app
 ```
+
+
