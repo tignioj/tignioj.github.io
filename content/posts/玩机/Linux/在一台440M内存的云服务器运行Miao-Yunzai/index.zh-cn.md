@@ -14,7 +14,7 @@ tags:
   - chromium-headless
 series:
 ---
-## 安装运行
+## 运行方案分析
 三个方案运行yunzai：
 1. trss，卡死，放弃
 2. miao-yunzai 自带的docker-compose.yml，容器构建速度太慢，放弃
@@ -28,9 +28,50 @@ cd Miao-Yunzai
 git clone --depth=1 https://gitee.com/yoimiya-kokomi/miao-plugin.git ./plugins/miao-plugin/
 ```
 
-安装npm
+# 安装nodejs
 ```
-yum install npm
+yum install nodejs
+```
+
+如果不行，则使用nvm安装nodejs https://linuxize.com/post/how-to-install-node-js-on-centos-7/
+```
+yum install nvm
+nvm install 16.20
+```
+查看有哪些nodejs版本 `nvm list`
+```
+[root@localhost]# nvm list
+default -> node (-> v21.4.0)
+node -> stable (-> v21.4.0) (default)
+stable -> 21.4 (-> v21.4.0) (default)
+iojs -> N/A (default)
+unstable -> N/A (default)
+lts/* -> lts/iron (-> v20.10.0)
+lts/argon -> v4.9.1 (-> N/A)
+lts/boron -> v6.17.1 (-> N/A)
+lts/carbon -> v8.17.0 (-> N/A)
+lts/dubnium -> v10.24.1 (-> N/A)
+lts/erbium -> v12.22.12 (-> N/A)
+lts/fermium -> v14.21.3 (-> N/A)
+lts/gallium -> v16.20.2
+lts/hydrogen -> v18.19.0 (-> N/A)
+lts/iron -> v20.10.0
+
+```
+注：报错则不要安装18以上版本的nodejs
+```
+node: /lib64/libm.so.6: version `GLIBC_2.27' not found (required by node)
+node: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.20' not found (required by node)
+node: /lib64/libstdc++.so.6: version `CXXABI_1.3.9' not found (required by node)
+node: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.21' not found (required by node)
+node: /lib64/libc.so.6: version `GLIBC_2.27' not found (required by node)
+node: /lib64/libc.so.6: version `GLIBC_2.28' not found (required by node)
+node: /lib64/libc.so.6: version `GLIBC_2.25' not found (required by node)
+```
+
+如果安装了多个版本的nodejs，指定版本可以使用nvm use
+```
+nv use 16.20
 ```
 
 安装pnpm
@@ -42,7 +83,7 @@ npm install pnpm -g
 npm --registry=https://registry.npmmirror.com install pnpm -g
 ```
 
-安装redis
+## 安装redis
 ```
 yum install redis
 ```
@@ -50,7 +91,20 @@ yum install redis
 ```
 redis-server 
 ```
-运行，发现报错
+
+通过源码方式安装redis
+https://redis.io/docs/install/install-redis/install-redis-from-source/
+
+```
+wget https://download.redis.io/redis-stable.tar.gz```bash
+tar -xzvf redis-stable.tar.gz
+cd redis-stable
+make
+```
+
+
+
+## 运行node app，发现报错
 ```
 node app
 ```
