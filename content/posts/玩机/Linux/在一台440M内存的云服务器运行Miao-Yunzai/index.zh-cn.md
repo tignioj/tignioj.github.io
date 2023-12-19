@@ -74,6 +74,7 @@ node: /lib64/libc.so.6: version `GLIBC_2.25' not found (required by node)
 nv use 16.20
 ```
 
+
 安装pnpm
 ```
 # 使用npmjs.org安装
@@ -82,6 +83,12 @@ npm install pnpm -g
 # 指定国内源npmmirror.com安装
 npm --registry=https://registry.npmmirror.com install pnpm -g
 ```
+
+注：如果没有npm则先安装npm
+```
+yum install npm
+```
+
 
 ## 安装redis
 ```
@@ -243,7 +250,7 @@ yum install chromium-headless
 - 假如报错：No package chromium-headless available. Error: Nothing to do
 - 解决： [yum安装出现No package ****** available-CSDN博客](https://blog.csdn.net/zhangxiaoyang0/article/details/109162240)
 ```
-yum insall epel-release
+yum intsall epel-release
 yum clean all
 yum update
 yum makecache
