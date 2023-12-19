@@ -28,6 +28,12 @@ cd Miao-Yunzai
 git clone --depth=1 https://gitee.com/yoimiya-kokomi/miao-plugin.git ./plugins/miao-plugin/
 ```
 
+### 系统依赖
+```
+yum install pango.x86_64 libXcomposite.x86_64 libXcursor.x86_64 libXdamage.x86_64 libXext.x86_64 libXi.x86_64 libXtst.x86_64 cups-libs.x86_64 libXScrnSaver.x86_64 libXrandr.x86_64 GConf2.x86_64 alsa-lib.x86_64 atk.x86_64 gtk3.x86_64 -y
+```
+
+
 # 安装nodejs
 ```
 yum install nodejs
@@ -173,9 +179,9 @@ Swap:            0          0       4095
 ```
 
 ### 创建swap分区
-3G有多了
+2G有多了
 ```
-sudo dd if=/dev/zero of=/swapfile count=3072 bs=1MiB
+sudo dd if=/dev/zero of=/swapfile count=2048 bs=1MiB
 ```
 
 ### 启用swap
