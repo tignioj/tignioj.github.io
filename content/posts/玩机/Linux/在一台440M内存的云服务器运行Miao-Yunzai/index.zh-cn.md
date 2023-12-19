@@ -239,6 +239,18 @@ vm.swappiness = 100
 ```
 yum install chromium-headless
 ```
+
+- 假如报错：No package chromium-headless available. Error: Nothing to do
+- 解决： [yum安装出现No package ****** available-CSDN博客](https://blog.csdn.net/zhangxiaoyang0/article/details/109162240)
+```
+yum insall epel-release
+yum clean all
+yum update
+yum makecache
+```
+
+
+
 [查看chromium-headless安装位置](https://stackoverflow.com/questions/46357102/chromium-headless-installed-path-in-centos-7)
 ```
 /usr/lib64/chromium-browser/headless_shell
