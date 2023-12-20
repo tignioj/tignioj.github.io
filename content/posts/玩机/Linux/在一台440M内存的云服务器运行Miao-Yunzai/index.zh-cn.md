@@ -314,9 +314,16 @@ import puppeteer from 'puppeteer-core'
 ```
 yum groupinstall fonts -y
 ```
+
+
+### 执行更新操作时候报错
+https://computingforgeeks.com/install-git-2-on-centos-7/
+装最新版git
 ### 重启启动miao-yunzai
 ```
 LD_LIBRARY_PATH=$PATH:/opt/gcc-10.2.1/usr/lib64/ node app
 ```
+
+
 
 
