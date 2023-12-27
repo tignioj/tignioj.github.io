@@ -13,7 +13,7 @@ tags:
   - sqlite3
 series:
 ---
-当你MiaoYunzai和TRSS都跑了一段时间后，两个机器人都有了自己独立的数据，这时候简单的迁移是不行的。因此我们需要将MiaoYunzai的数据导出，并在TRSS-Yunzai中导入。
+MiaoYunzai和TRSS都跑了一段时间后，两个机器人都有了自己独立的数据，这时候简单的迁移是不行的。因此我们需要将MiaoYunzai的数据导出，并在TRSS-Yunzai中导入。
 ## 导出Miao-Yunzai用户数据
 由于我是docker compose运行的MiaoYunzai，因此数据文件单独存储在了yunzai目录下
 ```
