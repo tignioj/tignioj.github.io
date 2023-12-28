@@ -25,7 +25,7 @@ series:
  ![](Pasted%20image%2020231228051136.png)
 ## 验证是否开启成功
 
-启动后，按下同时按下Ctrl+B，再按下C按键创建一个新的tmux窗口，输入
+启动后，同时按下`Ctrl+B`，再按下`C`按键创建一个新的tmux窗口，输入
 
 curl [http://localhost:2535](http://localhost:2535)
  
@@ -42,3 +42,8 @@ curl [http://localhost:2535](http://localhost:2535)
 ![](Pasted%20image%2020231228051224.png)
 重启TRSS-Yunzai即可。
 
+# 其他部署方法
+
+如果你没有使用TRSS，可以看看下面这个部署QSign的教程，写的已经比较详细
+
+Windows和Linux单独部署方法：[https://gitee.com/touchscale/Qsign](https://gitee.com/touchscale/Qsign)
