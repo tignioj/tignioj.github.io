@@ -1,6 +1,6 @@
 ---
 date: 2023-12-13T03:38:47.177Z
-lastmod: 2023-12-13T03:38:47.177Z
+lastmod: 2023-12-31T05:22:27+08:00
 categories:
   - 玩机
   - Linux
@@ -170,6 +170,12 @@ su tignioj
 mkdir .ssh
 cd .ssh
 ```
+
+设置`.ssh`文件的权限700
+```
+chmod 700 .ssh
+```
+
 创建authorized_keys文件，输入公钥。公钥是你登录的客户端.ssh目录下的`id_rsa.pub`里面的文件内容。
 ```
 vim authorized_keys
@@ -209,6 +215,33 @@ ssh tignioj@ip:port
 xshel7登录
 注意要导入客户端（非linux服务器）的.ssh/id_rsa 文件
 ![](Pasted%20image%2020231213122733.png)
+
+
+
+## 错误排查
+客户端登录时显示：
+```
+Permission denied (publickey,gssapi-keyex,gssapi-with-mic
+```
+查看服务器sshd状态:
+```
+ sshd[13132]: Authentication refused: bad ownership or modes for directory /home/tignioj/.ssh
+```
+
+原因是目录和文件权限不对，修改权限
+```
+chmod 700 /home/tignioj/.ssh
+chmod 600 /home/tignioj/.ssh/authorized_keys
+```
+
+修改前：
+```
+drwxrwxr-x  2 tignioj tignioj 4096 Dec 31 04:34 .ssh
+```
+修改后：
+```
+drwx------  2 tignioj tignioj 4096 Dec 31 04:34 .ssh
+```
 
 
 参考：
