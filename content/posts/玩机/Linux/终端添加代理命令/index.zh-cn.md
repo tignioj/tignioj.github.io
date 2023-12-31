@@ -1,6 +1,6 @@
 ---
 date: 2023-11-14T04:16:32.583Z
-lastmod: 2023-12-31T19:36:31+08:00
+lastmod: 2023-12-31T20:40:17+08:00
 categories:
   - 玩机
   - Linux
@@ -19,11 +19,11 @@ PROXY_HOST=192.168.101.29:7890
 alias proxy="
     export http_proxy=${PROXY_HOST};
     export https_proxy=${PROXY_HOST};
-    export all_proxy=${PROXY_HOST};
+    export all_proxy=${PROXY_HOST};"
 alias unproxy="
     unset http_proxy;
     unset https_proxy;
-    unset all_proxy;
+    unset all_proxy;"
 ```
 
 然后载入配置 `source ~/.bashrc`，此时输入`proxy`，自动为当前脚本环境添加了代理。输入env查看
