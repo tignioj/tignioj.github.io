@@ -1,6 +1,6 @@
 ---
 date: 2023-11-14T04:16:32.583Z
-lastmod: 2023-11-14T04:16:32.583Z
+lastmod: 2023-12-31T19:36:31+08:00
 categories:
   - 玩机
   - Linux
@@ -9,7 +9,8 @@ draft: "false"
 tags:
   - 代理
   - 终端
-series:
+  - 科学上网
+series: 
 ---
 对于Linux，编辑 `vim ~/.bashrc` (如果你是`zsh`则 `vim ~/.zshrc`)
 添加以下代码，把HOST设置成你自己的代理服务器
