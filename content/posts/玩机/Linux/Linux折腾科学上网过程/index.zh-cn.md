@@ -8,7 +8,7 @@ tags:
   - clash
   - docker
   - v2ray
-lastmod: 2024-01-01T08:54:15+08:00
+lastmod: 2024-01-01T10:01:34+08:00
 categories:
   - 玩机
   - Linux
@@ -18,26 +18,93 @@ series:
 ## [v2raya](https://github.com/v2rayA/v2rayA)代理
 文档地址： https://v2raya.org/docs/prologue/introduction/
 ### docker方式启动
+
 ```
-docker run -d \ 
---restart=always \ --privileged \ 
---network=host \ --name v2raya \ 
--e V2RAYA_LOG_FILE=/tmp/v2raya.log \ 
--e V2RAYA_V2RAY_BIN=/usr/local/bin/v2ray \ 
--e V2RAYA_NFTABLES_SUPPORT=off \ 
--e IPTABLES_MODE=legacy \ 
--v /lib/modules:/lib/modules:ro \ 
--v /etc/resolv.conf:/etc/resolv.conf \ 
--v /etc/v2raya:/etc/v2raya \ mzz2017/v2raya
+docker run -d \
+--restart=always \
+--privileged \
+--network=host \
+--name v2raya \
+-e V2RAYA_LOG_FILE=/tmp/v2raya.log \
+-e V2RAYA_V2RAY_BIN=/usr/local/bin/v2ray \
+-e V2RAYA_NFTABLES_SUPPORT=off \
+-e IPTABLES_MODE=legacy \
+-v /lib/modules:/lib/modules:ro \
+-v /etc/resolv.conf:/etc/resolv.conf \
+-v /etc/v2raya:/etc/v2raya \
+mzz2017/v2raya
 ```
 - 配置文件会被写入到系统的/etc/v2raya，
 - 由于是host模式，无需手动分配端口，启动成功后，直接打开浏览器访问 你的IP:2017
 - 首次进入后台管理需要创建管理密码。
 - 进入管理界面后导入订阅地址即可，订阅地址一定要国内可访问，否则会出现connection reset by peer的问题。
 
+#### 报错：v2ray-core未找到
+明明文档说Docker已经包含v2ray-core，但是为何仍然提示没找到呢？我们进容器查看一下bin目录
+
+```
+root@tignioj:/home/tignioj# docker exec -it v2raya sh
+~ # ls /usr/local/bin
+```
+果然是空白，猜测可能是docker镜像没有下载最新版v2raya，检查一下镜像
+```
+REPOSITORY       TAG      IMAGE ID       CREATED         SIZE
+
+mzz2017/v2raya   latest   998cc326cf58   2 years ago     84.9MB
+
+```
+查看镜像详细信息
+```
+root@tignioj:/home/tignioj# docker inspect mzz2017/v2raya
+[
+    {
+        "Id": "sha256:998cc326cf586d37ce2cf24d055dbb79b799a98faa1b590123e0e7d0669ac471",
+        "RepoTags": [
+            "mzz2017/v2raya:latest"
+        ],
+        "RepoDigests": [
+            "mzz2017/v2raya@sha256:890443d0b1c41b72ea69ac6fa604981fdff5c07a7c27da0a2d2b6c07bde1c3ed"
+        ],
+        "Parent": "",
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2021-12-09T05:28:12.051263892Z",
+
+```
+竟然是2年前的镜像，果然不是最新版。我们手动下载最新版。
+```
+docker pull mzz2017/v2raya:v2.2.4.6
+```
+删掉正在运行的容器
+```
+docker rm -f v2raya
+```
+指定最新版本启动
+```
+docker run -d \
+--restart=always \
+--privileged \
+--network=host \
+--name v2raya \
+-e V2RAYA_LOG_FILE=/tmp/v2raya.log \
+-e V2RAYA_V2RAY_BIN=/usr/local/bin/v2ray \
+-e V2RAYA_NFTABLES_SUPPORT=off \
+-e IPTABLES_MODE=legacy \
+-v /lib/modules:/lib/modules:ro \
+-v /etc/resolv.conf:/etc/resolv.conf \
+-v /etc/v2raya:/etc/v2raya \
+mzz2017/v2raya:v2.2.4.6
+```
+
+再次进入容器查看bin目录，找到v2ray和xray了
+```
+root@tignioj:/home/tignioj# docker exec -it v2raya sh
+/ # ls /usr/local/bin/
+ip6tables         ip6tables-nft     iptables-legacy   v2ray
+ip6tables-legacy  iptables          iptables-nft      xray
+
+```
 ### Windows客户端
 直接下载安装包双击运行后，打开localhost:2017导入配置即可。
-
 
 
 尽管clash已经删库跑路了，但是还留了个docker镜像，可惜没有文档只能盲目摸索。
