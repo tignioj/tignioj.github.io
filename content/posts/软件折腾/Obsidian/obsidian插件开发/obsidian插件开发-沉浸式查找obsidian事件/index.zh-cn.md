@@ -14,7 +14,7 @@ tags:
   - 监听
 series:
 ---
-# 需求
+## 需求
 当插入链接的时候，我需要修改标题，那么我就要获取插入链接的事件。
 有哪些事件呢？
 我翻开官方文档的editor https://docs.obsidian.md/Plugins/Editor/Editor
@@ -212,4 +212,4 @@ interface EditorEventMap {
 ```
 
 
-# 未完待续。。。
+## 未完待续。。。

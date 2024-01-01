@@ -12,7 +12,7 @@ tags:
 series: 
 description: CLION实时模板使用groovyScript()命令调用groovy脚本生成随机数组
 ---
-## 编写groovy文件
+ ## 编写groovy文件
 
 tools.groovy
 
@@ -53,7 +53,7 @@ groovyScript("/Users/xxx/CLionProjects/MyProject/tools.groovy", variableForItera
 groovyScript("G:\\ClionProject\\datastructures-c\\tools.groovy", variableForIteration());
 ```
 
-确定生效区域
+确定生效区域 
 ![](Pasted%20image%2020231115232750.png)
 ## 调用模板
 

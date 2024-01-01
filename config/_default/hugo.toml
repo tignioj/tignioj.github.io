@@ -32,5 +32,5 @@ theme = "DoIt"
 # [[module.imports]]
 # path = "github.com/HEIGE-PCloud/DoIt"
 
-# summary
-summaryLength = 50
+# summary, meta标签name=description中摘要的长度，bing SEO建议在25~160之间
+#summaryLength = 70

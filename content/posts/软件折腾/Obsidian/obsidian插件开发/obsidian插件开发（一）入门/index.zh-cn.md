@@ -5,7 +5,7 @@ draft: "false"
 tags:
   - obsidian
   - obsidian插件
-lastmod: 2023-11-05T16:55:58.050Z
+lastmod: 2023-12-29T07:52:43+08:00
 categories:
   - 软件折腾
   - Obsidian
