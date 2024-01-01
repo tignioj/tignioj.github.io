@@ -7,16 +7,41 @@ tags:
   - 科学上网
   - clash
   - docker
-lastmod: 2023-12-31T19:32:17+08:00
+  - v2ray
+lastmod: 2024-01-01T08:53:43+08:00
 categories:
   - 玩机
   - Linux
 series: 
 ---
 
+## [v2raya](https://github.com/v2rayA/v2rayA)代理
+文档地址： https://v2raya.org/docs/prologue/introduction/
+### docker方式启动
+```
+docker run -d \ 
+--restart=always \ --privileged \ 
+--network=host \ --name v2raya \ 
+-e V2RAYA_LOG_FILE=/tmp/v2raya.log \ 
+-e V2RAYA_V2RAY_BIN=/usr/local/bin/v2ray \ 
+-e V2RAYA_NFTABLES_SUPPORT=off \ 
+-e IPTABLES_MODE=legacy \ 
+-v /lib/modules:/lib/modules:ro \ 
+-v /etc/resolv.conf:/etc/resolv.conf \ 
+-v /etc/v2raya:/etc/v2raya \ mzz2017/v2raya
+```
+- 配置文件会被写入到系统的/etc/v2raya，
+- 由于是host模式，无需手动分配端口，启动成功后，直接打开浏览器访问 你的IP:2017
+- 首次进入后台管理需要创建管理密码。
+- 进入管理界面后导入订阅地址即可，订阅地址一定要国内可访问，否则会出现connection reset by peer的问题。
+
+### Windows客户端
+直接下载安装包双击运行后，打开localhost:2017导入配置即可。
+
+
 
 尽管clash已经删库跑路了，但是还留了个docker镜像，可惜没有文档只能盲目摸索。
-## 启动clash
+## clash代理
 1. 准备好你的config.yaml文件
 2. 创建`docker-compose.yml`文件,并添加如下内容：
 ```
@@ -43,7 +68,7 @@ services:
 - 7890是代理地址
 
 
-## 设置clash地址
+### 设置clash地址
 clash-dashboard只是查看clash配置的，所以要让dashboard连接上clash，而clash开启的9090端口提供了接口。
 1. 第一步准备的`config.yaml`中可以修改clash的监听地址和端口
 ```
@@ -56,7 +81,7 @@ external-controller: 0.0.0.0:9090 # clash监听地址和端口
 ```
 2. 输入你的ip:9999，进入clash-dashboard的网页，会提示配置clash地址和端口，密码等信息。clash地址请输入公网IP！
 
-## clash地址的困惑
+### clash地址的困惑
 令人感到困扰的是，在clash-dasboard容器内部执行`curl clash:9090`时，clash有响应，但是在web界面却无法设置host为`clash` (密码肯定是正确的)
 ```
 root@iZwz9f6aasa5nbfbk126doZ:~/clash# docker compose exec clash-dashboard bash
@@ -111,19 +136,22 @@ root@iZwz9f6aasa5nbfbk126doZ:~/clash# curl 172.17.0.1:9090
 
 
 
-## 步骤总结
+### clash代理步骤总结
 1. 使用`docker compose up -d`启动docker和面板
 2. 复制你的配置文件到config.yml 
 3. 在config.yml中配置以下两项
 	- `secret: '后端控制密码'`
 	- `external-controller: 0.0.0.0:9090` # 后端监听地址
 4. 进入dashboard界面，连接clash的公网IP地址。
-5. 命令行设置快捷代理，请查看->[index.zh-cn](../终端添加代理命令/index.zh-cn.md)
-6. 验证代理是否开启成功 `curl -I google.com` 
+
+
+## 使用代理
+1. 命令行设置快捷代理，请查看->[index.zh-cn](../终端添加代理命令/index.zh-cn.md)
+2. 验证代理是否开启成功 `curl -I https://www.google.com` 
+
 
 
 
 参考：
 
 - docker compose 运行clash和dashboard https://silon.vip/post/51#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE
-- 
