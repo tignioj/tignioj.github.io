@@ -1,6 +1,6 @@
 ---
 date: 2023-12-18T20:59:14.720Z
-lastmod: 2023-12-18T20:59:14.720Z
+lastmod: 2024-01-02T13:32:51+08:00
 categories:
   - 玩机
   - 虚拟机
@@ -9,7 +9,8 @@ draft: "false"
 tags:
   - Linux
   - CentOS7
-series:
+  - 静态IP
+series: 
 ---
 ## 查看网关和子网掩码
 ![](Pasted%20image%2020231219045956.png)
