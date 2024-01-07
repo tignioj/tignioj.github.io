@@ -8,7 +8,7 @@ tags:
   - clash
   - docker
   - v2ray
-lastmod: 2024-01-01T10:01:34+08:00
+lastmod: 2024-01-07T08:00:56+08:00
 categories:
   - 玩机
   - Linux
@@ -103,8 +103,6 @@ ip6tables         ip6tables-nft     iptables-legacy   v2ray
 ip6tables-legacy  iptables          iptables-nft      xray
 
 ```
-### Windows客户端
-直接下载安装包双击运行后，打开localhost:2017导入配置即可。
 
 
 尽管clash已经删库跑路了，但是还留了个docker镜像，可惜没有文档只能盲目摸索。
