@@ -15,7 +15,7 @@ series:
 
 
 ## 安装docker-openwrt
-下载[最新版openwrt](https://hub.docker.com/r/piaoyizy/openwrt-x86), 由于指定 latest标签可能未必是最新版，因此手动指定Digest版本下载
+下载[最新版openwrt](https://hub.docker.com/r/piaoyizy/openwrt-x86), 由于指定 latest标签未必是最新版，因此手动指定Digest版本下载
 ```
 docker pull piaoyizy/openwrt-x86@sha256:8f7ee2290e31a971818e71a4e53fc58b985afcbf5f181ea5fed2c528ff53542b
 ```
