@@ -133,7 +133,7 @@ iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE
 
 ---
 ## 主路由模式
-
+![](Pasted%20image%2020240108231508.png)
 
 安装openwrt的方法和旁路路由一样，不再赘述。由于我的主机只有一个网卡，因此需要外接一个usb网卡。
 
