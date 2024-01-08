@@ -5,9 +5,11 @@ categories:
   - 玩机
   - 路由器
 title: docker-compose部署软路由并解决与宿主机通信问题
-draft: "true"
-tags: []
-series: []
+draft: "false"
+tags:
+  - 软路由
+  - docker
+series:
 ---
 
 ### 前言
