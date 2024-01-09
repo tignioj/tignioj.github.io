@@ -17,7 +17,7 @@ series:
 ## 安装docker-openwrt
 下载[最新版openwrt](https://hub.docker.com/r/piaoyizy/openwrt-x86), 由于指定 latest标签未必是最新版，因此手动指定Digest版本下载
 ```
-docker pull piaoyizy/openwrt-x86@sha256:8f7ee2290e31a971818e71a4e53fc58b985afcbf5f181ea5fed2c528ff53542b
+docker pull piaoyizy/openwrt-x86@sha256:ccfe467e8735c8cb121a790fb6b64476f7b83decd45bceefebb125b6924a8dcf
 ```
 
 
@@ -50,17 +50,17 @@ docker network create -d macvlan --subnet=192.168.31.0/24 --gateway=192.168.31.1
 
 ### 创建openwrt容器并启动
 ```
-docker run -d --name=openwrt --restart always --privileged --network macnet --ip 192.168.31.9 6f0f3db7c96d
+docker run -d --name=openwrt --restart always --privileged --network macnet --ip 192.168.31.9 4decb85ef086
 ```
-- 这里的`6f0f3db7c96d`是你的openwrt镜像id（因为通过digest下载的镜像，其tag为none，只能通过id指定镜像）
+- 这里的`4decb85ef086`是你的openwrt镜像id（因为通过digest下载的镜像，其tag为none，只能通过id指定镜像）
 - `--ip` 是为openwrt分配新的ip，要求路由器1上没有冲突的ip
 
 ### 容器的网络设置
+**注意：一定不要在容器初次创建时候，马上修改配置文件！！否则可能会造成路由器无法访问的问题！！**
 修改openwrt监听地址，先进入容器
 ```
 docker exec -it openwrt bash
 ```
-
 找到lan->ipaddr, 把  `option ipaddr` 改为创建容器时候传入的ip，其他不用动
 ```
 config interface 'lan'
@@ -181,7 +181,7 @@ db808af93889   maclan                          macvlan   local
 ### 创建openwrt容器并启动
 指定一个网口(maclan)创建容器，另一个后面再手动连接。
 ```
-docker run -d --name=openwrt --restart always --privileged --network maclan --ip 192.168.10.9 6f0f3db7c96d
+docker run -d --name=openwrt --restart always --privileged --network maclan --ip 192.168.10.9 4decb85ef086
 ```
 - 这里的ip允许范围为192.168.10.0/24，即`192.168.10.2~192.168.10.254`
 - 容器创建时，指定lan网络，不同于旁路由模式，指定的是wan网络。
@@ -333,3 +333,5 @@ bash-5.2# ip a
 ### 参考
 - https://www.treesir.pub/post/openwrt-docker-multi-net/
 - https://www.cnblogs.com/luoshuifushen/p/16989469.html
+
+
