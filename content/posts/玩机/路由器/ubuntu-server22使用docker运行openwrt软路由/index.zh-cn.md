@@ -56,7 +56,7 @@ docker run -d --name=openwrt --restart always --privileged --network macnet --ip
 - `--ip` 是为openwrt分配新的ip，要求路由器1上没有冲突的ip
 
 ### 容器的网络设置
-**注意：一定不要在容器初次创建时候，马上修改配置文件！！否则可能会造成路由器无法访问的问题！！**
+**注意：一定不要在容器初次创建时候，马上修改配置文件！！否则可能会造成软路由无法访问的问题！！**
 修改openwrt监听地址，先进入容器
 ```
 docker exec -it openwrt bash
