@@ -1,6 +1,6 @@
 ---
 date: 2024-01-02T15:18:55+08:00
-lastmod: 2024-01-08T14:33:30+08:00
+lastmod: 2024-01-10T21:29:36+08:00
 categories:
   - 玩机
   - 路由器
@@ -10,7 +10,7 @@ tags:
   - openwrt
   - docker
   - 软路由
-series:
+series: 
 ---
 
 
@@ -114,7 +114,10 @@ iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE
 
 ### 路由器2设置
 
-连接路由器1，随便使用一个不冲突的静态IP，将网关和DNS指向openwrt的后台地址即可
+连接路由器1，随便使用一个不冲突的静态IP，将网关和DNS指向openwrt的后台地址即可。
+
+### 路由器1设置【可选】
+这个设置是使路由器1的网关指向软路由，这样会影响路由器1下的所有设备。对于小米路由器，找到  `局域网设置` ->  `DHCP服务` -> `默认网关`, 修改默认网关为软路由的后台地址。
 
 
 ### 其他设备连接路由
@@ -128,8 +131,7 @@ iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE
 - 配置参考
 	- https://www.bilibili.com/video/BV1P54y167sj/?spm_id_from=333.337.search-card.all.click&vd_source=cdd8cee3d9edbcdd99486a833d261c72
 	- https://www.cfmem.com/2021/08/docker-openwrt.html
-
-
+- 软路由基本介绍参考： 【【建议收藏】软路由是什么？软路由入坑指南】 https://www.bilibili.com/video/BV1LM4y1B75p/?share_source=copy_web&vd_source=801146758c4483987cb1bd1d6f31883a
 
 ---
 ## 主路由模式
