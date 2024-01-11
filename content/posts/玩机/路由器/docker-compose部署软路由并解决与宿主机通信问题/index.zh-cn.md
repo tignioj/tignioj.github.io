@@ -154,6 +154,11 @@ ip route add 192.168.10.9 dev dockerrouteif
 
 这时候容器就可以通过 192.168.10.99 访问宿主机了。
 ```
+docker exec openwrt bash -c 'ping 192.168.10.99 -c 3'
+```
+
+
+```
 oot@tignioj:~/dockercompose/openwrt# docker exec openwrt bash -c 'ping 192.168.10.99 -c 3'
 PING 192.168.10.99 (192.168.10.99): 56 data bytes
 64 bytes from 192.168.10.99: seq=0 ttl=64 time=0.088 ms
@@ -171,6 +176,16 @@ root@tignioj:~/dockercompose/openwrt#
 ```
 ip link del dockerrouteif link eno1 type macvlan mode bridge
 ip addr del 192.168.31.99 dev dockerrouteif
+```
+
+
+
+
+```
+ip link add container2host link eno1 type macvlan mode bridge
+ip addr add 192.168.31.66 dev container2host
+ip link set container2host up
+ip route add 192.168.31.6 dev container2host
 ```
 
 参考：

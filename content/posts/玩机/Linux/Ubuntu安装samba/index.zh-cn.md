@@ -5,11 +5,10 @@ draft: "false"
 tags:
   - ubuntu
   - samba
-lastmod: 2023-11-05T09:38:56.478Z
+lastmod: 2023-11-07T15:20:02+08:00
 categories:
-  - 编程杂谈
+  - 玩机
   - Linux
-  - Ubuntu
 ---
 
 
