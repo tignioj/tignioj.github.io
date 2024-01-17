@@ -59,7 +59,16 @@ config rule 'samba_tcp'
         option name 'samba_incoming_tcp'
 ```
 
-执行`/etc/init.d/firewall restart`命令重启防火墙
+执行`/etc/init.d/firewall reload`命令重新加载防火墙配置即可。
 
+- 注：对于小米路由器中docker开启的服务，如果发现二级路由无法访问，都是因为防火墙的问题，例如docker开启了alist服务，默认端口为5244，那么只需要在防火墙中添加以下内容后重启防火墙即可
+```
+config rule 'alist_tcp'
+        option src 'wan'
+        option dest_port '5244'
+        option proto 'tcp'
+        option target 'ACCEPT'
+        option name 'alist_incoming_tcp'
+```
 ## 测试是否允许访问
 电脑文件管理地址栏输入 `\\路由器WAN口ip`即可
