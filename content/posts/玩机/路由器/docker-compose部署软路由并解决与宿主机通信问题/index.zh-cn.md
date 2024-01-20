@@ -17,7 +17,7 @@ series:
 ```
 docker network create -d macvlan --subnet=192.168.10.0/24 --gateway=192.168.10.1 -o parent=enx98fc84e631d8 maclan
 
-docker network create -d macvlan --subnet=192.168.31.0/24 --gateway=192.168.31.1 -o parent=eno1 macwan
+docker network create -d macvlan --subnet=192.168.31.0/24 --gateway=192.168.31.1 -o parent=eno1 macwan 
 ```
 
 而使用docker-compose可以写成
