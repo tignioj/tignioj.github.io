@@ -1,6 +1,6 @@
 ---
 date: 2024-01-09T00:27:06+08:00
-lastmod: 2024-01-09T00:27:06+08:00
+lastmod: 2024-01-20T15:07:11+08:00
 categories:
   - 玩机
   - 路由器
@@ -9,7 +9,7 @@ draft: "false"
 tags:
   - 软路由
   - docker
-series:
+series: 
 ---
 
 ### 前言
@@ -145,12 +145,11 @@ openwrt重启网络
 
 主机联通宿容器
 ```shell 
-ip link add dockerrouteif link enx98fc84e631d8 type macvlan mode bridge
-ip addr add 192.168.10.99 dev dockerrouteif
-ip link set dockerrouteif up
-ip route add 192.168.10.9 dev dockerrouteif
+ip link add macvlan-proxy link enx98fc84e631d8 type macvlan mode bridge
+ip addr add 192.168.10.99 dev macvlan-proxy
+ip link set macvlan-proxy up
+ip route add 192.168.10.9 dev macvlan-proxy
 ```
-
 
 这时候容器就可以通过 192.168.10.99 访问宿主机了。
 ```
@@ -174,19 +173,26 @@ root@tignioj:~/dockercompose/openwrt#
 
 如果不需要通信，则可以删除
 ```
-ip link del dockerrouteif link eno1 type macvlan mode bridge
-ip addr del 192.168.31.99 dev dockerrouteif
+ip link del macvlan-proxy link eno1 type macvlan mode bridge
+ip addr del 192.168.31.99 dev macvlan-proxy
 ```
 
+如果要让宿主机使用容器的网络，请添加默认网关
+```
+ip route add default via 192.168.10.9 dev macvlan-proxy
+```
 
-
+如果发现无法联网，需要去openwrt后台添加自定义防火墙规则
 
 ```
-ip link add container2host link eno1 type macvlan mode bridge
-ip addr add 192.168.31.66 dev container2host
-ip link set container2host up
-ip route add 192.168.31.6 dev container2host
+iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE
 ```
+
+如果宿主机不想使用，可随时删掉默认网关
+```
+ip route del default via 192.168.10.9 dev macvlan-proxy
+```
+
 
 参考：
 - https://www.treesir.pub/post/n1-docker/
