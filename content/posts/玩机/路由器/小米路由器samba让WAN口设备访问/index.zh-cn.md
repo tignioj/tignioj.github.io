@@ -11,7 +11,7 @@ tags:
 series:
 ---
 
-首先你需要开启ssh，开启方法[请看这里](https://www.right.com.cn/forum/thread-8283638-1-1.html)
+首先你需要开启ssh，开启方法[请看这里](https://www.right.com.cn/forum/thread-8283638-1-1.html)，以及[这里](https://www.bilibili.com/video/BV1oo4y1V7b3/?vd_source=cdd8cee3d9edbcdd99486a833d261c72)
 ## samba设置
 开启ssh后，编辑`/etc/samba/smb.conf.template`
 ```
@@ -72,3 +72,17 @@ config rule 'alist_tcp'
 ```
 ## 测试是否允许访问
 电脑文件管理地址栏输入 `\\路由器WAN口ip`即可
+
+
+## 持久化配置
+由于小米路由器重启后会自动还原samba配置，因此我们需要添加开机自启脚本。 [index.zh-cn](../小米路由器BE7000开机自启通用脚本/index.zh-cn.md)
+往startup_script()里面添加两行即可。
+```
+sed -i 's/|INTERFACES|/&eth0/g' /etc/samba/smb.conf.template
+(sleep 20; /etc/init.d/samba restart) & 
+```
+这里使用了`(sleep 20; xx ) &` 来实现延迟重启服务。重启路由器后，查看监听状态
+```
+netstat -anpt | grep 445
+```
+看到你的WAN口监听了445表明成功了
