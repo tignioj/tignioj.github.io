@@ -6,7 +6,9 @@ categories:
   - 路由器
 title: 小米路由器BE7000将docker命令添加到环境变量
 draft: "false"
-tags: 
+tags:
+  - docker
+  - 路由器
 series:
 ---
 首先你需要创建通用脚本， 参考-> [index.zh-cn](../小米路由器BE7000开机自启通用脚本/index.zh-cn.md)
