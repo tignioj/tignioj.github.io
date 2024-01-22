@@ -1,6 +1,6 @@
 ---
 date: 2024-01-21T06:07:02+08:00
-lastmod: 2024-01-21T13:10:20+08:00
+lastmod: 2024-01-22T10:44:03+08:00
 categories:
   - 玩机
   - 路由器
@@ -15,6 +15,26 @@ series:
 ## 创建v2raya容器
 
 首先请开启ssh，否则无权限。插入usb存储后，安装docker并启动，管理界面安装与否无所谓，关键是你要能进ssh。连接小米路由器ssh终端后，进入usb目录，找到docker的执行文件路径,这里的usb-xxx具体取决于你的设备。
+
+### docker执行文件目录添加到环境变量
+一些有用的环境变量，从/etc/init.d/mi_docker上面复制的，粘贴到终端
+```
+DEVICE_UUID=$(uci -q get mi_docker.settings.device_uuid)
+STORAGE_DIR=$(storage dump | grep -C3 "${DEVICE_UUID:-invalid-uuid}" | grep target: | awk '{print $2}')
+STORAGE_SIZ=$(storage dump | grep -C3 "${DEVICE_UUID:-invalid-uuid}" | grep size: | awk '{printf "%d", $2/2}')
+DOCKER_DIR="${STORAGE_DIR:=/not_exist_disk}/mi_docker"
+DOCKER_VER="20.10.17"
+DOCKER_MD5="f9b6570a174df41aec6b822fba7a17aa"
+DOCKER_TGZ="$DOCKER_DIR/docker-$DOCKER_VER.tgz"
+DOCKER_BIN="$DOCKER_DIR/docker-binaries"
+```
+
+你也可以
+把docker执行文件添加到当前终端的环境变量
+```
+export PATH=$PATH:$DOCKER_BIN
+```
+相当于
 ```
 export PATH=$PATH:/mnt/usb-cc5b5b23/mi_docker/docker-binaries
 ```
@@ -22,7 +42,7 @@ export PATH=$PATH:/mnt/usb-cc5b5b23/mi_docker/docker-binaries
 
 创建一个v2raya配置目录
 ```
-mkdir /mnt/usb-cc5b5b23/docker/v2raya && cd /mnt/usb-cc5b5b23/docker/v2raya
+mkdir ${STORAGE_DIR}/docker/v2raya && cd ${STORAGE_DIR}/docker/v2raya
 ```
 
 执行以下命令创建v2raya容器
@@ -38,7 +58,7 @@ docker run -d \
   -e IPTABLES_MODE=legacy \
   -v /lib/modules:/lib/modules:ro \
   -v /etc/resolv.conf:/etc/resolv.conf \
-  -v /mnt/usb-cc5b5b23/docker/v2raya:/etc/v2raya \
+  -v ${STORAGE_DIR}/docker/v2raya:/etc/v2raya \
   mzz2017/v2raya
 ```
 
