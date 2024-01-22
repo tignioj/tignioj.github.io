@@ -11,7 +11,21 @@ tags:
   - 路由器
 series:
 ---
-首先你需要创建通用脚本， 参考-> [index.zh-cn](../小米路由器BE7000开机自启通用脚本/index.zh-cn.md)
+## 添加docker命令到当前终端
+进入终端，执行以下命令
+```
+DEVICE_UUID=$(uci -q get mi_docker.settings.device_uuid)
+STORAGE_DIR=$(storage dump | grep -C3 "${DEVICE_UUID:-invalid-uuid}" | grep target: | awk '{print $2}')
+DOCKER_DIR="${STORAGE_DIR:=/not_exist_disk}/mi_docker"
+DOCKER_BIN="$DOCKER_DIR/docker-binaries"
+export PATH=$PATH:$DOCKER_BIN
+```
+然后你就能使用docker命令了
+
+## 持久化配置
+为了让每次进入终端都无需手动配置环境变量，我们在开机自启的时候，把命令添加到/etc/profile里面。
+> 首先你需要创建通用自启动脚本， 参考-> [index.zh-cn](../小米路由器BE7000开机自启通用脚本/index.zh-cn.md)，
+
 创建一个脚本文件夹
 ```
 mkdir -p /data/myscript
@@ -38,3 +52,4 @@ startup_script() {
 	/data/myscript/env.sh
 }
 ```
+重启之后，会自动为profile文件添加环境变量
