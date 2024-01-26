@@ -1,13 +1,14 @@
 ---
 date: 2024-01-25T20:33:52+08:00
-lastmod: 2024-01-25T20:33:52+08:00
+lastmod: 2024-01-26T19:13:23+08:00
 categories:
   - 玩机
   - docker
 title: docker编译openwrt
 draft: "false"
-tags: 
-series:
+tags:
+  - openwrt
+series: 
 ---
 ## docker编译官方openwrt
 - docker提供环境： https://github.com/mwarning/docker-openwrt-build-env
