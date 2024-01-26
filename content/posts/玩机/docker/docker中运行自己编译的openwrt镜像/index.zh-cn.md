@@ -126,7 +126,7 @@ https://forum.openwrt.org/t/cant-access-openwrt-web-gui-luci/27914/12
 原因是编译了非稳定版本的镜像，不包括luci，正确做法使用git tag选择稳定版本，然后勾选Luci->luici-light或者luci，重新编译！
 ![](Pasted%20image%2020240126162654.png)
 
-
+ 
 
 ## 解决内核版本错误问题
 https://openwrt.org/faq/cannot_satisfy_dependencies
