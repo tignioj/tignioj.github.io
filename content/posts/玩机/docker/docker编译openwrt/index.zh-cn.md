@@ -15,6 +15,44 @@ series:
 - 官方编译步骤：  https://openwrt.org/docs/guide-developer/toolchain/use-buildsystem
 
 
+openwrt编译默认不带luci的web界面，你需要手动勾选安装，其余步骤完全相同
+![](Pasted%20image%2020240126162948.png)
+
+最好使用稳定版 `git checkout 指定版本`，而不是默认使用`HEAD`分支，如果你不使用稳定版，会带来两个问题
+- 不包含web界面
+- opkg安装程序会报错内核版本不匹配
+
+```
+# Download and update the sources
+git clone https://git.openwrt.org/openwrt/openwrt.git
+cd openwrt
+git pull
+ 
+# Select a specific code revision
+git branch -a
+git tag
+git checkout v23.05.2 # 指定稳定版
+ 
+# Update the feeds
+./scripts/feeds update -a
+./scripts/feeds install -a
+ 
+# Configure the firmware image
+make menuconfig
+ 
+# Optional: configure the kernel (usually not required)
+# Don't, unless have a strong reason to
+make -j$(nproc) kernel_menuconfig
+ 
+# Build the firmware image
+make -j$(nproc) defconfig download clean world
+```
+
+
+- 参考： https://openwrt.org/docs/guide-developer/toolchain/use-buildsystem
+
+
+
 ## docker编译lede
 其实就是仿造 https://github.com/mwarning/docker-openwrt-build-env 这个编写了一个linux环境，然后在这个环境里面执行编译
 ### 系统准备
@@ -78,45 +116,6 @@ make V=s -j$(nproc)
 
 
 - 参考： https://github.com/coolsnowwolf/lede
-
-## 编译openwrt
-
-
-openwrt编译默认不带luci的web界面，你需要手动勾选安装，其余步骤完全相同
-![](Pasted%20image%2020240126162948.png)
-
-最好使用稳定版 `git checkout 指定版本`，而不是默认使用`HEAD`分支，如果你不使用稳定版，会带来两个问题
-- 不包含web界面
-- opkg安装程序会报错内核版本不匹配
-
-```
-# Download and update the sources
-git clone https://git.openwrt.org/openwrt/openwrt.git
-cd openwrt
-git pull
- 
-# Select a specific code revision
-git branch -a
-git tag
-git checkout v23.05.2 # 指定稳定版
- 
-# Update the feeds
-./scripts/feeds update -a
-./scripts/feeds install -a
- 
-# Configure the firmware image
-make menuconfig
- 
-# Optional: configure the kernel (usually not required)
-# Don't, unless have a strong reason to
-make -j$(nproc) kernel_menuconfig
- 
-# Build the firmware image
-make -j$(nproc) defconfig download clean world
-```
-
-
-- 参考： https://openwrt.org/docs/guide-developer/toolchain/use-buildsystem
 
 
 
