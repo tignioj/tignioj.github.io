@@ -26,11 +26,11 @@ cp ~/mybuild/openwrt/bin/targets/x86/64/openwrt-x86-64-generic-rootfs.tar.gz .
 ```
 # 从空白镜像创建
 FROM scratch
-ADD openwrt-x86-generic-generic-rootfs.tar.gz /
+ADD openwrt-x86-64-generic-rootfs.tar.gz /
 EXPOSE 80 22 443
 ENTRYPOINT ["/sbin/init"]
 ```
-注意这里的ADD使用绝对路径时，是以当前context为根目录，所以你必须把镜像文件复制到当前目录，也就是说，你不能够写成 `#ADD /root/mybuild/openwrt/bin/targets/x86/generic/openwrt-x86-generic-generic-rootfs.tar.gz /`
+注意这里的ADD使用绝对路径时，是以当前context为根目录，所以你必须把镜像文件复制到当前目录，也就是说，你不能够写成 `#ADD /root/mybuild/openwrt/bin/targets/x86/64/openwrt-x86-generic-generic-rootfs.tar.gz /`
 
 ### 编写docker-compose.yaml
 ```
@@ -122,6 +122,13 @@ https://forum.openwrt.org/t/cant-access-openwrt-web-gui-luci/27914/12
 这下后台可以访问了，但是这显然不是正确的做法，目前进一步想办法解决。
 
 
-## 解决web无法访问的问题
+## 解决web无法访问的问题 
 正确做法是勾选Luci->luici-light或者luci，重新编译！
 ![](Pasted%20image%2020240126162654.png)
+
+
+
+## 解决内核版本错误问题
+https://openwrt.org/faq/cannot_satisfy_dependencies
+
+编译的时候选择稳定版本的分支
