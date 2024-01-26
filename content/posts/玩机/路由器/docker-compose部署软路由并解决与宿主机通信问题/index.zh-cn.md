@@ -76,7 +76,7 @@ networks:
         - subnet: 192.168.31.0/24
           gateway: 192.168.31.1
 ```
-
+参考: https://kingtam.win/archives/docker-openwrt.html#login
 ### 开启混杂模式
 ```
 ip link set enx98fc84e631d8 promisc on
