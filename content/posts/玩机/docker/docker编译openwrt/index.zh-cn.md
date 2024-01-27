@@ -8,44 +8,73 @@ title: docker编译openwrt
 draft: "false"
 tags:
   - openwrt
-series: 
+  - docker
+series:
 ---
 ## docker编译官方openwrt
 - docker提供环境： https://github.com/mwarning/docker-openwrt-build-env
 - 官方编译步骤：  https://openwrt.org/docs/guide-developer/toolchain/use-buildsystem
 
-
-openwrt编译默认不带luci的web界面，你需要手动勾选安装，其余步骤完全相同
-![](Pasted%20image%2020240126162948.png)
-
-最好使用稳定版 `git checkout 指定版本`，而不是默认使用`HEAD`分支，如果你不使用稳定版，会带来两个问题
-- 不包含web界面
-- opkg安装程序会报错内核版本不匹配
-
+## 下载源码
 ```
 # Download and update the sources
 git clone https://git.openwrt.org/openwrt/openwrt.git
 cd openwrt
 git pull
- 
+```
+
+### 选择稳定版本分支
+最好使用稳定版 `git checkout 指定版本`，而不是默认使用`HEAD`分支，如果你不使用稳定版，会带来两个问题
+- 不包含web界面
+- opkg安装程序会报错内核版本不匹配
+
+```
 # Select a specific code revision
 git branch -a
 git tag
 git checkout v23.05.2 # 指定稳定版
- 
+```
+
+### 更新feeds
+```
 # Update the feeds
 ./scripts/feeds update -a
 ./scripts/feeds install -a
- 
+```
+
+
+## 配置选项
+```
 # Configure the firmware image
 make menuconfig
- 
+```
+
+openwrt编译默认不带luci的web界面，你需要手动勾选安装luci
+![](Pasted%20image%2020240126162948.png)
+
+如果想要在docker中运行openwrt，请勾选`tar.gz`
+![](Pasted%20image%2020240127153010.png)
+
+
+可选项
+```
 # Optional: configure the kernel (usually not required)
 # Don't, unless have a strong reason to
 make -j$(nproc) kernel_menuconfig
- 
+```
+
+
+## 下载编译所需的库
+```
 # Build the firmware image
-make -j$(nproc) defconfig download clean world
+make download -j8
+```
+- `-j$(nproc)`, 其中`nproc`会返回你系统的最大核心数量，例如-j8表示8线程编译
+- `V=s`: 打印详细信息
+
+## 开始编译
+```
+make -j$(nproc) V=s
 ```
 
 
