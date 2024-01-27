@@ -10,6 +10,7 @@ tags:
   - v2ray
   - v2raya
   - "#openwrt"
+  - 科学上网
 series:
 ---
 
