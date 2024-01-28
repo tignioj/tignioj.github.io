@@ -63,3 +63,6 @@ iptables -I INPUT -p tcp --dport 9100 -j ACCEPT
 
 选择使用当前已经安装的驱动，而不是替换
 ![](Pasted%20image%2020240128005414.png)
+
+
+参考： https://zhuanlan.zhihu.com/p/139772672
