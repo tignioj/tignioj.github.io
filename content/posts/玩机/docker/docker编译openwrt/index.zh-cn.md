@@ -12,10 +12,52 @@ tags:
 series: 
 ---
 ## docker编译官方openwrt
+
+### 准备编译环境
 - docker提供环境： https://github.com/mwarning/docker-openwrt-build-env
+
+Dockerfile
+```
+FROM debian:buster
+
+RUN apt-get update &&\
+    apt-get install -y \
+        sudo time git-core subversion build-essential g++ bash make \
+        libssl-dev patch libncurses5 libncurses5-dev zlib1g-dev gawk \
+        flex gettext wget unzip xz-utils python python-distutils-extra \
+        python3 python3-distutils-extra rsync curl libsnmp-dev liblzma-dev \
+        libpam0g-dev cpio rsync gcc-multilib && \
+    apt-get clean && \
+    useradd -m user && \
+    echo 'user ALL=NOPASSWD: ALL' > /etc/sudoers.d/user
+
+# set system wide dummy git config
+RUN git config --system user.name "user" && git config --system user.email "user@example.com"
+
+USER user
+WORKDIR /home/user
+```
+
+### 构建编译所需的系统镜像
+为了不让编译环境污染宿主机，采用docker的方式编译，由docker为我们创建一个专门用于编译openwrt的系统，执行docker build的时候会自动下载编译工具所需要的依赖。
+
+```
+git clone https://github.com/mwarning/docker-openwrt-builder.git
+cd docker-openwrt-builder
+docker build -t openwrt_builder .
+```
+
+创建编译系统的容器
+```
+mkdir ~/mybuild
+docker run -v ~/mybuild:/home/user --name openwrt_builder -it openwrt_builder /bin/bash
+```
+
+## 编译准备
+经过上面的步骤，我们进入了一个已经准备好编译环境的系统，此时可以开始跟着官方的步骤开始编译了。
+
 - 官方编译步骤：  https://openwrt.org/docs/guide-developer/toolchain/use-buildsystem
 
-## 下载源码
 ```
 # Download and update the sources
 git clone https://git.openwrt.org/openwrt/openwrt.git
@@ -76,9 +118,6 @@ make download -j8
 ```
 make -j$(nproc) V=s
 ```
-
-
-- 参考： https://openwrt.org/docs/guide-developer/toolchain/use-buildsystem
 
 
 
