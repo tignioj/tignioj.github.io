@@ -150,12 +150,12 @@ WORKDIR /home/user
 
 构建镜像
 ```shell
-docker build -t openwrt_builder .
+docker build -t lede_builder .
 ```
 
 运行镜像
 ```shell
-docker run  -v ./mybild:home/user openwrt_builder /bin/bash
+docker run  -v ./mybild:home/user lede_builder /bin/bash
 ```
 ### 编译前准备
 

@@ -35,7 +35,7 @@ uninstall() {
     # Remove scripts from system autostart
     uci delete firewall.startup_script
     uci commit firewall
-    echo -e "\033[33m auto_start_docker has been removed. \033[0m"
+    echo -e "\033[33m startup_script has been removed. \033[0m"
 }
 
 startup_script() {

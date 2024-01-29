@@ -29,11 +29,11 @@ DOCKER_TGZ="$DOCKER_DIR/docker-$DOCKER_VER.tgz"
 DOCKER_BIN="$DOCKER_DIR/docker-binaries"
 ```
 
-你也可以
-把docker执行文件添加到当前终端的环境变量
+你也可以把docker执行文件添加到当前终端的环境变量
 ```
 export PATH=$PATH:$DOCKER_BIN
 ```
+
 相当于
 ```
 export PATH=$PATH:/mnt/usb-cc5b5b23/mi_docker/docker-binaries

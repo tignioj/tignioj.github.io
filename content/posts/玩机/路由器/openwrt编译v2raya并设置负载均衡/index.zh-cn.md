@@ -44,7 +44,7 @@ chmod +x /usr/bin/v2ray; chmod +x /usr/bin/v2ctl
 ### 指定核心
 
 ```
-uci set v2raya.config.v2ray_bin='/usr/bin/xray'
+uci set v2raya.config.v2ray_bin='/usr/bin/v2ray'
 uci commit v2raya
 ```
 上面这段命令会写入到/etc/config/v2raya

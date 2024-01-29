@@ -5,7 +5,7 @@ draft: "false"
 tags:
   - ubuntu
   - samba
-lastmod: 2023-11-07T15:20:02+08:00
+lastmod: 2024-01-11T22:27:41+08:00
 categories:
   - 玩机
   - Linux
