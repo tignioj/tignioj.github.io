@@ -121,6 +121,26 @@ make -j$(nproc) V=s
 
 
 
+## 自定义配置文件
+例如，自定义ip地址，我们可以在编译根目录下创建files目录，相当于路由器的根目录。此时我们往files/etc/uci-defaults/添加脚本，等同于往路由器的/etc/uci-defaults/中添加脚本。
+- 在uci/defaults/99-custom添加内容
+
+```
+cat << "EOF" > /etc/uci-defaults/99-custom
+uci -q batch << EOI
+set network.lan.ipaddr='192.168.30.99'
+set network.lan.dns='192.168.30.1'
+set network.lan.gateway='192.168.30.1'
+EOI
+EOF
+```
+
+
+
+ 
+参考： https://openwrt.org/docs/guide-developer/uci-defaults
+
+
 ## docker编译lede
 其实就是仿造 https://github.com/mwarning/docker-openwrt-build-env 这个编写了一个linux环境，然后在这个环境里面执行编译
 ### 系统准备
