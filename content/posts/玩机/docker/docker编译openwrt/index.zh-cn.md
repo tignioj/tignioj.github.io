@@ -188,6 +188,7 @@ make menuconfig
 
 自定义ip地址，我们可以在编译根目录下创建files目录，相当于路由器的根目录。此时我们往files/etc/uci-defaults/添加脚本，等同于往路由器的/etc/uci-defaults/中添加脚本。
 - 在uci/defaults/99-custom添加内容
+- 注意到我这里设置了uhttpd的https监听地址修改成了空字符串，原因是默认没有安装luci-app-openssl，如果不关闭https监听会无法启动web界面
 
 ```
 uci -q batch << EOI
@@ -195,8 +196,10 @@ set network.lan.ipaddr='192.168.30.101'
 set network.lan.dns='192.168.30.1'
 set network.lan.gateway='192.168.30.1'
 set network.lan.ipaddr='192.168.30.101'
+set uhttpd.main.listen_https=''
 EOI
 ```
+
 
 
  
