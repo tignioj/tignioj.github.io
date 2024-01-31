@@ -5,7 +5,7 @@ categories:
   - 玩机
   - Linux
 title: Ubuntu-Server2204LTS系统迁移
-draft: "true"
+draft: "false"
 tags:
   - Clonezilla
   - 再生龙
