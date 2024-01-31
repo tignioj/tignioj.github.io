@@ -67,7 +67,7 @@ git pull
 
 ### 选择稳定版本分支
 最好使用稳定版 `git checkout 指定版本`，而不是默认使用`HEAD`分支，如果你不使用稳定版，会带来两个问题
-- 不包含web界面
+- 不包含web界面（当然，你可以手动在menuconfig中勾选）
 - opkg安装程序会报错内核版本不匹配
 
 ```
@@ -126,15 +126,12 @@ make -j$(nproc) V=s
 - 在uci/defaults/99-custom添加内容
 
 ```
-cat << "EOF" > /etc/uci-defaults/99-custom
 uci -q batch << EOI
 set network.lan.ipaddr='192.168.30.99'
 set network.lan.dns='192.168.30.1'
 set network.lan.gateway='192.168.30.1'
 EOI
-EOF
 ```
-
 
 
  
@@ -186,6 +183,25 @@ cd lede
 ./scripts/feeds install -a
 make menuconfig
 ```
+
+### 自定义配置
+
+自定义ip地址，我们可以在编译根目录下创建files目录，相当于路由器的根目录。此时我们往files/etc/uci-defaults/添加脚本，等同于往路由器的/etc/uci-defaults/中添加脚本。
+- 在uci/defaults/99-custom添加内容
+
+```
+uci -q batch << EOI
+set network.lan.ipaddr='192.168.30.101'
+set network.lan.dns='192.168.30.1'
+set network.lan.gateway='192.168.30.1'
+set network.lan.ipaddr='192.168.30.101'
+EOI
+```
+
+
+ 
+
+
 
 Target-System选择x86后保存，接着下载 dl 库，编译固件 （-j 后面是线程数，第一次编译推荐用单线程）
 ```shell
