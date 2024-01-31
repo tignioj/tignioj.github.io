@@ -196,7 +196,7 @@ set network.lan.ipaddr='192.168.30.101'
 set network.lan.dns='192.168.30.1'
 set network.lan.gateway='192.168.30.1'
 set network.lan.ipaddr='192.168.30.101'
-set uhttpd.main.listen_https=''
+delete uhttpd.main.listen_https
 EOI
 ```
 
