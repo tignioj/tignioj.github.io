@@ -123,10 +123,25 @@ https://forum.openwrt.org/t/cant-access-openwrt-web-gui-luci/27914/12
 
 
 ## 解决web无法访问的问题 
+### openwrt 无法访问web
 原因是编译了非稳定版本的镜像，不包括luci，正确做法使用git tag选择稳定版本，然后勾选Luci->luici-light或者luci，重新编译！
 ![](Pasted%20image%2020240126162654.png)
 
- 
+### lede无法访问web的解决办法：
+https://forum.openwrt.org/t/luci-uhttpd-channel-3-open-failed-connect-failed/91646/2
+
+这是因为lede默认开启了https的访问，但是编译菜单没有勾选openssl，因此要么编译时候勾选openssl，要么关掉https
+
+### 关掉https
+```
+uci set uhttpd.main.listen_https=''
+uci commit
+```
+重启uhttpd
+```
+service uhttpd restart
+```
+
 
 ## 解决内核版本错误问题
 https://openwrt.org/faq/cannot_satisfy_dependencies
