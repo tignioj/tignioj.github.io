@@ -135,7 +135,8 @@ EOI
 
 
  
-参考： https://openwrt.org/docs/guide-developer/uci-defaults
+- 参考： https://openwrt.org/docs/guide-developer/uci-defaults
+- uci命令： https://openwrt.org/docs/techref/uci
 
 
 ## docker编译lede
