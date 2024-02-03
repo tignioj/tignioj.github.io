@@ -47,7 +47,7 @@ chmod +x /usr/bin/v2ray; chmod +x /usr/bin/v2ctl
 uci set v2raya.config.v2ray_bin='/usr/bin/v2ray'
 uci commit v2raya
 ```
-上面这段命令会写入到/etc/config/v2raya
+事实上，上面这段命令会写入到`/etc/config/v2raya`，因此你也可以自己手动编辑该文件，具体用法请参考v2raya的官方文档
 ```
 config v2raya 'config'
         option enabled '1'
@@ -60,7 +60,6 @@ config v2raya 'config'
         option v2ray_bin '/usr/bin/v2ray'
 
 ```
-事实上
 
 ## 参考： 
 - [OpenWrt - v2rayA](https://v2raya.org/docs/prologue/installation/openwrt/)
