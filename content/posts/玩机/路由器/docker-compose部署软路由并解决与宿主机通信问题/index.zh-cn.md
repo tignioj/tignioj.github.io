@@ -12,7 +12,7 @@ tags:
 series: 
 ---
 
-## 原始方法
+## 主路由模式
 ### docker原始方法创建macvlan
 
 假设这张usb网卡作为LAN口，由于这个网段随意，只要不和WAN网段有重合即可
@@ -95,7 +95,8 @@ docker compose up -d
 ```
 启动后，可以查看下容器的网络情况
 ![](Pasted%20image%2020240204041110.png)
-这里笔者感到疑惑，明明同样的设定，openwrt是怎么区分LAN和WAN的呢？笔者的猜想是，到目前为止，openwrt并不能区分LAN和WAN，而是我们自己设置LAN和WAN。
+- 这里笔者感到疑惑，明明同样的设定，openwrt是怎么区分LAN和WAN的呢？笔者的猜想是，到目前为止，openwrt并不能区分LAN和WAN，而是我们自己设置LAN和WAN。
+- 注意，这里虽然给容器设置了macwan的ip地址`192.168.30.99`，但是此时查看路由器后台是没有看到192.168.30.99设备接入的！即便你把macwan的subnet设置成172或者甚至不设置subnet，都不影响openwrt与路由器的通信，也就是说，即便你macwan的IPV4Address地址是172.17.0.2，openwrt照样可以使用DHCP客户端向路由器申请192.168.30.0/24的有效IP地址。
 
 ## 容器网络配置
 
@@ -201,8 +202,10 @@ openwrt重启网络
 /etc/init.d/network restart
 ```
 
-## 容器与宿主机的通讯修复
+主路由模式到此结束。
 
+## 容器与宿主机的通讯修复
+(以下文档尚未更新)
 
 造成原因及解决方法说明
 
