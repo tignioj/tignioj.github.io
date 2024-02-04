@@ -202,7 +202,72 @@ openwrt重启网络
 /etc/init.d/network restart
 ```
 
-主路由模式到此结束。
+
+## 避免每次手动设置网络
+前面提到，要修改网络设置，要么预编译，要么手动修改，那么有没有办法覆盖掉编译时候的预设配置呢？当然是有的，可以在构建镜像的时候，通过Dockerfile的RUN指令添加自己的预定义脚本到`/etc/uci-defaults/`。
+- 注意：不能使用`CMD`指令直接调用`uci set xxx`同样，docker compose的command指令也不生效，会报错uci命令未找到，猜测是`ENTRYPOINT`指令尚未执行openwrt的`/sbin/init`初始化操作，导致命令不生效
+- 参考： https://openwrt.org/docs/guide-developer/toolchain/use-buildsystem#custom_files
+
+在`docker-compose.yaml`同级目录下编写`Dockerfile`文件，内容如下
+
+如果是使用的是网络上的镜像
+```
+# 从别人的镜像创建
+FROM piaoyizy/openwrt-x86
+
+# 自定义配置
+RUN echo "uci set network.wan.device='eth2' && uci commit" > /etc/uci-defaults/100-custo
+
+EXPOSE 80 22 443
+# 路由器初始化
+ENTRYPOINT ["/sbin/init"]
+```
+
+如果是使用自己编译的镜像
+```
+# 从空白镜像创建
+# FROM scratch
+ADD openwrt-x86-64-generic-rootfs.tar.gz /
+
+# 自定义配置脚本
+RUN echo "uci set network.wan.device='eth2' && uci commit" > /etc/uci-defaults/100-custo
+
+EXPOSE 80 22 443
+ENTRYPOINT ["/sbin/init"]
+```
+
+
+然后，把`docker-compose.yaml`文件的image注释掉，添加`build: .` ，表示从当前目录下的Dockerfile构建
+```
+version: '3'
+
+services:
+  openwrt:
+    # image: piaoyizy/openwrt-x86
+    build: .
+    container_name: openwrt
+```
+
+此时创建容器需要先构建镜像
+```
+docker compose build && docker compose up -d
+```
+启动后就会发现，自定义配置生效了。
+
+
+## 主路由模式-使用宿主机无线网卡
+
+查看无线网卡
+
+```
+ip link set wlp2s0 promisc on
+```
+
+为无线网卡添加macvlan
+```
+
+```
+
 
 ## 容器与宿主机的通讯修复
 (以下文档尚未更新)
