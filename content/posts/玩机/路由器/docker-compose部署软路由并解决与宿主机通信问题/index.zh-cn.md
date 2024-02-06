@@ -1,6 +1,6 @@
 ---
 date: 2024-01-09T00:27:06+08:00
-lastmod: 2024-01-20T15:07:11+08:00
+lastmod: 2024-02-06T12:53:00+08:00
 categories:
   - 玩机
   - 路由器
@@ -206,6 +206,7 @@ openwrt重启网络
 ## 避免每次手动设置网络
 前面提到，要修改网络设置，要么预编译，要么手动修改，那么有没有办法覆盖掉编译时候的预设配置呢？当然是有的，可以在构建镜像的时候，通过Dockerfile的RUN指令添加自己的预定义脚本到`/etc/uci-defaults/`。
 - 注意：不能使用`CMD`指令直接调用`uci set xxx`同样，docker compose的command指令也不生效，会报错uci命令未找到，猜测是`ENTRYPOINT`指令尚未执行openwrt的`/sbin/init`初始化操作，导致命令不生效
+	- 更正：可以使用CMD指令，但是你不能同时使用ENTRYPOINT执行/sbin/init，这是因为/sbin/init可能会阻塞，因此如果要用CMD或者command指令，必须让/sbin/init放到最后一句执行。
 - 参考： https://openwrt.org/docs/guide-developer/toolchain/use-buildsystem#custom_files
 
 在`docker-compose.yaml`同级目录下编写`Dockerfile`文件，内容如下
@@ -218,23 +219,26 @@ FROM piaoyizy/openwrt-x86
 # 自定义配置
 RUN echo "uci set network.wan.device='eth2' && uci commit" > /etc/uci-defaults/100-custo
 
-EXPOSE 80 22 443
+EXPOSE 22 80 443 53 7681 5244
 # 路由器初始化
 ENTRYPOINT ["/sbin/init"]
 ```
 
 如果是使用自己编译的镜像
 ```
-# 从空白镜像创建
-# FROM scratch
+FROM scratch
+#ADD /root/mybuild/openwrt/bin/targets/x86/generic/openwrt-x86-generic-generic-rootfs.tar.gz /
 ADD openwrt-x86-64-generic-rootfs.tar.gz /
+EXPOSE 22 80 443 53 7681 5244
+RUN echo "uci set network.wan.device='eth2' \
+        && uci set network.wan6.device='eth2' \
+        && uci set firewall.@zone[1].input='ACCEPT' \
+        && uci commit" > /etc/uci-defaults/100-custom
 
-# 自定义配置脚本
-RUN echo "uci set network.wan.device='eth2' && uci commit" > /etc/uci-defaults/100-custo
-
-EXPOSE 80 22 443
 ENTRYPOINT ["/sbin/init"]
 ```
+
+
 
 
 然后，把`docker-compose.yaml`文件的image注释掉，添加`build: .` ，表示从当前目录下的Dockerfile构建
@@ -255,18 +259,11 @@ docker compose build && docker compose up -d
 启动后就会发现，自定义配置生效了。
 
 
-## 主路由模式-使用宿主机无线网卡
+## 旁路由模式
+- 注意：官方openwrt旁路由模式有BUG，UDP数据不能转发，解决办法是开启Passwall
+（先鸽）
 
-查看无线网卡
 
-```
-ip link set wlp2s0 promisc on
-```
-
-为无线网卡添加macvlan
-```
-
-```
 
 
 ## 容器与宿主机的通讯修复
