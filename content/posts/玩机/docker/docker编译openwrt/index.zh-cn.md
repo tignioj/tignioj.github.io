@@ -38,6 +38,8 @@ USER user
 WORKDIR /home/user
 ```
 
+- 不同系统所需依赖： https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem
+
 ### 构建编译所需的系统镜像
 为了不让编译环境污染宿主机，采用docker的方式编译，由docker为我们创建一个专门用于编译openwrt的系统，执行docker build的时候会自动下载编译工具所需要的依赖。
 
@@ -133,6 +135,9 @@ set network.lan.gateway='192.168.30.1'
 EOI
 ```
 
+
+
+## 差异配置
 
  
 - 参考： https://openwrt.org/docs/guide-developer/uci-defaults
