@@ -116,8 +116,8 @@ root@RAX3000M:/tmp# sync
 
 
 ## openclash
-如果发现无法启动，可能缺少内核clash
+如果发现无法启动openclash，可能缺少内核clash
 ### 安装clash内核
 - 方法1：修改github地址
-- 方法2：手动下载并上传到/etc/openclash/core
+- 方法2：手动下载并上传到/etc/openclash/core/clash，并给予执行权限。
 
