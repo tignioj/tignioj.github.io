@@ -105,9 +105,58 @@ root@RAX3000M:/tmp# sync
 - https://github.com/AngelaCooljx/Actions-rax3000m-emmc
 - https://www.right.com.cn/forum/thread-8306986-1-1.html
 
+
+```
+dd if=mt7981-cmcc_rax3000m-emmc-gpt.bin of=/dev/mmcblk0 bs=512 seek=0 count=34 conv=fsync
+echo 0 > /sys/block/mmcblk0boot0/force_ro
+dd if=/dev/zero of=/dev/mmcblk0boot0 bs=512 count=8192 conv=fsync
+dd if=mt7981-cmcc_rax3000m-emmc-bl2.bin of=/dev/mmcblk0boot0 bs=512 conv=fsync
+dd if=/dev/zero of=/dev/mmcblk0 bs=512 seek=13312 count=8192 conv=fsync
+dd if=mt7981-cmcc_rax3000m-emmc-fip.bin of=/dev/mmcblk0 bs=512 seek=13312 conv=fsync
+```
+
+
 ![](Pasted%20image%2020240224012602.png)
 
-进入uboot方式和方法1相同。
+#### 解释 `dd if=mt7981-cmcc_rax3000m-emmc-gpt.bin of=/dev/mmcblk0 bs=512 seek=0 count=34 conv=fsync`
+
+该命令执行了使用`dd`这一Unix和类Unix操作系统中的常用命令，进行磁盘写入操作。下面将一一解释命令中的每个组件：
+
+- `dd`：这是一个用于转换和复制文件的程序，通常被用于处理磁盘镜像文件或创建备份。
+- `if=mt7981-cmcc_rax3000m-emmc-gpt.bin`：`if`代表输入文件（input file），这里指定了要被复制到目的设备上的源文件`mt7981-cmcc_rax3000m-emmc-gpt.bin`。
+- `of=/dev/mmcblk0`：`of`代表输出文件（output file），指定了目的地设备。`/dev/mmcblk0`通常表示Linux环境下的第一个MMC设备（比如一个内嵌的eMMC存储）。
+- `bs=512`：`bs`代表块大小（blocksize），指定了读取和写入时每个块的大小，这里设置为512字节。每次读取和写入操作处理的数据量是512字节。
+- `seek=0`：这一参数指定了在开始写入前应该跳过目的文件（`of`指定的设备）开始的多少个`bs`大小的块。`seek=0`表示不跳过，直接从开头开始写入。
+- `count=34`：这一参数指定了要复制的块数量。结合上面的`bs`参数，这意味着此命令将写入34 * 512 = 17408字节的数据。
+- `conv=fsync`：`conv`代表转换，`fsync`意味着写入每个块后，`dd`命令会使用`fsync()`系统调用，确保将缓存中的数据立刻刷写到磁盘中。
+
+总结起来，这个`dd`命令的作用是将名为`mt7981-cmcc_rax3000m-emmc-gpt.bin`的文件的前17408字节拷贝到设备`/dev/mmcblk0`，这通常是为了写入一个特定的磁盘镜像或是引导记录等重要数据到一个存储设备上。
+
+#### 解释 `echo 0 > /sys/block/mmcblk0boot0/force_ro`
+这条命令在Linux系统中用来修改内核系统参数或者某些设备的设置。具体来说，此命令的各部分含义如下：
+
+- `echo`：是一个常用的shell命令，用于在屏幕上显示一段文字，或者将文字写入到文件中。
+- `0`：这是`echo`命令输出的内容。在这个上下文中，数字`0`通常被用来表示禁用或关闭一个选项。
+- `>`：这是重定向操作符。它会将左侧命令的输出（在这个例子中是`echo`命令的输出）重定向到右侧指定的文件或设备。
+- `/sys/block/mmcblk0boot0/force_ro`：这是一个路径，指向sysfs（一种虚拟文件系统）中的一个文件。在Linux中，sysfs用于导出内核对象的信息，允许运行中的系统通过用户空间的变化影响内核。`mmcblk0boot0`指的是一个特定的eMMC存储设备的引导分区，而`force_ro`文件允许用户将该分区设置为只读(`ro`)或可读写模式。
+
+所以，当执行`echo 0 > /sys/block/mmcblk0boot0/force_ro`命令时，它实际上是在将数字`0`写入到`force_ro`文件。这个操作会告诉系统不要强制将`mmcblk0boot0`这个eMMC引导分区设为只读模式，这允许在需要的时候对其进行修改。这种修改可能是为了更新引导加载程序或者对引导分区进行其他形式的写入操作。
+
+
+#### 解释 `dd if=/dev/zero of=/dev/mmcblk0boot0 bs=512 count=8192 conv=fsync`
+这条 `dd` 命令用于将数据写入Linux系统中的存储设备，命令各部分具体解释如下：
+
+- `dd` 是“data duplicator”的缩写，是一个非常强大的Unix命令行工具，用于转换和复制文件或设备内容。
+- `if=/dev/zero` 中的 `if` 代表输入文件（input file）。`/dev/zero` 是一个特殊的文件，它会不断提供无限的零（0x00）值。相当于输入源是「无限的0」。
+- `of=/dev/mmcblk0boot0` 中的 `of` 指输出文件（output file），在这里表示要写入的目标设备。`/dev/mmcblk0boot0` 可能是系统中某个eMMC存储设备的引导分区。
+- `bs=512` 中的 `bs` 表示块大小（block size），单位是字节。每次读取和写入操作会处理512字节的数据。
+- `count=8192` 这部分指明了要复制的块的数量，与`bs`结合，意味着命令会写入 `8192 * 512 = 4194304` 字节，即4MB的数据。
+- `conv=fsync` 指的是在写入每个块后，强制直接将内存中的缓冲数据同步到硬盘上，确保所有数据正确的被写入到设备中。
+
+整个命令的作用是，向`/dev/mmcblk0boot0`这个eMMC存储设备的引导分区写入4MB的全零数据，这通常会将该**存储区域清除**。这种操作常用于清理分区的内容，以便重新格式化或重新使用存储区域。
+
+
+> 进入uboot方式和方法1相同。
 
 ## 刷入openwrt
 
