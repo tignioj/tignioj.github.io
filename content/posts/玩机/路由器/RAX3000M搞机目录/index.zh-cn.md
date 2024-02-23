@@ -13,7 +13,37 @@ tags:
 series:
 ---
 
-### 备份
+
+## 开启SSH
+原理是通过修改配置的方式来开启ssh，由于后面生产的固件，配置文件可能会被加密，因此我们需要解密后才能修改配置文件，然后按照同样的加密方式生成新的配置文件
+
+- 参考1： https://blog.csdn.net/weixin_45357522/article/details/135342315
+- 参考2： https://blog.iplayloli.com/rax3000m-router-flashing-explanation-nanny-tutorial-easy-to-get-started.html
+
+
+### 导出配置
+配置管理->导出配置文件
+### 解密
+解密后你会获得一个etc目录，里面有路由器的配置文件
+```
+openssl aes-256-cbc -d -pbkdf2 -k $CmDc#RaX30O0M@\!$ -in ../cfg_export_config_file.conf -out - | tar -zxvf -
+```
+
+### 修改配置
+1. 修改/etc/shadow，去掉root用户的密码，这样ssh进入系统时，不用root密码了。具体做法是： 将两个冒号间的密码删除然后保存
+![](Pasted%20image%2020240223141934.png)
+2. 修改/etc/config/dropbear开启ssh服务
+![](Pasted%20image%2020240223142007.png)
+
+### 加密
+```
+tar -zcvf - etc | openssl aes-256-cbc -pbkdf2 -k $CmDc#RaX30O0M@\!$ -out ../cfg_export_config_file_new.conf
+```
+### 导入配置
+配置管理->导入配置文件，选择我们刚修改好的cfg_export_config_file_new.conf
+
+
+### 进入ssh备份
 参考： https://www.right.com.cn/forum/thread-8306986-1-1.html
 
 ```
@@ -40,38 +70,13 @@ dd if=/dev/mmcblk0p10 of=/mnt/mmcblk0p12/mmcblk0p10.bin
 dd if=/dev/mmcblk0p11 of=/mnt/mmcblk0p12/mmcblk0p11.bin
 ```
 
-
-## 开启SSH
-- 参考1： https://blog.csdn.net/weixin_45357522/article/details/135342315
-- 参考2： https://blog.iplayloli.com/rax3000m-router-flashing-explanation-nanny-tutorial-easy-to-get-started.html
-
-
-### 导出配置
-配置管理->导出配置文件
-### 解密
-解密后你会获得一个etc目录，里面有配置文件
-```
-openssl aes-256-cbc -d -pbkdf2 -k $CmDc#RaX30O0M@\!$ -in ../cfg_export_config_file.conf -out - | tar -zxvf -
-```
-
-### 修改配置
-1. 修改/etc/shadow，去掉root用户的密码，这样ssh进入系统时，不用root密码了。具体做法是： 将两个冒号间的密码删除然后保存
-![](Pasted%20image%2020240223141934.png)
-2. 修改/etc/config/dropbear开启ssh服务
-![](Pasted%20image%2020240223142007.png)
-
-### 加密
-```
-tar -zcvf - etc | openssl aes-256-cbc -pbkdf2 -k $CmDc#RaX30O0M@\!$ -out ../cfg_export_config_file_new.conf
-```
-### 导入配置
-
+然后你可以通过winscp连接上路由器，进入/mnt/mmcblk0p12下载这些备份文件到电脑以防变砖的时候恢复。
 
 
 ## 刷入uboot
-
+uboot是用来刷入固件的，如果你uboot都刷错了那路由器就成砖了，因此以下步骤需要谨慎！
 ### 方法1：h大的uboot
-
+缺点：无法刷入稍微大一点的固件
 - 下载链接： https://github.com/hanwckf/bl-mt798x/releases/tag/20240123
 - 检查md5
 ```
@@ -95,19 +100,28 @@ root@RAX3000M:/tmp# sync
 
 
 ### 方法2：immortalwrt的uboot
+
 参考： immortalwrt刷入教程
 - https://github.com/AngelaCooljx/Actions-rax3000m-emmc
 - https://www.right.com.cn/forum/thread-8306986-1-1.html
 
 ![](Pasted%20image%2020240224012602.png)
 
+进入uboot方式和方法1相同。
 
 ## 刷入openwrt
+
+### 官方源码openwrt
+由于目前master源码编译出来的只有itb格式的固件，刷入方式过于复杂，暂时放弃。
 - 教程： https://www.1234f.com/sj/technique/xxzl/20231108/560.html
 - 视频教程： https://www.bilibili.com/video/BV1dj411b7yW/?spm_id_from=333.337.search-card.all.click&vd_source=cdd8cee3d9edbcdd99486a833d261c72
-
-
 - itb 格式怎么刷？ https://www.right.com.cn/forum/thread-8316238-1-1.html
+
+### lede
+进uboot刷即可，但是h大的uboot无法刷入稍微大一点的固件（70M左右），40兆左右的固件则可以刷入，原因不明。
+
+### immortalwrt
+镜像和刷入教程： [AngelaCooljx/Actions-rax3000m-emmc: Build ImmortalWrt for CMCC RAX3000M eMMC version using GitHub Actions](https://github.com/AngelaCooljx/Actions-rax3000m-emmc)
 
 
 ## ipv6中继
