@@ -167,14 +167,25 @@ dd if=mt7981-cmcc_rax3000m-emmc-fip.bin of=/dev/mmcblk0 bs=512 seek=13312 conv=f
 - itb 格式怎么刷？ https://www.right.com.cn/forum/thread-8316238-1-1.html
 
 ### lede
-进uboot刷即可，但是h大的uboot无法刷入稍微大一点的固件（70M左右），40兆左右的固件则可以刷入，原因不明。
+进uboot刷即可，但是h大的uboot无法刷入稍微大一点的固件（70M左右），40兆左右的固件则可以刷入，原因不明。因此建议刷immortal的uboot。
+
+
 
 ### immortalwrt
 镜像和刷入教程： [AngelaCooljx/Actions-rax3000m-emmc: Build ImmortalWrt for CMCC RAX3000M eMMC version using GitHub Actions](https://github.com/AngelaCooljx/Actions-rax3000m-emmc)
 
 
+
+## 扩容overlays
+- 参考： https://www.techkoala.net/openwrt_resize/
+
+
+
+
+
 ## ipv6中继
 教程： https://www.right.com.cn/forum/thread-8309440-1-1.html
+
 
 
 
