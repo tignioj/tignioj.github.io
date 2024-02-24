@@ -1,6 +1,6 @@
 ---
 date: 2024-02-21T00:10:40+08:00
-lastmod: 2024-02-21T00:10:58+08:00
+lastmod: 2024-02-25T07:38:50+08:00
 categories:
   - 玩机
   - 路由器
@@ -10,7 +10,7 @@ tags:
   - RAX3000M
   - openwrt
   - immortalwrt
-series:
+series: 
 ---
 
 
@@ -100,10 +100,10 @@ root@RAX3000M:/tmp# sync
 
 
 ### 方法2：immortalwrt的uboot
-
-参考： immortalwrt刷入教程
-- https://github.com/AngelaCooljx/Actions-rax3000m-emmc
-- https://www.right.com.cn/forum/thread-8306986-1-1.html
+- 链接：[Index of /releases/23.05.0/targets/mediatek/filogic/ (immortalwrt.org)](https://downloads.immortalwrt.org/releases/23.05.0/targets/mediatek/filogic/)
+- 参考： immortalwrt刷入教程
+	- https://github.com/AngelaCooljx/Actions-rax3000m-emmc
+	- https://www.right.com.cn/forum/thread-8306986-1-1.html
 
 
 ```
@@ -175,18 +175,11 @@ dd if=mt7981-cmcc_rax3000m-emmc-fip.bin of=/dev/mmcblk0 bs=512 seek=13312 conv=f
 镜像和刷入教程： [AngelaCooljx/Actions-rax3000m-emmc: Build ImmortalWrt for CMCC RAX3000M eMMC version using GitHub Actions](https://github.com/AngelaCooljx/Actions-rax3000m-emmc)
 
 
-
 ## 扩容overlays
 - 参考： https://www.techkoala.net/openwrt_resize/
 
-
-
-
-
 ## ipv6中继
 教程： https://www.right.com.cn/forum/thread-8309440-1-1.html
-
-
 
 
 ## openclash
