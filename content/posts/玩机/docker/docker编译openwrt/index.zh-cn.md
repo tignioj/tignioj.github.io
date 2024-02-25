@@ -1,6 +1,6 @@
 ---
 date: 2024-01-25T20:33:52+08:00
-lastmod: 2024-02-26T06:17:05+08:00
+lastmod: 2024-02-26T06:22:46+08:00
 categories:
   - 玩机
   - docker
@@ -155,18 +155,18 @@ EOI
 ```
 
 
-
 ## 差异配置
-
+暂时不清楚有什么优点
  
 - 参考： https://openwrt.org/docs/guide-developer/uci-defaults
 - uci命令： https://openwrt.org/docs/techref/uci
 
 
 ## docker编译lede
-其实就是仿造 https://github.com/mwarning/docker-openwrt-build-env 这个编写了一个linux环境，然后在这个环境里面执行编译
+- 简介：lede是openwrt的一个分支，默认使用中文，集成了一些基本的插件。
+- 编译：类似openwrt，其实就是仿造 https://github.com/mwarning/docker-openwrt-build-env 这个编写了一个linux环境，然后在这个环境里面执行编译
 ### 系统准备
-编写一个Dockerfile文件
+这次我们不下载他们Dockerfile，而是自己仿造一个
 ```dockerfile
 FROM debian:buster
 # 使用国内镜像
@@ -209,12 +209,20 @@ cd lede
 make menuconfig
 ```
 
+第一次编译建议不要勾选任何插件，因为第一次编译包含了很多基础包的编译，过程比较持久，如果加上了插件造成报错可能会感到困惑：到底是插件的问题，还是我系统没配置好？因此第一次仅仅勾选你的路由器平台即可。
+
 ### 自定义配置
+默认情况况下，openwrt和lede默认后台地址都是192.168.1.1，有没有办法在编译的时候自定义呢？当然可以，只需要在编译的根目录下创建文件夹files，然后往里面添加初始化脚本即可。files相当于路由器的根目录
+```
+mkdir -p files/etc/uci-defautls
+```
 
-自定义ip地址，我们可以在编译根目录下创建files目录，相当于路由器的根目录。此时我们往files/etc/uci-defaults/添加脚本，等同于往路由器的/etc/uci-defaults/中添加脚本。
-- 在uci/defaults/99-custom添加内容
-- 注意到我这里设置了uhttpd的https监听地址修改成了空字符串，原因是默认没有安装luci-app-openssl，如果不关闭https监听会无法启动web界面
+假设我们要自定义ip地址
+```
+vim files/uci-defaults/99-custom
+```
 
+往里面添加内容
 ```
 uci -q batch << EOI
 set network.lan.ipaddr='192.168.30.101'
@@ -225,8 +233,7 @@ delete uhttpd.main.listen_https
 EOI
 ```
 
-
-
+注意到我这里设置了uhttpd的https监听地址修改成了空字符串，原因是lede默认没有安装luci-app-openssl，如果不关闭https监听会无法启动web界面
  
 
 
