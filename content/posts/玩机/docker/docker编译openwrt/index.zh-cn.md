@@ -13,14 +13,15 @@ series:
 ---
 ## docker编译官方openwrt
 总体步骤
-1. 准备编译所需的系统镜像
+1. docker构建编译所需的系统镜像
 2. 下载源代码
 3. 首次编译
 4. 选择自己需要的软件再次编译
 
 
 ## 准备编译环境
-- docker提供环境： https://github.com/mwarning/docker-openwrt-build-env
+
+你可以使用别人写好的Dockerfile文件： https://github.com/mwarning/docker-openwrt-build-env
 ### 构建编译所需的系统镜像
 为了不让编译环境污染宿主机，采用docker的方式编译，由docker为我们创建一个专门用于编译openwrt的系统，执行docker build的时候会自动下载编译工具所需要的依赖。
 
@@ -51,11 +52,40 @@ USER user
 WORKDIR /home/user
 ```
 
+为了加快构建速度，使用国内的源，在`FROM debian:buster`后面添加一行
+```
+RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+```
 
-构建镜像，执行此命令后，我们本地就多出了一个安装好编译依赖的debian镜像
+此时Dockerfile如下
+```
+FROM debian:buster
+RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+
+RUN apt-get update &&\
+    apt-get install -y \
+        sudo time git-core subversion build-essential g++ bash make \
+        libssl-dev patch libncurses5 libncurses5-dev zlib1g-dev gawk \
+        flex gettext wget unzip xz-utils python python-distutils-extra \
+        python3 python3-distutils-extra rsync curl libsnmp-dev liblzma-dev \
+        libpam0g-dev cpio rsync gcc-multilib && \
+    apt-get clean && \
+    useradd -m user && \
+    echo 'user ALL=NOPASSWD: ALL' > /etc/sudoers.d/user
+
+# set system wide dummy git config
+RUN git config --system user.name "user" && git config --system user.email "user@example.com"
+
+USER user
+WORKDIR /home/user
+```
+
+
+构建镜像
 ```
 docker build -t openwrt_builder .
 ```
+执行此命令后，我们本地就多出了一个安装好编译依赖的debian镜像
 
 - 不同系统所需依赖： https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem
 
