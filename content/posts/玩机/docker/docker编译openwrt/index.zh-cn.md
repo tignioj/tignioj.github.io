@@ -12,25 +12,30 @@ tags:
 series: 
 ---
 ## docker编译官方openwrt
-总体步骤
+整体步骤
 1. docker构建编译所需的系统镜像
 2. 下载源代码
 3. 首次编译
 4. 选择自己需要的软件再次编译
-
-
+5. 集成第三方软件包编译/编译单独ipk
+官网教程： https://openwrt.org/docs/guide-developer/toolchain/start
 ## 准备编译环境
 
-你可以使用别人写好的Dockerfile文件： https://github.com/mwarning/docker-openwrt-build-env
+### 为什么要使用Docker编译？
+- 因为容器可以随时创建、删除，但是如果你直接在系统上构建，系统被破坏了就不好恢复了！因此推荐使用Docker
+- 如果你对Docker一无所知，可以看看入门教程，推荐这个 【【编程不良人】Docker&Docker-Compose 实战!】 https://www.bilibili.com/video/BV1wQ4y1Y7SE/?p=3&share_source=copy_web&vd_source=801146758c4483987cb1bd1d6f31883a
+
 ### 构建编译所需的系统镜像
-为了不让编译环境污染宿主机，采用docker的方式编译，由docker为我们创建一个专门用于编译openwrt的系统，执行docker build的时候会自动下载编译工具所需要的依赖。
+为了不让编译环境污染宿主机，采用docker的方式编译，由docker为我们创建一个专门用于编译openwrt的系统，执行docker build的时候会自动下载编译工具所需要的依赖。你可以使用别人写好的Dockerfile文件： https://github.com/mwarning/docker-openwrt-build-env
 
 ```
 git clone https://github.com/mwarning/docker-openwrt-builder.git
 cd docker-openwrt-builder
 ```
 
-查看Dockerfile，可以看到是基于debian的系统，并创建了一个user用户。
+查看Dockerfile，可以看到是基于debian的系统，安装了一些依赖，并创建了一个user用户（原因是不能使用root用户编译，也不能使用sudo执行编译）
+- 不同系统所需依赖： https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem
+- 
 ```
 FROM debian:buster
 
@@ -86,25 +91,26 @@ WORKDIR /home/user
 docker build -t openwrt_builder .
 ```
 执行此命令后，我们本地就多出了一个安装好编译依赖的debian镜像
-
-- 不同系统所需依赖： https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem
-
+```
+root@tignioj:~/docker-openwrt-builder# docker images | grep openwrt
+openwrt_builder            latest     0175798f5da9   4 weeks ago     716MB
+```
 
 创建编译系统的容器
 ```
 mkdir ~/mybuild
-docker run -v ~/mybuild:/home/user --name openwrt_builder -it openwrt_builder /bin/bash
+docker run -v ~/mybuild:/home/user --name openwrt_builder -itd openwrt_builder /bin/bash
 ```
 
 ### 编译准备
-经过上面的步骤，我们进入了一个已经准备好编译环境的系统，此时可以开始跟着官方的步骤开始编译了。
-
 首先进入容器
 ```
 docker exec -it openwrt_builder /bin/bash
 ```
-
+经过上面的步骤，我们进入了一个已经准备好编译环境的系统，此时可以开始跟着官方的步骤开始编译了
 - 官方编译步骤：  https://openwrt.org/docs/guide-developer/toolchain/use-buildsystem
+
+下载openwrt源代码：
 
 ```
 # Download and update the sources
@@ -131,7 +137,6 @@ git checkout v23.05.2 # 指定稳定版
 ./scripts/feeds update -a
 ./scripts/feeds install -a
 ```
-
 
 ## 配置选项
 ```
