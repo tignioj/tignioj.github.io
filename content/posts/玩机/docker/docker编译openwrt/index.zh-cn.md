@@ -237,8 +237,7 @@ EOI
  
 
 
-
-Target-System选择x86后保存，接着下载 dl 库，编译固件 （-j 后面是线程数，第一次编译推荐用单线程）
+开始编译固件 （-j 后面是线程数，第一次编译推荐用单线程）
 ```shell
 make download -j8
 make V=s -j$(nproc)
