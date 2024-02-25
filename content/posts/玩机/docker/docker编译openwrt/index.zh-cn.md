@@ -1,6 +1,6 @@
 ---
 date: 2024-01-25T20:33:52+08:00
-lastmod: 2024-01-27T15:37:36+08:00
+lastmod: 2024-02-25T12:10:59+08:00
 categories:
   - 玩机
   - docker
@@ -111,16 +111,19 @@ make -j$(nproc) kernel_menuconfig
 ## 下载编译所需的库
 ```
 # Build the firmware image
-make download -j8
+make download -j$(nproc)
 ```
 - `-j$(nproc)`, 其中`nproc`会返回你系统的最大核心数量，例如-j8表示8线程编译
 - `V=s`: 打印详细信息
 
 ## 开始编译
 ```
-make -j$(nproc) V=s
+make -j$(nproc)
 ```
-
+如果编译出错了，那么就单线程编译一遍
+```
+make -j1 V=s
+```
 
 
 ## 自定义配置文件
