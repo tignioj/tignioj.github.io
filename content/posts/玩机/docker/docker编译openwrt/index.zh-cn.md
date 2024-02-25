@@ -240,8 +240,28 @@ EOI
 开始编译固件 （-j 后面是线程数，第一次编译推荐用单线程）
 ```shell
 make download -j8
-make V=s -j$(nproc)
+make -j$(nproc)
 ```
+如果发现编译出错，那么可以使用单线程编译，并输出详细信息。大部分情况下的首次编译出现错误都是网络问题。
+
+```
+make -j1 V=s
+```
+
+编译完成后，可以在bin/target/平台目录下看到自己编译后的包
+![](Pasted%20image%2020240226064650.png)
+
+### 集成插件编译
+经过前面的首次编译后，一些基础的包都已经编译完成，再次编译时候会跳过他们。此时选择自己需要的插件编译速度，就取决于插件本身。
+```
+make menuconfig
+```
+选择自己的插件后
+```
+make download -j$(nproc)
+make -j$(nproc)
+```
+
 
 如果需要重新配置：
 
@@ -253,9 +273,37 @@ make V=s -j$(nproc)
 
 
 
+
+
 - 参考： https://github.com/coolsnowwolf/lede
 
 
+## 编译的一些技巧
+### tmux多窗口
+tmux小技巧往期文章-> [index.zh-cn](../../Linux/tmux小技巧/index.zh-cn.md)
+- 如果是远程ssh连接服务器编译，最好使用`tmux`，可以多窗口，且ssh断掉后进程不会中断，再次ssh进入服务器可以回到tmux会话。
+创建一个名称为openwrt的session
+```
+tmux new -s openwrt
+```
+面板垂直分割，键盘按下快捷键
+```
+Ctrl + B + %
+```
+面板水平分割
+```
+Ctrl + B + "
+```
+退出tmux，但不退出tmux的进程
+```
+Ctrl + B + Q
+```
+回到tmux
+```
+tmux attach
+```
 
-## github action
+
+
+## 云编译：github action
 https://github.com/tignioj/Actions-OpenWrt/tree/main
