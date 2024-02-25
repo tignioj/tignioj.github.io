@@ -151,7 +151,7 @@ openwrt编译默认不带luci的web界面，你需要手动勾选安装luci
 ![](Pasted%20image%2020240127153010.png)
 
 
-可选项
+可选项（可以不执行）
 ```
 # Optional: configure the kernel (usually not required)
 # Don't, unless have a strong reason to
