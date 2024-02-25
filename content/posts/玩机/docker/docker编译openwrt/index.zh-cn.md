@@ -1,6 +1,6 @@
 ---
 date: 2024-01-25T20:33:52+08:00
-lastmod: 2024-02-25T12:10:59+08:00
+lastmod: 2024-02-26T06:17:05+08:00
 categories:
   - 玩机
   - docker
@@ -12,11 +12,24 @@ tags:
 series: 
 ---
 ## docker编译官方openwrt
+总体步骤
+1. 准备编译所需的系统镜像
+2. 下载源代码
+3. 首次编译
+4. 选择自己需要的软件再次编译
 
-### 准备编译环境
+
+## 准备编译环境
 - docker提供环境： https://github.com/mwarning/docker-openwrt-build-env
+### 构建编译所需的系统镜像
+为了不让编译环境污染宿主机，采用docker的方式编译，由docker为我们创建一个专门用于编译openwrt的系统，执行docker build的时候会自动下载编译工具所需要的依赖。
 
-Dockerfile
+```
+git clone https://github.com/mwarning/docker-openwrt-builder.git
+cd docker-openwrt-builder
+```
+
+查看Dockerfile，可以看到是基于debian的系统，并创建了一个user用户。
 ```
 FROM debian:buster
 
@@ -38,16 +51,14 @@ USER user
 WORKDIR /home/user
 ```
 
-- 不同系统所需依赖： https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem
 
-### 构建编译所需的系统镜像
-为了不让编译环境污染宿主机，采用docker的方式编译，由docker为我们创建一个专门用于编译openwrt的系统，执行docker build的时候会自动下载编译工具所需要的依赖。
-
+构建镜像，执行此命令后，我们本地就多出了一个安装好编译依赖的debian镜像
 ```
-git clone https://github.com/mwarning/docker-openwrt-builder.git
-cd docker-openwrt-builder
 docker build -t openwrt_builder .
 ```
+
+- 不同系统所需依赖： https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem
+
 
 创建编译系统的容器
 ```
@@ -55,8 +66,13 @@ mkdir ~/mybuild
 docker run -v ~/mybuild:/home/user --name openwrt_builder -it openwrt_builder /bin/bash
 ```
 
-## 编译准备
+### 编译准备
 经过上面的步骤，我们进入了一个已经准备好编译环境的系统，此时可以开始跟着官方的步骤开始编译了。
+
+首先进入容器
+```
+docker exec -it openwrt_builder /bin/bash
+```
 
 - 官方编译步骤：  https://openwrt.org/docs/guide-developer/toolchain/use-buildsystem
 
