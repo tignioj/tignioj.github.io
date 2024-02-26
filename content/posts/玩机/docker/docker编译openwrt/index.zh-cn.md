@@ -107,18 +107,24 @@ docker run -v ~/mybuild:/home/user --name openwrt_builder -itd openwrt_builder /
 ```
 docker exec -it openwrt_builder /bin/bash
 ```
+
+修改当前目录所属用户给user
+```
+sudo chown -R user:user .
+```
+
 经过上面的步骤，我们进入了一个已经准备好编译环境的系统，此时可以开始跟着官方的步骤开始编译了
 - 官方编译步骤：  https://openwrt.org/docs/guide-developer/toolchain/use-buildsystem
 
 下载openwrt源代码：
 
 ```
-# Download and update the sources
 git clone https://git.openwrt.org/openwrt/openwrt.git
-cd openwrt
-git pull
 ```
-
+进入代码目录
+```
+cd openwrt
+```
 ### 选择稳定版本分支
 最好使用稳定版 `git checkout 指定版本`，而不是默认使用`HEAD`分支，如果你不使用稳定版，会带来两个问题
 - 不包含web界面（当然，你可以手动在menuconfig中勾选）
@@ -149,6 +155,7 @@ make menuconfig
 
 openwrt编译默认不带luci的web界面，你需要手动勾选安装luci，
 LuCI-> Collections->
+
 ![](Pasted%20image%2020240126162948.png)
 
 如果想要在docker中运行openwrt，请勾选`tar.gz` 
