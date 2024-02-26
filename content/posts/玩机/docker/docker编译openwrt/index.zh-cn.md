@@ -484,12 +484,12 @@ make menuconfig
 ```
 首次编译
 ```
-make -j $(nproc)
+make -j$(nproc)
 ```
 选择插件后再次编译
 ```
 make menuconfig
-make -j $(nproc)
+make -j$(nproc)
 ```
 
 
