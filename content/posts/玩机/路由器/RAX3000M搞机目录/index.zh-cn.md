@@ -163,6 +163,7 @@ dd if=mt7981-cmcc_rax3000m-emmc-fip.bin of=/dev/mmcblk0 bs=512 seek=13312 conv=f
 ### 官方源码openwrt
 由于目前master源码编译出来的只有itb格式的固件，刷入方式过于复杂，暂时放弃。
 - 官网教程： https://openwrt.org/docs/guide-user/installation/generic.flashing.tftp
+- 油管教程： https://www.youtube.com/watch?v=7UIX9v2oV58
 - 教程： https://www.1234f.com/sj/technique/xxzl/20231108/560.html
 - 视频教程： https://www.bilibili.com/video/BV1dj411b7yW/?spm_id_from=333.337.search-card.all.click&vd_source=cdd8cee3d9edbcdd99486a833d261c72
 - itb 格式怎么刷？ https://www.right.com.cn/forum/thread-8316238-1-1.html
