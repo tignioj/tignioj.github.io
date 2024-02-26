@@ -36,7 +36,7 @@ cd docker-openwrt-builder
 查看Dockerfile，可以看到是基于debian的系统，安装了一些依赖，并创建了一个user用户（原因是不能使用root用户编译，也不能使用sudo执行编译）
 - 不同系统所需依赖： https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem
 
-```
+```Dockerfile
 FROM debian:buster
 
 RUN apt-get update &&\
@@ -63,7 +63,7 @@ RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
 ```
 
 此时Dockerfile如下
-```
+```Dockerfile
 FROM debian:buster
 RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
 
@@ -247,7 +247,6 @@ EOI
 这次我们不下载他们Dockerfile，而是自己仿造一个
 ```dockerfile
 FROM debian:buster
-# 使用国内镜像
 RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
 
 RUN apt-get update &&\
@@ -255,8 +254,8 @@ RUN apt-get update &&\
         sudo time git-core subversion build-essential g++ bash make \
         libssl-dev patch libncurses5 libncurses5-dev zlib1g-dev gawk \
         flex gettext wget unzip xz-utils python python-distutils-extra \
-        python3 python3-distutils-extra rsync curl libsnmp-dev liblzma-dev \
-        libpam0g-dev cpio rsync gcc-multilib && \
+        python3 python3-distutils-extra python3-setuptools swig rsync curl \
+        libsnmp-dev liblzma-dev libpam0g-dev cpio rsync gcc-multilib && \
     apt-get clean && \
     useradd -m user && \
     echo 'user ALL=NOPASSWD: ALL' > /etc/sudoers.d/user
@@ -265,7 +264,7 @@ RUN apt-get update &&\
 RUN git config --system user.name "user" && git config --system user.email "user@example.com"
 
 USER user
-WORKDIR /home/user           
+WORKDIR /home/user
 ```
 
 构建镜像
@@ -275,9 +274,9 @@ docker build -t lede_builder .
 
 运行镜像
 ```shell
-docker run  -v ./mybild:home/user lede_builder /bin/bash
+docker run  -v ~/lede_mybild:/home/user lede_builder /bin/bash
 ```
-### 编译前准备
+## 首次编译前准备
 
 ```shell
 git clone https://github.com/coolsnowwolf/lede
@@ -287,7 +286,9 @@ cd lede
 make menuconfig
 ```
 
-第一次编译建议不要勾选任何插件，因为第一次编译包含了很多基础包的编译，过程比较持久，如果加上了插件造成报错可能会感到困惑：到底是插件的问题，还是我系统没配置好？因此第一次仅仅勾选你的路由器平台即可。
+第一次编译建议不要勾选任何插件，因为第一次编译包含了很多基础包的编译，过程比较持久，如果加上了插件造成报错可能会感到困惑：到底是插件的问题，还是我系统没配置好？因此第一次仅仅勾选你的路由器平台即可。这里拿RAX3000M举例，首先选择平台，接着是芯片，第三项是具体型号
+
+![](Pasted%20image%2020240226112522.png)
 
 ### 自定义配置
 默认情况下，openwrt和lede后台地址都是192.168.1.1，有没有办法在编译的时候自定义呢？当然可以，只需要在编译的根目录下创建文件夹files，然后往里面添加初始化脚本即可。files相当于路由器的根目录
