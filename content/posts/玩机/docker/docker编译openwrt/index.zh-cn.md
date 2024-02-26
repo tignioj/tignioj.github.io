@@ -204,10 +204,19 @@ make -j1 V=s
 怎么在docker运行我们编译好的固件？请查看-> [index.zh-cn](../docker中运行自己编译的openwrt镜像/index.zh-cn.md)
 ## 选择插件编译进固件
 
-经过第一次编译后，后面再次编译速度就会快很多，这时候我们就可以选择自己需要的插件编译进固件里面
+经过第一次编译后，后面再次编译速度就会快很多，这时候我们就可以选择自己需要的插件编译进固件里面，例如 samba4
 
 ```
 make menuconfig
+```
+找到LuCI->Applications->luci-app-samba4, 双击空格使得前面的`<>`变成`<*>`，其中`*`表示集成进固件里面, `M`表示作为ipk包。
+![](Pasted%20image%2020240226105556.png)
+光标移动到save，保存.config，然后再次编译，发现速度会快很多。
+
+### 编译
+```
+make -j$(nproc) download
+make -j$(nproc)
 ```
 
 
