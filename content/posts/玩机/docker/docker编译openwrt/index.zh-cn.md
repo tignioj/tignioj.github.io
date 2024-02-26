@@ -105,8 +105,8 @@ mkdir ~/mybuild
 docker run -v ~/mybuild:/home/user --name openwrt_builder -itd openwrt_builder
 ```
 
-### 编译准备
-首先进入容器
+
+进入容器
 ```
 docker exec -it openwrt_builder /bin/bash
 ```
@@ -115,6 +115,8 @@ docker exec -it openwrt_builder /bin/bash
 ```
 sudo chown -R user:user .
 ```
+
+## 首次编译
 
 经过上面的步骤，我们进入了一个已经准备好编译环境的系统，此时可以开始跟着官方的步骤开始编译了
 - 官方编译步骤：  https://openwrt.org/docs/guide-developer/toolchain/use-buildsystem
@@ -148,7 +150,7 @@ git checkout v23.05.2 # 指定稳定版
 ./scripts/feeds install -a
 ```
 
-## 配置选项
+### 配置选项
 ```
 # Configure the firmware image
 make menuconfig
@@ -164,6 +166,12 @@ openwrt编译默认不带luci的web界面，你需要手动勾选安装，找到
 LuCI-> Collections-> luci，双击使得前面的变成`*`符号
 ![](Pasted%20image%2020240226085646.png)
 
+设置web界面为中文， 双击使得前面的变成`*`符号
+```
+LuCI->Modules->Translations -> <*> Chinese Simplified (zh_Hans)
+```
+
+
 我们选择x86平台就是为了能在宿主机上运行，为了能docker中运行openwrt，找到target image勾选`tar.gz` (默认是勾选上的，没有自己勾上)
 ![](Pasted%20image%2020240127153010.png)
 
@@ -173,14 +181,14 @@ LuCI-> Collections-> luci，双击使得前面的变成`*`符号
 ![](Pasted%20image%2020240226085958.png)
 然后光标移动到EXIT退出菜单。
 
-## 下载编译所需的库
+### 下载编译所需的库
 ```
 # Build the firmware image
 make download -j$(nproc)
 ```
 - `-j$(nproc)`, 其中`nproc`会返回你系统的最大核心数量，例如-j8表示8线程编译
 - `V=s`: 打印详细信息
-## 开始编译
+### 开始编译
 ```
 make -j$(nproc)
 ```
@@ -192,6 +200,16 @@ make -j1 V=s
 到这里你可以看到在`bin/target/x86/64`目录下看到编译的固件
 
 ![](Pasted%20image%2020240226104638.png)
+
+怎么在docker运行我们编译好的固件？请查看-> [index.zh-cn](../docker中运行自己编译的openwrt镜像/index.zh-cn.md)
+## 选择插件编译进固件
+
+经过第一次编译后，后面再次编译速度就会快很多，这时候我们就可以选择自己需要的插件编译进固件里面
+
+```
+make menuconfig
+```
+
 
 ## 自定义配置文件
 例如，自定义ip地址，我们可以在编译根目录下创建files目录，相当于路由器的根目录。此时我们往files/etc/uci-defaults/添加脚本，等同于往路由器的/etc/uci-defaults/中添加脚本。
