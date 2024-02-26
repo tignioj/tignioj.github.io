@@ -168,14 +168,7 @@ LuCI-> Collections-> luci，双击使得前面的变成`*`符号
 ![](Pasted%20image%2020240226085951.png)
 选择OK
 ![](Pasted%20image%2020240226085958.png)
-
-可选项（可以不执行）
-```
-# Optional: configure the kernel (usually not required)
-# Don't, unless have a strong reason to
-make -j$(nproc) kernel_menuconfig
-```
-
+然后光标移动到EXIT退出菜单。
 
 ## 下载编译所需的库
 ```
