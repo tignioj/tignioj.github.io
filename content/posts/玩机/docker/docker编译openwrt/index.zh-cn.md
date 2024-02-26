@@ -313,10 +313,8 @@ EOI
 ```
 
 注意到我这里设置了uhttpd的https监听地址修改成了空字符串，原因是lede默认没有安装luci-app-openssl，如果不关闭https监听会无法启动web界面
- 
 
-
-开始编译固件 （-j 后面是线程数，第一次编译推荐用单线程）
+开始编译固件 （-j 后面是线程数）
 ```shell
 make download -j8
 make -j$(nproc)
