@@ -426,11 +426,30 @@ sudo chown -R user:user .
 下载源代码
 ```
 git clone -b openwrt-23.05 --single-branch --filter=blob:none https://github.com/immortalwrt/immortalwrt
+cd immortalwrt
 ```
 
 选择哪个分区可以在这里找 https://github.com/immortalwrt/immortalwrt/branches/active
 
+安装
+```
+./scripts/feeds update -a
+./scripts/feeds install -a
+```
 
+编译菜单，同样，先别选择插件，仅选择你的平台即可！
+```
+make menuconfig
+```
+首次编译
+```
+make -j $(nproc)
+```
+选择插件后再次编译
+```
+make menuconfig
+make -j $(nproc)
+```
 
 
 ## 编译的一些技巧
