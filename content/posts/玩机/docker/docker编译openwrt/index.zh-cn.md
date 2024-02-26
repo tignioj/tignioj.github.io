@@ -161,9 +161,13 @@ openwrt编译默认不带luci的web界面，你需要手动勾选安装，找到
 LuCI-> Collections-> luci，双击使得前面的变成`*`符号
 ![](Pasted%20image%2020240226085646.png)
 
-如果想要在docker中运行openwrt，请勾选`tar.gz` 
+我们选择x86平台就是为了能在宿主机上运行，为了能docker中运行openwrt，找到target image勾选`tar.gz` (默认是勾选上的，没有自己勾上)
 ![](Pasted%20image%2020240127153010.png)
 
+接着保存配置菜单，移动到Save，回车
+![](Pasted%20image%2020240226085951.png)
+选择OK
+![](Pasted%20image%2020240226085958.png)
 
 可选项（可以不执行）
 ```
