@@ -445,8 +445,6 @@ WORKDIR /home/user
 ```
 注意到这里还加了一行 `DEBIAN_FRONTEND=noninteractive`，防止创建镜像的过程出现交互行为。
 
-
-
 ```
 docker build -t immortalwrt_builder .
 ```
@@ -461,7 +459,7 @@ docker run -itd --name iwt_builder -v ~/iwt_builder:/home/user immortalwrt_build
 docker exec -it iwt_builder bash
 ```
 
-## 开始编译
+## 首次编译准备
 注意，ubuntu系统需要修改用户目录权限给user才能下载源代码
 ```
 sudo chown -R user:user .
