@@ -44,8 +44,8 @@ RUN apt-get update &&\
         sudo time git-core subversion build-essential g++ bash make \
         libssl-dev patch libncurses5 libncurses5-dev zlib1g-dev gawk \
         flex gettext wget unzip xz-utils python python-distutils-extra \
-        python3 python3-distutils-extra rsync curl libsnmp-dev liblzma-dev \
-        libpam0g-dev cpio rsync gcc-multilib && \
+        python3 python3-distutils-extra python3-setuptools swig rsync curl \
+        libsnmp-dev liblzma-dev libpam0g-dev cpio rsync gcc-multilib && \
     apt-get clean && \
     useradd -m user && \
     echo 'user ALL=NOPASSWD: ALL' > /etc/sudoers.d/user
@@ -72,8 +72,8 @@ RUN apt-get update &&\
         sudo time git-core subversion build-essential g++ bash make \
         libssl-dev patch libncurses5 libncurses5-dev zlib1g-dev gawk \
         flex gettext wget unzip xz-utils python python-distutils-extra \
-        python3 python3-distutils-extra rsync curl libsnmp-dev liblzma-dev \
-        libpam0g-dev cpio rsync gcc-multilib && \
+        python3 python3-distutils-extra python3-setuptools swig rsync curl \
+        libsnmp-dev liblzma-dev libpam0g-dev cpio rsync gcc-multilib && \
     apt-get clean && \
     useradd -m user && \
     echo 'user ALL=NOPASSWD: ALL' > /etc/sudoers.d/user
@@ -186,6 +186,7 @@ make -j$(nproc)
 make -j1 V=s
 ```
 
+到这里你可以看到在bin/target/x86
 
 ## 自定义配置文件
 例如，自定义ip地址，我们可以在编译根目录下创建files目录，相当于路由器的根目录。此时我们往files/etc/uci-defaults/添加脚本，等同于往路由器的/etc/uci-defaults/中添加脚本。
