@@ -150,14 +150,16 @@ git checkout v23.05.2 # 指定稳定版
 # Configure the firmware image
 make menuconfig
 ```
-此时可以看到，选中了目标镜像是x86平台，在这个例子里面，我们就使用默认的x86平台，到后面我们再使用指定的路由器平台，所以这些默认不动即可！
+先认识一下界面
+![](Pasted%20image%2020240226085544.png)
+
+在这个例子里面，我们暂时使用x86平台，到后面我们再使用指定的路由器平台，所以这些默认不动即可！
 ![](Pasted%20image%2020240226083923.png)
 
 
-openwrt编译默认不带luci的web界面，你需要手动勾选安装luci，
-LuCI-> Collections->
-
-![](Pasted%20image%2020240126162948.png)
+openwrt编译默认不带luci的web界面，你需要手动勾选安装，找到，
+LuCI-> Collections-> luci，双击使得前面的变成`*`符号
+![](Pasted%20image%2020240226085646.png)
 
 如果想要在docker中运行openwrt，请勾选`tar.gz` 
 ![](Pasted%20image%2020240127153010.png)
