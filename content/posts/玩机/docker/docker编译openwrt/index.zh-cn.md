@@ -327,7 +327,7 @@ make -j$(nproc)
 make -j1 V=s
 ```
 
-编译完成后，可以在bin/target/平台目录下看到自己编译后的包
+编译完成后，可以在bin/target/平台目录下看到自己编译后的包，其中 `xxx-squashfs-sysupgrade.bin`就是我们要的固件
 ![](Pasted%20image%2020240226064650.png)
 
 ### 集成插件编译
