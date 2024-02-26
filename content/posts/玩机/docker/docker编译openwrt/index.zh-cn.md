@@ -35,7 +35,7 @@ cd docker-openwrt-builder
 
 查看Dockerfile，可以看到是基于debian的系统，安装了一些依赖，并创建了一个user用户（原因是不能使用root用户编译，也不能使用sudo执行编译）
 - 不同系统所需依赖： https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem
-- 
+
 ```
 FROM debian:buster
 
