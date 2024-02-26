@@ -235,7 +235,9 @@ EOI
 然后编译出来的固件，就会使用你的自定义配置
 
 ### 注意事项
-如果你选择了自定义路由器平台，官方openwrt编译出来的是`.itb`格式的固件，关于此格式文件的刷入暂时还没有深入研究。主要是官方的tftp刷机方法不如web界面的uboot方便。可参考教程： https://www.right.com.cn/forum/thread-8338290-1-1.html 
+如果你选择了自定义路由器平台，官方openwrt编译出来的是`.itb`格式的固件，关于此格式文件的刷入暂时还没有深入研究。主要是官方的tftp刷机方法不如web界面的uboot方便。可参考教程：
+- 官网： https://openwrt.org/docs/guide-user/installation/generic.flashing.tftp
+- 恩山： https://www.right.com.cn/forum/thread-8338290-1-1.html 
 ## 差异配置
 暂时不清楚有什么优点
  
