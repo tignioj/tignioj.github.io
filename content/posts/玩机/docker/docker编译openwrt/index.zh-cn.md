@@ -90,6 +90,9 @@ WORKDIR /home/user
 ```
 docker build -t openwrt_builder .
 ```
+
+![](Pasted%20image%2020240226093400.png)
+
 执行此命令后，我们本地就多出了一个安装好编译依赖的debian镜像
 ```
 root@tignioj:~/docker-openwrt-builder# docker images | grep openwrt
@@ -99,7 +102,7 @@ openwrt_builder            latest     0175798f5da9   4 weeks ago     716MB
 创建编译系统的容器（镜像类似于系统的安装光盘，是固定的，容器类似于安装后的系统，可以开机关机、安装软件）
 ```
 mkdir ~/mybuild
-docker run -v ~/mybuild:/home/user --name openwrt_builder -itd openwrt_builder /bin/bash
+docker run -v ~/mybuild:/home/user --name openwrt_builder -itd openwrt_builder
 ```
 
 ### 编译准备
