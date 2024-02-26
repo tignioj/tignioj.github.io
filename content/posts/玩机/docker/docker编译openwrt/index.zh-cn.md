@@ -166,7 +166,6 @@ make download -j$(nproc)
 ```
 - `-j$(nproc)`, 其中`nproc`会返回你系统的最大核心数量，例如-j8表示8线程编译
 - `V=s`: 打印详细信息
-
 ## 开始编译
 ```
 make -j$(nproc)
@@ -366,6 +365,72 @@ opkg install luci-i18n-alist-zh-cn_1.0.11-1_all.ipk
 opkg install alist_3.30.0-2_aarch64_cortex-a53.ipk
 opkg install luci-app-alist_1.0.11-1_all.ipk
 ```
+
+或者在web界面上传安装
+
+## docker编译immortalwrt
+- 地址： https://github.com/immortalwrt/immortalwrt
+- 简介： immortalwrt甚至集成了很多第三方的软件包，无需额外添加软件源，感觉更方便，编译步骤和lede一样，过程不再赘述。
+
+### 构建镜像
+#### 准备Dockerfile文件
+Dockerfile文件，根据官网描述，建议基于ubuntu20.04-LTS，那么第一行的FROM就要改了
+```
+FROM ubuntu:20.04
+RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list
+
+RUN apt-get update &&\
+  DEBIAN_FRONTEND=noninteractive  apt install -y \
+  sudo ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential \
+  bzip2 ccache clang cmake cpio curl device-tree-compiler ecj fastjar flex gawk gettext gcc-multilib \
+  g++-multilib git gnutls-dev gperf haveged help2man intltool lib32gcc-s1 libc6-dev-i386 libelf-dev \
+  libglib2.0-dev libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5 \
+  libncursesw5-dev libpython3-dev libreadline-dev libssl-dev libtool lld llvm lrzsz mkisofs msmtp \
+  nano ninja-build p7zip p7zip-full patch pkgconf python2.7 python3 python3-pip python3-ply \
+  python3-docutils python3-pyelftools qemu-utils re2c rsync scons squashfs-tools subversion swig \
+  texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev 
+
+RUN apt-get clean && \
+    useradd -m user && \
+    echo 'user ALL=NOPASSWD: ALL' > /etc/sudoers.d/user
+
+# set system wide dummy git config
+RUN git config --system user.name "user" && git config --system user.email "user@example.com"
+
+USER user
+WORKDIR /home/user
+```
+注意到这里还加了一行 `DEBIAN_FRONTEND=noninteractive`，防止创建镜像的过程出现交互行为。
+
+
+
+```
+docker build -t immortalwrt_builder .
+```
+#### 创建容器
+```
+docker run -itd --name iwt_builder -v ~/iwt_builder:/home/user immortalwrt_builder 
+```
+
+#### 进入容器
+
+```
+docker exec -it iwt_builder bash
+```
+
+## 开始编译
+注意，ubuntu系统需要修改用户目录权限给user才能下载源代码
+```
+sudo chown -R user:user .
+```
+下载源代码
+```
+git clone -b openwrt-23.05 --single-branch --filter=blob:none https://github.com/immortalwrt/immortalwrt
+```
+
+选择哪个分区可以在这里找 https://github.com/immortalwrt/immortalwrt/branches/active
+
+
 
 
 ## 编译的一些技巧
