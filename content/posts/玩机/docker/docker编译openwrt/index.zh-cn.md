@@ -125,6 +125,7 @@ git clone https://git.openwrt.org/openwrt/openwrt.git
 ```
 cd openwrt
 ```
+	
 ### 选择稳定版本分支
 最好使用稳定版 `git checkout 指定版本`，而不是默认使用`HEAD`分支，如果你不使用稳定版，会带来两个问题
 - 不包含web界面（当然，你可以手动在menuconfig中勾选）
@@ -149,7 +150,7 @@ git checkout v23.05.2 # 指定稳定版
 # Configure the firmware image
 make menuconfig
 ```
-此时可以看到，默认选中了目标镜像是x86平台，在这个例子里面，我们就使用默认的x86平台，到后面我们再使用指定的路由器平台，所以这些默认不懂即可！
+此时可以看到，选中了目标镜像是x86平台，在这个例子里面，我们就使用默认的x86平台，到后面我们再使用指定的路由器平台，所以这些默认不动即可！
 ![](Pasted%20image%2020240226083923.png)
 
 
