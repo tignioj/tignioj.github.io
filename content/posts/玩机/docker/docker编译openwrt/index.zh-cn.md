@@ -189,7 +189,9 @@ make -j$(nproc)
 make -j1 V=s
 ```
 
-到这里你可以看到在bin/target/x86
+到这里你可以看到在`bin/target/x86/64`目录下看到编译的固件
+
+![](Pasted%20image%2020240226104638.png)
 
 ## 自定义配置文件
 例如，自定义ip地址，我们可以在编译根目录下创建files目录，相当于路由器的根目录。此时我们往files/etc/uci-defaults/添加脚本，等同于往路由器的/etc/uci-defaults/中添加脚本。
