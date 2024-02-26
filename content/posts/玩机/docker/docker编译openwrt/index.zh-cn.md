@@ -233,12 +233,14 @@ EOI
 ```
 
 然后编译出来的固件，就会使用你的自定义配置
+
+### 注意事项
+如果你选择了自定义路由器平台，官方openwrt编译出来的是`.itb`格式的固件，关于此格式文件的刷入暂时还没有深入研究。可参考教程： https://www.right.com.cn/forum/thread-8338290-1-1.html 
 ## 差异配置
 暂时不清楚有什么优点
  
 - 参考： https://openwrt.org/docs/guide-developer/uci-defaults
 - uci命令： https://openwrt.org/docs/techref/uci
-
 
 ## docker编译lede
 - 简介：lede是openwrt的一个分支，默认使用中文，集成了一些基本的插件。
