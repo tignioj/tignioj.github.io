@@ -202,6 +202,8 @@ make -j1 V=s
 ![](Pasted%20image%2020240226104638.png)
 
 怎么在docker运行我们编译好的固件？请查看-> [index.zh-cn](../docker中运行自己编译的openwrt镜像/index.zh-cn.md)
+
+
 ## 选择插件编译进固件
 
 经过第一次编译后，后面再次编译速度就会快很多，这时候我们就可以选择自己需要的插件编译进固件里面，例如 samba4
@@ -230,7 +232,7 @@ make -j$(nproc)
 
 ## 自定义配置文件
 例如，自定义ip地址，我们可以在编译根目录下创建files目录，相当于路由器的根目录。此时我们往files/etc/uci-defaults/添加脚本，等同于往路由器的/etc/uci-defaults/中添加脚本。
-- 在uci/defaults/99-custom添加内容
+- 在uci-defaults/99-custom添加内容
 
 ```
 uci -q batch << EOI
@@ -319,7 +321,6 @@ uci -q batch << EOI
 set network.lan.ipaddr='192.168.30.101'
 set network.lan.dns='192.168.30.1'
 set network.lan.gateway='192.168.30.1'
-set network.lan.ipaddr='192.168.30.101'
 delete uhttpd.main.listen_https
 EOI
 ```
@@ -406,6 +407,10 @@ make package/luci-app-alist/compile V=s
 ```
 
 ipk生成路径，可以使用find命令查找
+```
+find bin/  -name "*alist*"   
+```
+
 ```
 user@c6ba0d0ab225:~/lede$ find bin/  -name "*alist*"                                                                                       
 bin/packages/aarch64_cortex-a53/kenzo/luci-i18n-alist-zh-cn_1.0.11-1_all.ipk
