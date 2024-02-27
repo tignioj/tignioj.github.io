@@ -1,6 +1,6 @@
 ---
 date: 2024-01-26T12:37:08+08:00
-lastmod: 2024-01-26T12:37:08+08:00
+lastmod: 2024-02-27T08:34:51+08:00
 categories:
   - 玩机
   - docker
@@ -9,7 +9,7 @@ draft: "false"
 tags:
   - openwrt
   - docker
-series:
+series: 
 ---
 ## 准备docker镜像
 ```
