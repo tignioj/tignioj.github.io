@@ -11,6 +11,7 @@ tags:
   - openwrt
   - immortalwrt
 series: 
+description: RAX3000M EMMC 1214版本开启ssh刷入uboot教程
 ---
 > 注意：这是EMMC版本，NAND版本有一些步骤可以参考，但涉及到存储擦写操作请谨慎！！
 
