@@ -44,7 +44,8 @@ tar -zcvf - etc | openssl aes-256-cbc -pbkdf2 -k $CmDc#RaX30O0M@\!$ -out ../cfg_
 
 
 ### 进入ssh备份
-参考： https://www.right.com.cn/forum/thread-8306986-1-1.html
+
+- 参考： https://www.right.com.cn/forum/thread-8306986-1-1.html
 
 ```
 dd if=/dev/mmcblk0p1 of=/mnt/mmcblk0p12/mmcblk0p1.bin
@@ -79,12 +80,13 @@ uboot是用来刷入固件的，如果你uboot都刷错了那路由器就成砖�
 缺点：无法刷入稍微大一点的固件
 - 下载链接： https://github.com/hanwckf/bl-mt798x/releases/tag/20240123
 - 检查md5
+
 ```
 root@RAX3000M:/tmp# md5sum mt7981_cmcc_rax3000m-emmc-fip.bin 
 2deacf30fe9cb6ef8a0ce646f507bfb4  mt7981_cmcc_rax3000m-emmc-fip.bin
 ```
 
-- 刷入uboot命令
+- 刷入uboot命令，请注意，下面命令是刷入的emmc版本的uboot，nand版本请不要乱刷！！
 ```
 root@RAX3000M:/tmp# dd if=/tmp/mt7981_cmcc_rax3000m-emmc-fip.bin of=/dev/mmcblk0p3
 1148+1 records in
