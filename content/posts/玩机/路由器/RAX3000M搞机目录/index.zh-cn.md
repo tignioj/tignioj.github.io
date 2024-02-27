@@ -10,6 +10,9 @@ tags:
   - RAX3000M
   - openwrt
   - immortalwrt
+  - uboot
+  - lede
+  - 路由器
 series: 
 description: RAX3000M EMMC 1214版本开启ssh刷入uboot教程
 ---
