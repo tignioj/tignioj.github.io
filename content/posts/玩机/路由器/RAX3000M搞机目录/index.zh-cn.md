@@ -133,7 +133,7 @@ dd if=mt7981-cmcc_rax3000m-emmc-fip.bin of=/dev/mmcblk0 bs=512 seek=13312 conv=f
 ```
 parted /dev/mmcblk0 print
 ```
-分区前，可以看到rootfs大小是64M，而且有2个rootfs
+分区前，可以看到rootfs大小是64M，而且有2个rootfs，这个空间决定了你刷机包上限的大小
 ![](Pasted%20image%2020240228001211.png)
 
 分区后，就只有一个rootfs了，大小变成了629M
