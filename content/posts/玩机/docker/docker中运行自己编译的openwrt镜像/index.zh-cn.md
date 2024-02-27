@@ -46,6 +46,18 @@ ENTRYPOINT ["/sbin/init"]
 docker network create -d macvlan --subnet=192.168.30.0/24 --gateway=192.168.30.1 -o parent=eno1 macnet
 ```
 
+
+test
+```
+docker network create -d macvlan --subnet=192.168.1.0/24 --gateway=192.168.1.1 -o parent=eno1 macnet
+```
+
+
+```
+docker run -d --name openwrt --restart always -d --network macnet --privileged  bleachwrt/plus /sbin/init
+```
+
+
 ### 编写docker-compose.yaml
 ```
 vim docker-compose.yaml
@@ -70,7 +82,7 @@ networks:
 ```
 
 
-当然，也可以在docker-compose里面编写虚拟网卡参数，当执行`docker compose up` 时，会自动创建虚拟网卡，需要注意的是，同一个网卡只能创建一个虚拟网络
+当然，也可以在docker-compose里面编写虚拟网卡参数，当执行`docker compose up` 时，会自动创建虚拟网卡，需要注意的是，同一个网卡只能创建一个虚拟网络     
 
 例如，开头我们已经为eno1创建了192.168.30.0/24的网络，名称为macnet，此时则不能继续用eno1作为上游网卡
 ```
@@ -175,7 +187,7 @@ https://forum.openwrt.org/t/cant-access-openwrt-web-gui-luci/27914/12
 ## 解决web无法访问的问题 
 ### openwrt 无法访问web
 原因是编译镜像的时候没有勾选luci，请勾选Luci->luci后重新编译！
-![](Pasted%20image%2020240126162654.png)
+![](Pasted%20image%2020240227151843.png)
 
 
 ### lede无法访问web的解决办法：
