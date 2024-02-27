@@ -19,7 +19,9 @@ description: RAX3000M EMMC 1214版本开启ssh刷入uboot教程
 > 注意：这是EMMC版本，NAND版本有一些步骤可以参考，但涉及到存储擦写操作请谨慎！！
 
 ## 开启SSH
-原理是通过修改配置的方式来开启ssh，由于后面生产的固件，配置文件可能会被加密，因此我们需要解密后才能修改配置文件，然后按照同样的加密方式生成新的配置文件
+原理是通过修改配置的方式来开启ssh，由于后面生产的固件，配置文件可能会被加密，因此我们需要解密后才能修改配置文件，然后按照同样的加密方式生成新的配置文件。
+
+> 注意：不要随便导入别人的配置文件，有的人版本和你不一样，导入了可能出错！最好就是自己导出配置文件，自己修改，自己打包再导入
 
 - 参考1： https://blog.csdn.net/weixin_45357522/article/details/135342315
 - 参考2： https://blog.iplayloli.com/rax3000m-router-flashing-explanation-nanny-tutorial-easy-to-get-started.html
