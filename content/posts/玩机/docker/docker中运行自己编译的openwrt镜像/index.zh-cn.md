@@ -46,18 +46,6 @@ ENTRYPOINT ["/sbin/init"]
 docker network create -d macvlan --subnet=192.168.30.0/24 --gateway=192.168.30.1 -o parent=eno1 macnet
 ```
 
-
-test
-```
-docker network create -d macvlan --subnet=192.168.1.0/24 --gateway=192.168.1.1 -o parent=eno1 macnet
-```
-
-
-```
-docker run -d --name openwrt --restart always -d --network macnet --privileged  bleachwrt/plus /sbin/init
-```
-
-
 ### 编写docker-compose.yaml
 ```
 vim docker-compose.yaml
