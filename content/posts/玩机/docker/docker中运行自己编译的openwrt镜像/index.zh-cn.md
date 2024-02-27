@@ -154,6 +154,22 @@ docker compose restart openwrt
 ```
 
 
+## 安装ipk
+如果你使用的是稳定的发行版，而不是master，那么你可以直接通过opkg update获取官方的安装包。
+```
+opkg update
+```
+比如安装 `iperf3`
+```
+opkg install iperf3
+```
+或者安装 `wol`
+```
+opkg install luci-app-wol
+opkg install luci-i18n-wol-zh-cn
+```
+
+
 ## 可能遇到的错误
 ### 在ip地址正确设置的情况下，web界面无法打开
 猜测是你的镜像有问题，进入容器，查看一下网络监听状态，有没有80和443，如果没监听 0.0.0.0:80，那么就说明镜像可能有问题
