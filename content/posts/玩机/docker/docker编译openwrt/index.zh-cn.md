@@ -231,7 +231,13 @@ make -j$(nproc)
 
 
 ## 自定义配置文件
-例如，自定义ip地址，我们可以在编译根目录下创建files目录，相当于路由器的根目录。此时我们往`files/etc/uci-defaults/`添加脚本，等同于往路由器的/etc/uci-defaults/中添加脚本。
+我们可以在编译根目录下创建files目录，相当于路由器的根目录。然后往里面新建etc/uci-defaults文件夹，这里面可以写自己定义的uci命令
+
+```
+mkdir -p files/etc/uci-defautls
+```
+
+往`files/etc/uci-defaults/`添加脚本，等同于往路由器的/etc/uci-defaults/中添加脚本。
 
 ```
 vim files/etc/uci-defaults/99-custom
