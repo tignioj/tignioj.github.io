@@ -129,6 +129,17 @@ dd if=mt7981-cmcc_rax3000m-emmc-fip.bin of=/dev/mmcblk0 bs=512 seek=13312 conv=f
 
 ![](Pasted%20image%2020240224012602.png)
 
+查看分区情况
+```
+parted /dev/mmcblk0 print
+```
+分区前，可以看到rootfs大小是64M，而且有2个rootfs
+![](Pasted%20image%2020240228001211.png)
+
+分区后，就只有一个rootfs了，大小变成了629M
+![](Pasted%20image%2020240228001249.png)
+
+
 #### 解释 `dd if=mt7981-cmcc_rax3000m-emmc-gpt.bin of=/dev/mmcblk0 bs=512 seek=0 count=34 conv=fsync`
 
 该命令执行了使用`dd`这一Unix和类Unix操作系统中的常用命令，进行磁盘写入操作。下面将一一解释命令中的每个组件：
