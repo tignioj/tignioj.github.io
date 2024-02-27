@@ -213,6 +213,14 @@ make menuconfig
 ![](Pasted%20image%2020240226105556.png)
 光标移动到save，保存.config，然后再次编译，发现速度会快很多。
 
+> 提醒：仅针对x86平台，如果编译`luci-app-dockerman`，则需要自己手动勾选依赖`dockerd`，否则docker无法正常启动
+
+在Utilities下找到，把前面的设置成`<*>`
+```
+<*> dockerd............ Docker Community Edition Daemon  --->
+```
+
+
 ### 编译
 ```
 make -j$(nproc) download
