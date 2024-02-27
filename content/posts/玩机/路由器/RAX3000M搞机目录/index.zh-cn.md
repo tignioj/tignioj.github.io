@@ -106,6 +106,7 @@ root@RAX3000M:/tmp# sync
 - 参考： immortalwrt刷入教程
 	- https://github.com/AngelaCooljx/Actions-rax3000m-emmc
 	- https://www.right.com.cn/forum/thread-8306986-1-1.html
+- uboot地址： [Developer drive of ImmortalWrt - /uboot/mediatek](https://firmware.download.immortalwrt.eu.org/uboot/mediatek)
 - immortalwrt官网连接：[Index of /releases/23.05.0/targets/mediatek/filogic/ (immortalwrt.org)](https://downloads.immortalwrt.org/releases/23.05.0/targets/mediatek/filogic/)
 
 > 请注意，下面命令是刷入的emmc版本的uboot，nand版本请不要乱刷！此步刷错必成砖！
