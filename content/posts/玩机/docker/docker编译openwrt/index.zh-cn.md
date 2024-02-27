@@ -243,7 +243,7 @@ mkdir -p files/etc/uci-defautls
 vim files/etc/uci-defaults/99-custom
 ```
 
-在99-custom添加内容
+在99-custom添加自定义ip地址、dns和网关命令
 ```
 uci -q batch << EOI
 set network.lan.ipaddr='192.168.30.99'
