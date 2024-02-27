@@ -86,7 +86,8 @@ root@RAX3000M:/tmp# md5sum mt7981_cmcc_rax3000m-emmc-fip.bin
 2deacf30fe9cb6ef8a0ce646f507bfb4  mt7981_cmcc_rax3000m-emmc-fip.bin
 ```
 
-- 刷入uboot命令，请注意，下面命令是刷入的emmc版本的uboot，nand版本请不要乱刷！此步刷错，必成砖！
+- 刷入uboot命令
+> 请注意，下面命令是刷入的emmc版本的uboot，nand版本请不要乱刷！此步刷错必成砖！
 ```
 root@RAX3000M:/tmp# dd if=/tmp/mt7981_cmcc_rax3000m-emmc-fip.bin of=/dev/mmcblk0p3
 1148+1 records in
@@ -107,7 +108,7 @@ root@RAX3000M:/tmp# sync
 	- https://github.com/AngelaCooljx/Actions-rax3000m-emmc
 	- https://www.right.com.cn/forum/thread-8306986-1-1.html
 
-
+> 请注意，下面命令是刷入的emmc版本的uboot，nand版本请不要乱刷！此步刷错必成砖！
 ```
 dd if=mt7981-cmcc_rax3000m-emmc-gpt.bin of=/dev/mmcblk0 bs=512 seek=0 count=34 conv=fsync
 echo 0 > /sys/block/mmcblk0boot0/force_ro
