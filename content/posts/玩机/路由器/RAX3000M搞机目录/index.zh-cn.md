@@ -109,6 +109,7 @@ root@RAX3000M:/tmp# sync
 
 
 ### 方法2：immortalwrt的uboot
+- 参考： openwrt RAX3000M官方教程 https://github.com/openwrt/openwrt/pull/13513
 - 参考： immortalwrt刷入教程
 	- https://github.com/AngelaCooljx/Actions-rax3000m-emmc
 	- https://www.right.com.cn/forum/thread-8306986-1-1.html
