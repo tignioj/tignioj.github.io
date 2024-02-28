@@ -221,7 +221,7 @@ dd if=openwrt-mediatek-filogic-cmcc_rax3000m-emmc-bl31-uboot.fip of=/dev/mmcblk0
 - itb 格式怎么刷？ https://www.right.com.cn/forum/thread-8316238-1-1.html
 
 #### 重启路由器
-刷入openwrt的官方uboot后，只需要断开电源再插上重启即可，不需要按下任何按键，路由器会等待tftp服务器上传固件。
+刷入openwrt的官方uboot后，只需要断开电源，按住reset再插上电源重启即可，路由器会等待tftp服务器上传固件。
 
 #### 设置电脑IP地址
 - 设置静态地址 192.168.1.254（注意，一定是1.254而不是别的ip地址）
