@@ -238,6 +238,10 @@ dd if=openwrt-mediatek-filogic-cmcc_rax3000m-emmc-bl31-uboot.fip of=/dev/mmcblk0
 选择`openwrt-mediatek-filogic-cmcc_rax3000m-squashfs-sysupgrade.itb` 上传升级
 ![](Pasted%20image%2020240228184954.png)
 
+#### 23.05.2 一些使用的问题
+- 编译luci-app-dockerman 需要自己手动勾选dockerd
+- 如果发现web界面的dockerman菜单项缺失，仅仅包含“配置”，则去`系统`->`软件包`处更新`luci-lib-docker`
+
 
 
 ### lede
