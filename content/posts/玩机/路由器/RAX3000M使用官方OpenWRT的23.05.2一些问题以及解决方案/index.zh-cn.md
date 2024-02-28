@@ -1,0 +1,43 @@
+---
+date: 2024-02-29T05:28:21+08:00
+lastmod: 2024-02-29T05:28:21+08:00
+categories:
+  - 玩机
+  - 路由器
+title: RAX3000M使用官方OpenWRT的23.05.2一些问题以及解决方案
+draft: "false"
+tags:
+  - openwrt
+  - dockerman
+  - docker
+  - RAX3000M
+series:
+---
+
+## WiFi
+首次启动需要自己手动开启WiFi
+
+## dockerman
+- 编译luci-app-dockerman 需要自己手动勾选dockerd
+- 如果发现web界面的dockerman菜单项缺失，仅仅包含“配置”，则去`系统`->`软件包`处更新`luci-lib-docker`
+
+## 磁盘挂载
+安装cfdisk和e2fsprogs
+```
+opkg updatee e2fsprogs
+```
+分配空闲磁盘
+ ```
+ cfdisk -l /dev/mmcblk0
+```
+选择FreeSpace，点击New创建新的存储空间，选择Write然后输入yes，会发现多出一个/dev/mmcblk0p6的存储空间
+- 格式化新创建的存储空间
+```
+mkfs.ext4 /dev/mmcblk0p6
+```
+手动挂载到/mnt
+```
+mkdir -p /mnt/mmcblk0p6
+mount /dev/mmcblk0p6 /mnt/mmcblk0p6
+```
+
