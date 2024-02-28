@@ -111,7 +111,7 @@ docker run -v ~/mybuild:/home/user --name openwrt_builder -itd openwrt_builder
 docker exec -it openwrt_builder /bin/bash
 ```
 
-修改当前目录所属用户给user
+修改当前目录所属用户给user（这个user用户是在Dockerfile中创建的）
 ```
 sudo chown -R user:user .
 ```
