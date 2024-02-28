@@ -18,7 +18,7 @@ series:
 3. 首次编译
 4. 选择自己需要的软件再次编译
 5. 集成第三方软件包编译/编译单独ipk
-官网教程： https://openwrt.org/docs/guide-developer/toolchain/start
+- 官网教程： https://openwrt.org/docs/guide-developer/toolchain/start
 ## 准备编译环境
 
 ### 为什么要使用Docker编译？
