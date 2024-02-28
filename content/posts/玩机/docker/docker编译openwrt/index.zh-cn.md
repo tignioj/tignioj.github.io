@@ -137,7 +137,11 @@ cd openwrt
 ```
 # Select a specific code revision
 git branch -a
-git tag
+git tag  # 查看有哪些分支
+```
+
+切换到指定版本
+```
 git checkout v23.05.2 # 指定稳定版
 ```
 
