@@ -118,6 +118,7 @@ root@RAX3000M:/tmp# sync
 - （没刷过这个链接的）immortalwrt官网连接：[Index of /releases/23.05.0/targets/mediatek/filogic/ (immortalwrt.org)](https://downloads.immortalwrt.org/releases/23.05.0/targets/mediatek/filogic/)
 
 > 请注意，下面命令是刷入的emmc版本的uboot，nand版本请不要乱刷！此步刷错必成砖！
+
 ```
 dd if=mt7981-cmcc_rax3000m-emmc-gpt.bin of=/dev/mmcblk0 bs=512 seek=0 count=34 conv=fsync
 echo 0 > /sys/block/mmcblk0boot0/force_ro
@@ -178,8 +179,29 @@ parted /dev/mmcblk0 print
 
 整个命令的作用是，向`/dev/mmcblk0boot0`这个eMMC存储设备的引导分区写入4MB的全零数据，这通常会将该**存储区域清除**。这种操作常用于清理分区的内容，以便重新格式化或重新使用存储区域。
 
-
 > 进入uboot方式和方法1相同。
+
+
+### 方法3： openwrt官网uboot
+- 参考： https://github.com/openwrt/openwrt/pull/13513#issue-1909808957
+- uboot来源：官网下载或者自己编译固件时会生成。
+1. 刷入GPT分区
+```
+dd if=openwrt-mediatek-filogic-cmcc_rax3000m-emmc-gpt.bin of=/dev/mmcblk0 bs=512 seek=0 count=34 conv=fsync
+   ```
+2. 擦写bl2分区
+```
+echo 0 > /sys/block/mmcblk0boot0/force_ro
+dd if=/dev/zero of=/dev/mmcblk0boot0 bs=512 count=8192 conv=fsync
+dd if=openwrt-mediatek-filogic-cmcc_rax3000m-emmc-preloader.bin of=/dev/mmcblk0boot0 bs=512 conv=fsync
+```
+
+3. 写入新的uboot
+```
+dd if=/dev/zero of=/dev/mmcblk0 bs=512 seek=13312 count=8192 conv=fsync
+dd if=openwrt-mediatek-filogic-cmcc_rax3000m-emmc-bl31-uboot.fip of=/dev/mmcblk0 bs=512 seek=13312 conv=fsync
+```
+
 
 ## 刷入openwrt
 
