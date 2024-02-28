@@ -22,7 +22,8 @@ series:
 - （未解决）如果发现web界面的dockerman菜单项缺失，仅仅包含“配置”，则去`系统`->`软件包`处更新`luci-lib-docker`，以及中文包`luci-i18n-dockerman-zh-cn`
 
 ## DHCP（未解决）
-不知为何我的Ubuntu主机无法获取ip地址，即使执行dhclient 也无济于事。
+不知为何我的Ubuntu主机无法获取ip地址，即使执行dhclient 也无济于事，初步推断是插件引起的问题。但不确定是哪个。
+- 经过排查是openclash的问题
 
 
 ## 磁盘挂载
