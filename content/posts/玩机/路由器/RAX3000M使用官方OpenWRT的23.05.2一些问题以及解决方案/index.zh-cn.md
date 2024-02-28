@@ -21,6 +21,9 @@ series:
 - 编译luci-app-dockerman 需要自己手动勾选dockerd
 - 如果发现web界面的dockerman菜单项缺失，仅仅包含“配置”，则去`系统`->`软件包`处更新`luci-lib-docker`
 
+
+
+
 ## 磁盘挂载
 安装cfdisk和e2fsprogs
 ```
@@ -40,4 +43,12 @@ mkfs.ext4 /dev/mmcblk0p6
 mkdir -p /mnt/mmcblk0p6
 mount /dev/mmcblk0p6 /mnt/mmcblk0p6
 ```
-
+docker挂载到/mnt/mmcblk0p6
+```
+vi /etc/config/dockerd
+```
+找到`data_root`，修改`/opt/docker`为`/mnt/mmcblk0p6/docker`
+```
+config globals 'globals'
+        option data_root '/mnt/mmcblk0p6/docker'
+```
