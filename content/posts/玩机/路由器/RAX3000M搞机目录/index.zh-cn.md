@@ -188,11 +188,11 @@ parted /dev/mmcblk0 print
 
 > 官网的uboot不带web界面，只能刷入.itb格式的固件，和第三方uboot不兼容
 >  请注意，下面命令是刷入的emmc版本的uboot，nand版本请不要乱刷！此步刷错必成砖！
-1. 刷入GPT分区
+1. 刷入GPT分区（从0~17408）
 ```
 dd if=openwrt-mediatek-filogic-cmcc_rax3000m-emmc-gpt.bin of=/dev/mmcblk0 bs=512 seek=0 count=34 conv=fsync
    ```
-2. 擦写bl2分区
+2. 擦写bl2分区（)
 ```
 echo 0 > /sys/block/mmcblk0boot0/force_ro
 dd if=/dev/zero of=/dev/mmcblk0boot0 bs=512 count=8192 conv=fsync
@@ -205,6 +205,7 @@ dd if=/dev/zero of=/dev/mmcblk0 bs=512 seek=13312 count=8192 conv=fsync
 dd if=openwrt-mediatek-filogic-cmcc_rax3000m-emmc-bl31-uboot.fip of=/dev/mmcblk0 bs=512 seek=13312 conv=fsync
 ```
 
+![](Pasted%20image%2020240228175932.png)
 
 ## 刷入openwrt
 
