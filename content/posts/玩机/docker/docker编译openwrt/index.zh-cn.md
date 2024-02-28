@@ -132,9 +132,7 @@ cd openwrt
 ```
 	
 ### 选择稳定版本分支
-最好使用稳定版 `git checkout 指定版本`，而不是默认使用`HEAD`分支，如果你不使用稳定版，会带来两个问题
-- 不包含web界面（当然，你可以手动在menuconfig中勾选）
-- opkg安装程序会报错内核版本不匹配
+最好使用稳定版 `git checkout 指定版本`，而不是默认使用`HEAD`分支，如果你不使用稳定版，会带来某些问题，比如opkg安装程序会报错内核版本不匹配
 
 ```
 # Select a specific code revision
