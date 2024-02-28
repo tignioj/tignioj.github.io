@@ -182,7 +182,7 @@ parted /dev/mmcblk0 print
 
 ## 刷入openwrt
 
-### 官方源码openwrt
+### 官方openwrt
 由于目前master源码编译出来的只有itb格式的固件，刷入方式过于复杂，暂时放弃。
 - 官网教程： https://openwrt.org/docs/guide-user/installation/generic.flashing.tftp
 - 油管教程： https://www.youtube.com/watch?v=7UIX9v2oV58
