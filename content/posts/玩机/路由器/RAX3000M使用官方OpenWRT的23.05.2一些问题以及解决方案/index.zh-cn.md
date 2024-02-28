@@ -21,7 +21,8 @@ series:
 - 编译luci-app-dockerman 需要自己手动勾选dockerd
 - （未解决）如果发现web界面的dockerman菜单项缺失，仅仅包含“配置”，则去`系统`->`软件包`处更新`luci-lib-docker`，然而发现重启后，配置菜单还是缺失了。
 
-
+## DHCP
+不知道为何我的Ubuntu22 主机无法获取到IP地址，但是最新的master源码编译出来的就没问题。
 
 
 ## 磁盘挂载
