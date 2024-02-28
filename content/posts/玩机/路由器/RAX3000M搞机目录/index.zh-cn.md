@@ -192,7 +192,7 @@ parted /dev/mmcblk0 print
 ```
 dd if=openwrt-mediatek-filogic-cmcc_rax3000m-emmc-gpt.bin of=/dev/mmcblk0 bs=512 seek=0 count=34 conv=fsync
    ```
-2. 擦写bl2分区（)
+2. 擦写bl2分区
 ```
 echo 0 > /sys/block/mmcblk0boot0/force_ro
 dd if=/dev/zero of=/dev/mmcblk0boot0 bs=512 count=8192 conv=fsync
