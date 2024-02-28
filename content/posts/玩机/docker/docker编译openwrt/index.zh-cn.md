@@ -224,6 +224,7 @@ make menuconfig
 <*> dockerd............ Docker Community Edition Daemon  --->
 ```
 
+> 提醒：dnsmasq和dnsmasq-full不能同时勾选。例如选中passwall第三方插件时，可能会出现这种情况，请到Base System中取消调dnsmasq的勾选
 
 ### 编译
 ```
