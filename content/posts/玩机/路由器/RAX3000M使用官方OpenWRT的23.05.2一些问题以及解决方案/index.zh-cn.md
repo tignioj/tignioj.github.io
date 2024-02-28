@@ -19,10 +19,11 @@ series:
 
 ## dockerman
 - 编译luci-app-dockerman 需要自己手动勾选dockerd
-- （未解决）如果发现web界面的dockerman菜单项缺失，仅仅包含“配置”，则去`系统`->`软件包`处更新`luci-lib-docker`，然而发现重启后，配置菜单还是缺失了。
+- （未解决）如果发现web界面的dockerman菜单项缺失，仅仅包含“配置”，则去`系统`->`软件包`处更新`luci-lib-docker`，以及中文包`luci-i18n-dockerman-zh-cn`
 
-## DHCP
-如果发现无法获取IP地址给局域网设备，确保首次安装后，执行一次`系统`->`备份于升级`->`执行重置`操作。
+## DHCP（未解决）
+不知为何我的Ubuntu主机无法获取ip地址，即使执行dhclient 也无济于事。
+
 
 ## 磁盘挂载
 安装cfdisk和e2fsprogs
