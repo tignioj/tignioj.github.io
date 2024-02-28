@@ -207,15 +207,38 @@ dd if=openwrt-mediatek-filogic-cmcc_rax3000m-emmc-bl31-uboot.fip of=/dev/mmcblk0
 
 ![](Pasted%20image%2020240228175932.png)
 
+
+![](Pasted%20image%2020240228182730.png)
+
 ## 刷入openwrt
 
 ### 官方openwrt
-由于目前master源码编译出来的只有itb格式的固件，刷入方式过于复杂，暂时放弃。
+- 参考： https://www.right.com.cn/forum/thread-8308281-1-7.html
 - 官网教程： https://openwrt.org/docs/guide-user/installation/generic.flashing.tftp
 - 油管教程： https://www.youtube.com/watch?v=7UIX9v2oV58
 - 教程： https://www.1234f.com/sj/technique/xxzl/20231108/560.html
 - 视频教程： https://www.bilibili.com/video/BV1dj411b7yW/?spm_id_from=333.337.search-card.all.click&vd_source=cdd8cee3d9edbcdd99486a833d261c72
 - itb 格式怎么刷？ https://www.right.com.cn/forum/thread-8316238-1-1.html
+
+#### 重启路由器
+刷入openwrt的官方uboot后，只需要断开电源再插上重启即可，不需要按下任何按键，路由器会等待tftp服务器上传固件。
+
+#### 设置电脑IP地址
+- 设置静态地址 192.168.1.254（注意，一定是1.254而不是别的ip地址）
+- 网关192.168.1.1
+#### 打开tftp服务器
+把`openwrt-mediatek-filogic-cmcc_rax3000m-initramfs-recovery.itb` 格式文件放在和tftp服务器相同的目录。如果不是这个名称，手动修改一下。过一会就会自动上传固件了。
+
+![](Pasted%20image%2020240228184200.png)
+
+#### 进入路由器后台
+点击`转到固件升级`
+![](Pasted%20image%2020240228183956.png)
+
+选择`openwrt-mediatek-filogic-cmcc_rax3000m-squashfs-sysupgrade.itb` 上传升级
+![](Pasted%20image%2020240228184954.png)
+
+
 
 ### lede
 进uboot刷即可，但是h大的uboot无法刷入稍微大一点的固件（70M左右），40兆左右的固件则可以刷入，原因不明。因此建议刷immortal的uboot。
@@ -237,5 +260,5 @@ dd if=openwrt-mediatek-filogic-cmcc_rax3000m-emmc-bl31-uboot.fip of=/dev/mmcblk0
 如果发现无法启动openclash，可能缺少内核clash
 ### 安装clash内核
 - 方法1：修改github地址
-- 方法2：手动下载并上传到/etc/openclash/core/clash，并给予执行权限。
+- 方法2：[手动下载](https://github.com/vernesong/OpenClash/releases/tag/Clash)并上传到/etc/openclash/core/clash，并给予执行权限。 
 
