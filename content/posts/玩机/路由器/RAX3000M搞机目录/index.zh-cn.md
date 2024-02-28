@@ -185,6 +185,9 @@ parted /dev/mmcblk0 print
 ### 方法3： openwrt官网uboot
 - 参考： https://github.com/openwrt/openwrt/pull/13513#issue-1909808957
 - uboot来源：官网下载或者自己编译固件时会生成。
+
+> 官网的uboot不带web界面，只能刷入.itb格式的固件，和第三方uboot不兼容
+>  请注意，下面命令是刷入的emmc版本的uboot，nand版本请不要乱刷！此步刷错必成砖！
 1. 刷入GPT分区
 ```
 dd if=openwrt-mediatek-filogic-cmcc_rax3000m-emmc-gpt.bin of=/dev/mmcblk0 bs=512 seek=0 count=34 conv=fsync
