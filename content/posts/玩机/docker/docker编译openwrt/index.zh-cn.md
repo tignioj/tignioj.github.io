@@ -214,9 +214,13 @@ make -j1 V=s
 make menuconfig
 ```
 找到LuCI->Applications->luci-app-samba4, 双击空格使得前面的`<>`变成`<*>`，其中`*`表示集成进固件里面, `M`表示作为ipk包。
+
+
+#### 网络共享samba4
 ![](Pasted%20image%2020240226105556.png)
 光标移动到save，保存.config，然后再次编译，发现速度会快很多。
 
+#### docker
 > 提醒：仅针对x86平台，如果编译`luci-app-dockerman`，则需要自己手动勾选依赖`dockerd`，否则docker无法正常启动
 
 在Utilities下找到，把前面的设置成`<*>`
@@ -225,6 +229,25 @@ make menuconfig
 ```
 
 > 提醒：dnsmasq和dnsmasq-full不能同时勾选。例如选中passwall第三方插件时，可能会出现这种情况，请到Base System中取消调dnsmasq的勾选
+
+#### usb打印服务器
+```
+ <*> luci-app-p910nd........... p910nd - Printer server module
+```
+找到内核`Kernal Modules` -> `USB Support`
+```
+ <*> kmod-usb-printer...... ........ Support for printers
+```
+
+#### usb存储支持
+```
+-*- kmod-usb-storage............................. USB Storage support
+<*> kmod-usb-storage-extras............ Extra drivers for usb-storage
+<*> kmod-usb-storage-uas............... USB Attached SCSI (UASP) support
+```
+
+
+
 
 ### 编译
 ```
@@ -480,6 +503,9 @@ USER user
 WORKDIR /home/user
 ```
 注意到这里还加了一行 `DEBIAN_FRONTEND=noninteractive`，防止创建镜像的过程出现交互行为。
+
+
+
 
 ```
 docker build -t immortalwrt_builder .
