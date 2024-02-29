@@ -215,20 +215,21 @@ make menuconfig
 ```
 找到LuCI->Applications->luci-app-samba4, 双击空格使得前面的`<>`变成`<*>`，其中`*`表示集成进固件里面, `M`表示作为ipk包。
 
-
 #### 网络共享samba4
 ![](Pasted%20image%2020240226105556.png)
 光标移动到save，保存.config，然后再次编译，发现速度会快很多。
 
 #### docker
+
+```
+<*> luci-app-dockerman.................. LuCI Support for docker
+```
 > 提醒：仅针对x86平台，如果编译`luci-app-dockerman`，则需要自己手动勾选依赖`dockerd`，否则docker无法正常启动
 
 在Utilities下找到，把前面的设置成`<*>`
 ```
 <*> dockerd............ Docker Community Edition Daemon  --->
 ```
-
-> 提醒：dnsmasq和dnsmasq-full不能同时勾选。例如选中passwall第三方插件时，可能会出现这种情况，请到Base System中取消调dnsmasq的勾选
 
 #### usb打印服务器
 ```
@@ -246,6 +247,8 @@ make menuconfig
 <*> kmod-usb-storage-uas............... USB Attached SCSI (UASP) support
 ```
 
+
+> 提醒：dnsmasq和dnsmasq-full不能同时勾选。例如选中passwall第三方插件时，可能会出现这种情况，请到Base System中取消调dnsmasq的勾选
 
 
 
