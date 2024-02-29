@@ -26,7 +26,7 @@ series:
 
 
 
-## 磁盘挂载
+## 磁盘管理
 ### 分区
 安装cfdisk和e2fsprogs
 ```
