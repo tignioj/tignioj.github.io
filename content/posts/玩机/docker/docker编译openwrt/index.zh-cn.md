@@ -232,6 +232,12 @@ make -j$(nproc) download
 make -j$(nproc)
 ```
 
+## 调整ROOT大小
+- 参考 https://github.com/danshui-git/shuoming/blob/master/overlay.md
+> 注意：修改root分区大小后，如果刷到路由器里面，需要重新刷GPT和uboot，否则可能不生效。
+
+找到 `Target Images` -> `(102) Root filesystem partition size (in MiB) `， 把102改为自己想要的大小。
+
 
 ## 自定义配置文件
 我们可以在编译根目录下创建files目录，相当于路由器的根目录。然后往里面新建etc/uci-defaults文件夹，这里面可以写自己定义的uci命令
