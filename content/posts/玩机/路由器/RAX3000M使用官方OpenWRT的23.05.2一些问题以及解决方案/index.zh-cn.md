@@ -27,6 +27,7 @@ series:
 
 
 ## 磁盘挂载
+### 分区
 安装cfdisk和e2fsprogs
 ```
 opkg updatee e2fsprogs
@@ -40,6 +41,9 @@ opkg updatee e2fsprogs
 ```
 mkfs.ext4 /dev/mmcblk0p6
 ```
+
+### 挂载
+#### 方法1：手动挂载
 手动挂载到/mnt
 ```
 mkdir -p /mnt/mmcblk0p6
@@ -50,8 +54,18 @@ docker挂载到/mnt/mmcblk0p6
 vi /etc/config/dockerd
 ```
 
+#### 方法2：使用挂载点`blokc-mount`
+最好在编译固件的时候就在`Base System` 中选中 `block-mount`，如果没有，则自己手动安装
+
+
+#### 挂载docker
+
 找到`data_root`，修改`/opt/docker`为`/mnt/mmcblk0p6/docker`
 ```
 config globals 'globals'
         option data_root '/mnt/mmcblk0p6/docker'
+```
+或者在web界面修改docker的挂载点。修改完成后，重启dockerd
+```
+service dockerd restart
 ```
