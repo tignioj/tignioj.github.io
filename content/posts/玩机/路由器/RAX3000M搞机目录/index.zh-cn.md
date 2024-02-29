@@ -16,8 +16,12 @@ tags:
 series: 
 description: RAX3000M EMMC 1214版本开启ssh刷入uboot教程
 ---
-> 注意：这是EMMC版本，NAND版本有一些步骤可以参考，但涉及到存储擦写操作请谨慎！！
+> 注意：这是EMMC版本，NAND版本有一些步骤可以参考，但涉及到存储擦写操作请谨慎！！ EMMC 和 NAND的开启ssh步骤完全相同，都是导出配置->解密->修改配置->加密->导入配置
 
+如何判断自己是EMMC还是NAND，网上主流的说法是看路由器后面的标签来区分。
+- NAND： 只有CH
+- EMMC：CH后面还跟着EC
+但是这种方法不是绝对的，判断的唯一标准是开启ssh后，输入`df -h`命令查看你存储空间的大小，如果有一个50多G的分区，则说明是EMMC，否则是NAND。
 ## 开启SSH
 原理是通过修改配置的方式来开启ssh，由于后面生产的固件，配置文件可能会被加密，因此我们需要解密后才能修改配置文件，然后按照同样的加密方式生成新的配置文件。
 
@@ -81,11 +85,16 @@ dd if=/dev/mmcblk0p11 of=/mnt/mmcblk0p12/mmcblk0p11.bin
 
 
 ## 刷入uboot
-uboot是用来刷入固件的，如果你uboot都刷错了那路由器就成砖了，因此以下步骤需要谨慎！
+uboot是用来刷入固件的，如果你uboot都刷错了那路由器就成砖了，因此以下步骤需要谨慎！网上有很多人用mtd命令刷uboot，但是我手上这台机器则报错
+
+```
+Could not open mtd device: /dev/mtd0  
+Can't open device for writing
+```
 ### 方法1：h大的uboot
 缺点：无法刷入稍微大一点的固件
 - 下载链接： https://github.com/hanwckf/bl-mt798x/releases/tag/20240123
-- 检查md5
+- 检查md5，确保文件一致
 
 ```
 root@RAX3000M:/tmp# md5sum mt7981_cmcc_rax3000m-emmc-fip.bin 
