@@ -216,6 +216,7 @@ dd if=openwrt-mediatek-filogic-cmcc_rax3000m-emmc-bl31-uboot.fip of=/dev/mmcblk0
 ## 刷入openwrt
 
 ### 官方openwrt
+> 注意：官方版本的固件只能由官方的uboot刷入，和第三方固件不兼容。
 - 参考： https://www.right.com.cn/forum/thread-8308281-1-7.html
 - 官网教程： https://openwrt.org/docs/guide-user/installation/generic.flashing.tftp
 - 油管教程： https://www.youtube.com/watch?v=7UIX9v2oV58
@@ -266,5 +267,5 @@ dd if=openwrt-mediatek-filogic-cmcc_rax3000m-emmc-bl31-uboot.fip of=/dev/mmcblk0
 - 方法2：[手动下载](https://github.com/vernesong/OpenClash/releases/tag/Clash)并上传到/etc/openclash/core/clash，并给予执行权限。 
 
 ### 开启openclash无法登录游戏
-启动fake-ip模式
+运行模式使用TUN模式
 
