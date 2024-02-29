@@ -186,8 +186,11 @@ parted /dev/mmcblk0 print
 - 参考： https://github.com/openwrt/openwrt/pull/13513#issue-1909808957
 - uboot来源：官网下载或者自己编译固件时会生成。
 
-> 官网的uboot不带web界面，只能刷入.itb格式的固件，和第三方uboot不兼容
+- 官网的uboot不带web界面，只能刷入.itb格式的固件，和第三方uboot不兼容
+- 如果希望修改root分区大小，请在编译镜像时候在Target Images -> Root filesystem 处修改，每次修改大小都要重新刷GPT，否则不生效。
+
 >  请注意，下面命令是刷入的emmc版本的uboot，nand版本请不要乱刷！此步刷错必成砖！
+
 1. 刷入GPT分区（从0~17408）
 ```
 dd if=openwrt-mediatek-filogic-cmcc_rax3000m-emmc-gpt.bin of=/dev/mmcblk0 bs=512 seek=0 count=34 conv=fsync
@@ -238,30 +241,7 @@ dd if=openwrt-mediatek-filogic-cmcc_rax3000m-emmc-bl31-uboot.fip of=/dev/mmcblk0
 选择`openwrt-mediatek-filogic-cmcc_rax3000m-squashfs-sysupgrade.itb` 上传升级
 ![](Pasted%20image%2020240228184954.png)
 
-#### 23.05.2 一些使用的问题
-##### WiFi
-首次启动需要自己手动开启WiFi
-
-##### dockerman
-- 编译luci-app-dockerman 需要自己手动勾选dockerd
-- 如果发现web界面的dockerman菜单项缺失，仅仅包含“配置”，则去`系统`->`软件包`处更新`luci-lib-docker`
-
-##### 磁盘挂载
-安装cfdisk和e2fsprogs
-```
-opkg updatee e2fsprogs
-```
-分配空闲磁盘
- ```
- cfdisk -l /dev/mmcblk0
-```
-选择FreeSpace，点击New创建新的存储空间，选择Write然后输入yes，会发现多出一个/dev/mmcblk0p6的存储空间
-- 格式化新创建的存储空间
-```
-mkfs.ext4 /dv
-```
-
-
+23.05.2 一些使用的问题和解决方案-> [index.zh-cn](../RAX3000M使用官方OpenWRT的23.05.2一些问题以及解决方案/index.zh-cn.md)
 
 ### lede
 进uboot刷即可，但是h大的uboot无法刷入稍微大一点的固件（70M左右），40兆左右的固件则可以刷入，原因不明。因此建议刷immortal的uboot。
