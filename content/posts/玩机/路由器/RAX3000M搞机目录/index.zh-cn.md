@@ -265,3 +265,6 @@ dd if=openwrt-mediatek-filogic-cmcc_rax3000m-emmc-bl31-uboot.fip of=/dev/mmcblk0
 - 方法1：修改github地址
 - 方法2：[手动下载](https://github.com/vernesong/OpenClash/releases/tag/Clash)并上传到/etc/openclash/core/clash，并给予执行权限。 
 
+### 开启openclash无法登录游戏
+启动fake-ip模式
+
