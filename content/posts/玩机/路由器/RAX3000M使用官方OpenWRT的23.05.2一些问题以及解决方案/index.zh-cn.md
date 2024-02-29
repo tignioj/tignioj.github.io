@@ -49,16 +49,17 @@ mkfs.ext4 /dev/mmcblk0p6
 mkdir -p /mnt/mmcblk0p6
 mount /dev/mmcblk0p6 /mnt/mmcblk0p6
 ```
-docker挂载到/mnt/mmcblk0p6
-```
-vi /etc/config/dockerd
-```
 
 #### 方法2：使用挂载点`blokc-mount`
 最好在编译固件的时候就在`Base System` 中选中 `block-mount`，如果没有，则自己手动安装
 
 
 #### 挂载docker
+
+docker挂载到/mnt/mmcblk0p6
+```
+vi /etc/config/dockerd
+```
 
 找到`data_root`，修改`/opt/docker`为`/mnt/mmcblk0p6/docker`
 ```
