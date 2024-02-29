@@ -278,5 +278,6 @@ Reply from 192.168.1.1: bytes=32 time<1ms TTL=64
 - 方法2：[手动下载](https://github.com/vernesong/OpenClash/releases/tag/Clash)并上传到/etc/openclash/core/clash，并给予执行权限。 
 
 ### 开启openclash无法登录游戏
-运行模式使用TUN模式
+- 参考： https://github.com/vernesong/OpenClash/issues/107
+- 解决：运行模式使用TUN模式
 
