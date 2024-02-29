@@ -186,7 +186,7 @@ parted /dev/mmcblk0 print
 - 参考： https://github.com/openwrt/openwrt/pull/13513#issue-1909808957
 - uboot来源：官网下载或者自己编译固件时会生成。
 
-- 官网的uboot不带web界面，只能刷入.itb格式的固件，和第三方uboot不兼容
+- 官网的uboot不带web界面，只能刷入`.itb`格式的固件，和第三方uboot不兼容
 - 如果希望修改root分区大小，请在编译镜像时候在Target Images -> Root filesystem 处修改，每次修改大小都要重新刷GPT，否则不生效。
 
 >  请注意，下面命令是刷入的emmc版本的uboot，nand版本请不要乱刷！此步刷错必成砖！
@@ -194,7 +194,7 @@ parted /dev/mmcblk0 print
 1. 刷入GPT分区（从0~17408）
 ```
 dd if=openwrt-mediatek-filogic-cmcc_rax3000m-emmc-gpt.bin of=/dev/mmcblk0 bs=512 seek=0 count=34 conv=fsync
-   ```
+```
 2. 擦写bl2分区
 ```
 echo 0 > /sys/block/mmcblk0boot0/force_ro
@@ -229,7 +229,18 @@ dd if=openwrt-mediatek-filogic-cmcc_rax3000m-emmc-bl31-uboot.fip of=/dev/mmcblk0
 
 #### 设置电脑IP地址
 - 设置静态地址 192.168.1.254（注意，一定是1.254而不是别的ip地址）
-- 网关192.168.1.1
+- 网关和DNS填入192.168.1.1
+
+此时电脑网线连接路由器的LAN口，打开powershell输入`ping 192.168.1.1` 应当有回应，否则表明你路由器没有成功连接电脑或者路由器没有进入uboot模式
+
+```
+Pinging 192.168.1.1 with 32 bytes of data:  
+Reply from 192.168.1.1: bytes=32 time<1ms TTL=64  
+Reply from 192.168.1.1: bytes=32 time<1ms TTL=64  
+Reply from 192.168.1.1: bytes=32 time<1ms TTL=64  
+Reply from 192.168.1.1: bytes=32 time<1ms TTL=64
+```
+
 #### 打开tftp服务器
 把`openwrt-mediatek-filogic-cmcc_rax3000m-initramfs-recovery.itb` 格式文件放在和tftp服务器相同的目录。如果不是这个名称，手动修改一下。过一会就会自动上传固件了。
 
