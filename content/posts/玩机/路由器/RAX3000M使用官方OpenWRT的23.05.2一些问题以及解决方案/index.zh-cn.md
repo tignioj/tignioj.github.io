@@ -64,11 +64,13 @@ service dockerd restart
 ```
 
 
-> 以下出现的问题均在按照完整的刷机流程刷一遍后得以解决(包括gpt, preloader, uboot, initramfs)
-
 ## dockerman
 - 编译luci-app-dockerman 需要自己手动勾选dockerd
-- web界面的dockerman菜单项缺失，仅仅包含“配置”
+- web界面的dockerman菜单项缺失，仅仅包含“配置”，则去`系统`->`软件包`， 先点击`更新列表`，然后选择更新`luci-lib-docker` 和`luci-i18n-dockerman-zh-cn`
+
+
+
+> 以下出现的问题均在按照完整的刷机流程刷一遍后得以解决(包括gpt, preloader, uboot, initramfs)
 
 ## DHCP
 - 不知为何我的Ubuntu主机无法获取ip地址，即使执行dhclient 也无济于事，初步推断是插件引起的问题。但不确定是哪个。重启再等待一会就好了。
