@@ -223,7 +223,10 @@ dd if=openwrt-mediatek-filogic-cmcc_rax3000m-emmc-bl31-uboot.fip of=/dev/mmcblk0
 ![](Pasted%20image%2020240228182730.png)
 
 ## 刷入openwrt
-参考：
+#### 自用固件
+
+
+#### 参考：
 - 官网教程： https://openwrt.org/docs/guide-user/installation/generic.flashing.tftp
 - 油管教程： https://www.youtube.com/watch?v=7UIX9v2oV58
 - 教程： https://www.1234f.com/sj/technique/xxzl/20231108/560.html
@@ -261,6 +264,8 @@ Reply from 192.168.1.1: bytes=32 time<1ms TTL=64
 
 选择`openwrt-mediatek-filogic-cmcc_rax3000m-squashfs-sysupgrade.itb` 上传升级
 ![](Pasted%20image%2020240228184954.png)
+
+刷完之后会重启一次，如果发现仍然在 initramfs恢复系统模式，则点击`系统`->`重启` -> `执行重启`即可
 
 23.05.2 一些使用的问题和解决方案-> [index.zh-cn](../RAX3000M使用官方OpenWRT的23.05.2一些问题以及解决方案/index.zh-cn.md)
 
