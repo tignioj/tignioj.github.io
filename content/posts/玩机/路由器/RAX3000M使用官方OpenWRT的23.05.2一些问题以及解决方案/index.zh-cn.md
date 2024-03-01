@@ -19,7 +19,7 @@ series:
 
 
 
-> 以下出现的问题均在按照完整的刷机流程刷一遍后得以解决
+> 以下出现的问题均在按照完整的刷机流程刷一遍后得以解决(包括gpt, preloader, uboot, initramfs)
 
 ## dockerman
 - 编译luci-app-dockerman 需要自己手动勾选dockerd
