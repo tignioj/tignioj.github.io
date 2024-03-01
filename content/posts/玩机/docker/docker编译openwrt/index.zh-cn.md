@@ -240,6 +240,10 @@ make menuconfig
  <*> kmod-usb-printer...... ........ Support for printers
 ```
 
+#### usb挂载
+
+`Base System` 中选中 `block-mount`
+
 #### usb存储支持
 ```
 -*- kmod-usb-storage............................. USB Storage support
@@ -257,6 +261,72 @@ make menuconfig
 make -j$(nproc) download
 make -j$(nproc)
 ```
+
+
+## 集成第三方插件
+经过上面的的步骤，你已经学会了基本的编译，此时可以尝试添加第三方的软件包  https://github.com/kenzok8/openwrt-packages
+### 添加软件源
+执行
+```
+sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
+sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
+git pull
+./scripts/feeds update -a
+./scripts/feeds install -a
+make menuconfig
+```
+找到LuCI->Applications，勾选需要的软件，依赖会自动勾选
+
+### 插件集成到固件里面
+按下空格选中`M`表示作为ipk包编译
+```
+<M> luci-app-alist............ LuCI support for alist 
+```
+再次按下空格，出现`*`表示集成到固件里面
+```
+<*> luci-app-alist............ LuCI support for alist 
+```
+
+然后开始编译
+```
+make -j$(nproc) download
+make -j$(nproc)
+```
+
+### 插件不集成到固件里面，而是单独作为ipk包
+参考：
+- https://3mile.github.io/archives/2019/0813123100/
+- 
+按下空格选中`M`表示作为ipk包编译
+```
+<M> luci-app-alist............ LuCI support for alist 
+```
+开始编译
+```
+make package/luci-app-alist/compile V=s
+```
+
+ipk生成路径，可以使用find命令查找
+```
+find bin/  -name "*alist*"   
+```
+
+```
+user@c6ba0d0ab225:~/openwrt$ find bin/  -name "*alist*"                                                                                       
+bin/packages/aarch64_cortex-a53/kenzo/luci-i18n-alist-zh-cn_1.0.11-1_all.ipk
+bin/packages/aarch64_cortex-a53/kenzo/alist_3.30.0-2_aarch64_cortex-a53.ipk
+bin/packages/aarch64_cortex-a53/kenzo/luci-app-alist_1.0.11-1_all.ipk
+user@c6ba0d0ab225:~/lede$ 
+```
+
+然后把这些ipk上传到路由器上执行即可
+```
+opkg install luci-i18n-alist-zh-cn_1.0.11-1_all.ipk
+opkg install alist_3.30.0-2_aarch64_cortex-a53.ipk
+opkg install luci-app-alist_1.0.11-1_all.ipk
+```
+
+或者在web界面上传安装
 
 ## 调整ROOT大小
 - 参考 https://github.com/danshui-git/shuoming/blob/master/overlay.md
@@ -408,70 +478,12 @@ make V=s -j$(nproc)
 
 - 参考： https://github.com/coolsnowwolf/lede
 
-## 集成第三方插件
-经过上面的的步骤，你已经学会了基本的编译，此时可以尝试添加第三方的软件包  https://github.com/kenzok8/openwrt-packages
-### 添加软件源
-执行
-```
-sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
-sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
-git pull
-./scripts/feeds update -a
-./scripts/feeds install -a
-make menuconfig
-```
-找到LuCI->Applications，勾选需要的软件，依赖会自动勾选
 
-### 插件集成到固件里面
-按下空格选中`M`表示作为ipk包编译
-```
-<M> luci-app-alist............ LuCI support for alist 
-```
-再次按下空格，出现`*`表示集成到固件里面
-```
-<*> luci-app-alist............ LuCI support for alist 
-```
 
-然后开始编译
-```
-make -j$(nproc) download
-make -j$(nproc)
-```
 
-### 插件不集成到固件里面，而是单独作为ipk包
-参考：
-- https://3mile.github.io/archives/2019/0813123100/
-- 
-按下空格选中`M`表示作为ipk包编译
-```
-<M> luci-app-alist............ LuCI support for alist 
-```
-开始编译
-```
-make package/luci-app-alist/compile V=s
-```
+## 添加第三方插件源与openwrt的相同
 
-ipk生成路径，可以使用find命令查找
-```
-find bin/  -name "*alist*"   
-```
 
-```
-user@c6ba0d0ab225:~/lede$ find bin/  -name "*alist*"                                                                                       
-bin/packages/aarch64_cortex-a53/kenzo/luci-i18n-alist-zh-cn_1.0.11-1_all.ipk
-bin/packages/aarch64_cortex-a53/kenzo/alist_3.30.0-2_aarch64_cortex-a53.ipk
-bin/packages/aarch64_cortex-a53/kenzo/luci-app-alist_1.0.11-1_all.ipk
-user@c6ba0d0ab225:~/lede$ 
-```
-
-然后把这些ipk上传到路由器上执行即可
-```
-opkg install luci-i18n-alist-zh-cn_1.0.11-1_all.ipk
-opkg install alist_3.30.0-2_aarch64_cortex-a53.ipk
-opkg install luci-app-alist_1.0.11-1_all.ipk
-```
-
-或者在web界面上传安装
 
 ## docker编译immortalwrt
 - 地址： https://github.com/immortalwrt/immortalwrt
