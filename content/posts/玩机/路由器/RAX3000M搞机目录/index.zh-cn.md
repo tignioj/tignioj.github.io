@@ -278,7 +278,7 @@ Reply from 192.168.1.1: bytes=32 time<1ms TTL=64
 
 ## ipv6中继
 教程： https://www.right.com.cn/forum/thread-8309440-1-1.html
-
+文档连接-> [index.zh-cn](../RAX3000M-openwrt使用ipv6中继/index.zh-cn.md)
 
 ## openclash
 如果发现无法启动openclash，可能缺少内核clash
