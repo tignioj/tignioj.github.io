@@ -1,6 +1,6 @@
 ---
 date: 2024-02-29T05:28:21+08:00
-lastmod: 2024-02-29T05:28:21+08:00
+lastmod: 2024-03-01T13:25:34+08:00
 categories:
   - 玩机
   - 路由器
@@ -11,7 +11,7 @@ tags:
   - dockerman
   - docker
   - RAX3000M
-series:
+series: 
 ---
 
 ## WiFi
