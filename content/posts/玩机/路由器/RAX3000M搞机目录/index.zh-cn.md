@@ -223,15 +223,15 @@ dd if=openwrt-mediatek-filogic-cmcc_rax3000m-emmc-bl31-uboot.fip of=/dev/mmcblk0
 ![](Pasted%20image%2020240228182730.png)
 
 ## 刷入openwrt
-
-### 官方openwrt
-> 注意：官方版本的固件只能由官方的uboot刷入，和第三方固件不兼容。
-- 参考： https://www.right.com.cn/forum/thread-8308281-1-7.html
+参考：
 - 官网教程： https://openwrt.org/docs/guide-user/installation/generic.flashing.tftp
 - 油管教程： https://www.youtube.com/watch?v=7UIX9v2oV58
 - 教程： https://www.1234f.com/sj/technique/xxzl/20231108/560.html
 - 视频教程： https://www.bilibili.com/video/BV1dj411b7yW/?spm_id_from=333.337.search-card.all.click&vd_source=cdd8cee3d9edbcdd99486a833d261c72
-- itb 格式怎么刷？ https://www.right.com.cn/forum/thread-8316238-1-1.html
+### 官方openwrt
+> 注意：官方版本的固件只能由官方的uboot刷入，和第三方固件不兼容。
+
+- 参考： itb 格式怎么刷？ https://www.right.com.cn/forum/thread-8316238-1-1.html
 
 #### 重启路由器
 刷入openwrt的官方uboot后，只需要断开电源，按住reset再插上电源重启即可，路由器会等待tftp服务器上传固件。
