@@ -283,7 +283,7 @@ Reply from 192.168.1.1: bytes=32 time<1ms TTL=64
 ## openclash
 如果发现无法启动openclash，可能缺少内核clash
 ### 安装clash内核
-- 方法1：修改github地址
+- 方法1：覆写设置->修改github地址，然后点击启动openclash会自动安装
 - 方法2：[手动下载](https://github.com/vernesong/OpenClash/releases/tag/Clash)并上传到/etc/openclash/core/clash，并给予执行权限。 
 
 ### 开启openclash无法登录游戏
