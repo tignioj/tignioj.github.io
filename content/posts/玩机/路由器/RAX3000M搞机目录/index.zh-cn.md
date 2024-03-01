@@ -250,7 +250,7 @@ Reply from 192.168.1.1: bytes=32 time<1ms TTL=64
 Reply from 192.168.1.1: bytes=32 time<1ms TTL=64
 ```
 
-#### 打开tftp服务器
+#### 打开[tftp服务器](https://pjo2.github.io/tftpd64/)
 把`openwrt-mediatek-filogic-cmcc_rax3000m-initramfs-recovery.itb` 格式文件放在和tftp服务器相同的目录。如果不是这个名称，手动修改一下。过一会就会自动上传固件了。
 
 ![](Pasted%20image%2020240228184200.png)
