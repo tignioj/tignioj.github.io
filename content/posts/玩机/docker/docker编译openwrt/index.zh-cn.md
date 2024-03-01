@@ -328,6 +328,16 @@ opkg install luci-app-alist_1.0.11-1_all.ipk
 
 或者在web界面上传安装
 
+
+### 第三方插件源目前已知问题
+
+##### ERROR: package/feeds/kenzo/alist failed to build
+- 解决方案参考： https://github.com/kenzok8/openwrt-packages/issues/363#issuecomment-1426531811
+添加依赖即可
+```
+sudo apt install libfuse-dev
+```
+
 ## 调整ROOT大小
 - 参考 https://github.com/danshui-git/shuoming/blob/master/overlay.md
 > 注意：修改root分区大小后，如果刷到路由器里面，需要重新刷GPT和uboot，否则可能不生效。
