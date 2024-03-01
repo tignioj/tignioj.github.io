@@ -491,7 +491,8 @@ make V=s -j$(nproc)
 
 
 
-## 添加第三方插件源与openwrt的相同
+## 添加第三方插件源
+与openwrt的相同，请参考上面
 
 
 
