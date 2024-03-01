@@ -18,17 +18,6 @@ series:
 首次启动需要自己手动开启WiFi
 
 
-
-> 以下出现的问题均在按照完整的刷机流程刷一遍后得以解决(包括gpt, preloader, uboot, initramfs)
-
-## dockerman
-- 编译luci-app-dockerman 需要自己手动勾选dockerd
-- web界面的dockerman菜单项缺失，仅仅包含“配置”
-
-## DHCP
-- 不知为何我的Ubuntu主机无法获取ip地址，即使执行dhclient 也无济于事，初步推断是插件引起的问题。但不确定是哪个。重启再等待一会就好了。
-
-
 ## 磁盘管理
 ### 分区
 安装cfdisk和e2fsprogs
@@ -73,3 +62,14 @@ config globals 'globals'
 ```
 service dockerd restart
 ```
+
+
+> 以下出现的问题均在按照完整的刷机流程刷一遍后得以解决(包括gpt, preloader, uboot, initramfs)
+
+## dockerman
+- 编译luci-app-dockerman 需要自己手动勾选dockerd
+- web界面的dockerman菜单项缺失，仅仅包含“配置”
+
+## DHCP
+- 不知为何我的Ubuntu主机无法获取ip地址，即使执行dhclient 也无济于事，初步推断是插件引起的问题。但不确定是哪个。重启再等待一会就好了。
+
