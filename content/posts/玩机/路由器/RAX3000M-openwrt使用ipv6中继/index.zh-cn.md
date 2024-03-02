@@ -29,4 +29,3 @@ WAN口的DHCP服务器设置
 ![](Pasted%20image%2020240221170639.png)
 
 
-设置完成后，手机可以获取到ipv6地址，但是[ipv6测试](https://test-ipv6.com/)不通过，换了官方固件后没问题。
