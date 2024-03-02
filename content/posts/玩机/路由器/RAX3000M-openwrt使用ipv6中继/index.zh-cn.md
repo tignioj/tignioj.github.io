@@ -19,8 +19,6 @@ https://www.lategege.com/?p=676
 
 ### 设置WAN，DHCP服务器为中继，并设为主接口
 
-![](Pasted%20image%2020240221170529.png)
-
 
 WAN口的DHCP服务器设置
 ![](Pasted%20image%2020240221170555.png)
