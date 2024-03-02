@@ -5,9 +5,11 @@ categories:
   - 玩机
   - 路由器
 title: RAX3000M-openwrt使用ipv6中继
-draft: "true"
-tags: []
-series: []
+draft: "false"
+tags:
+  - IPv6
+  - openwrt
+series:
 ---
 中继教程：
 https://www.lategege.com/?p=676
