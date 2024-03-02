@@ -281,6 +281,59 @@ Reply from 192.168.1.1: bytes=32 time<1ms TTL=64
 ## 扩容overlays
 - 参考： https://www.techkoala.net/openwrt_resize/
 
+#### 插入u盘，格式化成ext4
+```
+mkfs.ext4 /dev/sda1
+```
+
+如果没有这个命令，就先安装
+```
+opkg update
+opkg install e2fsprogs
+```
+
+如果报错`/dev/sda1 is mounted; will not make a filesystem here!`，说明你u盘被自动挂载了，先取消挂载
+```
+umount /dev/sda1
+```
+
+然后重新执行
+```
+mkfs.ext4 /dev/sda1
+```
+他如果问你是否继续，输入y后回车即可。
+![](Pasted%20image%2020240302094556.png)
+此时u盘成功格式化成ext4格式
+
+### 挂载U盘
+```
+mount /dev/sda1 /mnt/sda1
+```
+
+#### 复制原来的`/overlay/*`到u盘
+```
+cp -r /overlay/* /mnt/sda1
+```
+
+
+### 重新挂载u盘到/overlays
+
+取消挂载
+```
+umount /dev/sda1
+```
+挂载到/overlay
+```
+mount /dev/sda1 /overlay
+```
+挂载前:
+![](Pasted%20image%2020240302094803.png)
+
+挂在后
+![](Pasted%20image%2020240302095922.png)
+
+
+
 ## ipv6中继
 - 教程： https://www.right.com.cn/forum/thread-8309440-1-1.html
 - 文档连接-> [index.zh-cn](../RAX3000M-openwrt使用ipv6中继/index.zh-cn.md)
