@@ -17,7 +17,7 @@ https://www.lategege.com/?p=676
 ### 设置WAN6为DHCPv6客户端
 ![](Pasted%20image%2020240221170451.png)
 
-### 设置WAN为静态地址，DHCP服务器为中继，并设为主接口
+### 设置WAN，DHCP服务器为中继，并设为主接口
 
 ![](Pasted%20image%2020240221170529.png)
 
