@@ -386,7 +386,7 @@ mount /dev/sda1 /overlay
 
 ## ipv6中继
 - 教程： https://www.right.com.cn/forum/thread-8309440-1-1.html
-
+- 往期文章-> [index.zh-cn](../RAX3000M-openwrt使用ipv6中继/index.zh-cn.md)
 ## openclash
 如果发现无法启动openclash，可能缺少内核clash
 ### 安装clash内核
