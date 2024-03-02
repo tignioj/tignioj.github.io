@@ -329,7 +329,7 @@ mount /dev/sda1 /overlay
 挂载前:
 ![](Pasted%20image%2020240302094803.png)
 
-挂在后
+挂载后
 ![](Pasted%20image%2020240302095922.png)
 
 
