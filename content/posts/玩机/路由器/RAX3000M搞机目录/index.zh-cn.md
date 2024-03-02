@@ -145,6 +145,12 @@ dd if=mt7981-cmcc_rax3000m-emmc-fip.bin of=/dev/mmcblk0 bs=512 seek=13312 conv=f
 ```
 parted /dev/mmcblk0 print
 ```
+如果没有parted命令，则先安装
+```
+opkg update
+opkg install parted
+```
+
 分区前，可以看到rootfs大小是64M，而且有2个rootfs，这个空间决定了你刷机包上限的大小
 ![](Pasted%20image%2020240228001211.png)
 
@@ -278,6 +284,45 @@ Reply from 192.168.1.1: bytes=32 time<1ms TTL=64
 ### immortalwrt
 镜像和刷入教程： [AngelaCooljx/Actions-rax3000m-emmc: Build ImmortalWrt for CMCC RAX3000M eMMC version using GitHub Actions](https://github.com/AngelaCooljx/Actions-rax3000m-emmc)
 
+
+
+## 利用剩余的内存
+
+#### 分区
+
+当你刷好固件后，发现有50多G的空间不见了，这是因为分区表变了，你要自己重新分区
+```
+opkg update
+opkg install cfdisk
+```
+
+创建分区
+```
+cfdisk /dev/mmcblk0
+```
+找到最下面的Fress Space，选择New
+![](Pasted%20image%2020240302150128.png)
+会自动分配最大内存，然后回车
+![](Pasted%20image%2020240302150153.png)
+
+则创建了一个56.9G大小的新分区，光标移动到Write
+![](Pasted%20image%2020240302150316.png)
+然后输入yes，回车，然后键盘按下`q`退出
+![](Pasted%20image%2020240302150402.png)
+
+
+### 格式化
+安装`mkfs.ext4`命令包
+```
+ opkg install e2fsprogs
+```
+格式化我们新创建的分区
+```
+mkfs.ext4 /dev/mmcblk0p7
+```
+
+### 挂载
+去web界面找打挂载点挂载即可
 
 ## 扩容overlays
 - 参考： https://www.techkoala.net/openwrt_resize/
