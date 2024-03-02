@@ -333,6 +333,10 @@ mount /dev/sda1 /overlay
 挂载后
 ![](Pasted%20image%2020240302095922.png)
 
+### 进入web界面挂载
+- 为了让系统自动挂载，可以在web界面设置挂载点，这样重启后仍然保留挂载
+- 根据uuid选中你的u盘，作为外部overlay使用，然后点击保存&应用即可。
+![](Pasted%20image%2020240302103042.png)
 
 
 ## ipv6中继
