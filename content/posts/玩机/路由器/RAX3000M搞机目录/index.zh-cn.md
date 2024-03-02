@@ -397,3 +397,17 @@ mount /dev/sda1 /overlay
 - 参考： https://github.com/vernesong/OpenClash/issues/107
 - 解决：运行模式使用TUN模式
 
+
+## docker程序的端口无法打开
+docker默认使用bridge模式，可能无法正常使用，需要切换成host模式。
+例如alist，官网给出的运行命令是
+```
+docker run -d --restart=unless-stopped -v /etc/alist:/opt/alist/data -p 5244:5244 -e PUID=0 -e PGID=0 -e UMASK=022 --name="alist" xhofe/alist:latest
+```
+会发现打不开 http://192.168.1.1:5244 , 原因是docker的在openwrt下的bridge无法正常使用，需要手动添加参数 `--network=host` 来使用宿主机模式的网络，
+- 注意端口可能会冲突，5244不能被系统提前占用
+- 使用host网络模式不再需要指定-p参数。
+
+```
+docker run -d --restart=unless-stopped -v /etc/alist:/opt/alist/data --network=host -e PUID=0 -e PGID=0 -e UMASK=022 --name="alist" xhofe/alist:latest
+```
