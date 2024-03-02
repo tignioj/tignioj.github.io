@@ -230,8 +230,7 @@ dd if=openwrt-mediatek-filogic-cmcc_rax3000m-emmc-bl31-uboot.fip of=/dev/mmcblk0
 ![](Pasted%20image%2020240228182730.png)
 
 ## 刷入openwrt
-#### 自用固件
-
+自用固件： https://www.right.com.cn/forum/thread-8349807-1-1.html
 
 #### 参考：
 - 官网教程： https://openwrt.org/docs/guide-user/installation/generic.flashing.tftp
