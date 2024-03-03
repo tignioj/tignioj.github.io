@@ -460,7 +460,7 @@ delete uhttpd.main.listen_https
 EOI
 ```
 
-注意到我这里设置了uhttpd的https监听地址修改成了空字符串，原因是lede默认没有安装luci-app-openssl，如果不关闭https监听会无法启动web界面
+注意到我这里删掉了uhttpd的https监听地址，原因是lede默认没有安装luci-app-openssl，如果不关闭https监听会无法启动web界面（仅x86）
 
 开始编译固件 （-j 后面是线程数）
 ```shell
