@@ -593,7 +593,7 @@ make -j$(nproc)
 ## 常用项目
 #### 自动挂载，自动网络共享, ipv6
 Extra packages -> automount, autosamba, ipv6helper
-
+> 注意，git-24.057.40909-ee89490版本使用 autosamba可能会导致无线网络消失！请不要使用
 
 ## 编译的一些技巧
 ### tmux多窗口
