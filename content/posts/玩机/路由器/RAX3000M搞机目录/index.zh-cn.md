@@ -22,7 +22,8 @@ description: RAX3000M EMMC 1214版本开启ssh刷入uboot教程
 - 网上主流的说法是看路由器后面的标签来区分，找到路由器后面标签偏上的"制造商“，找到上面的字母CH：
 	- NAND： 只有CH
 	- EMMC：CH后面还跟着EC
-- 但是这种方法不是绝对的，判断的唯一标准是开启ssh后，输入`df -h`命令查看你存储空间的大小，如果有一个50多G的分区，则说明是EMMC，否则是NAND。
+- 但是这种方法不是绝对的，判断的唯一标准是开启ssh后，输入`df -h`命令查看你存储空间的大小，如果有一个50多G的分区，则说明是EMMC，否则是NAND
+> 注意，此方法仅针对于出厂固件，有些已经刷过机的固件，可能改过分区表，导致有些空闲空间无法显示。请自行安装 fdisk 判断
 ## 开启SSH
 原理是通过修改配置的方式来开启ssh，由于后面生产的固件，配置文件可能会被加密，因此我们需要解密后才能修改配置文件，然后按照同样的加密方式生成新的配置文件。
 
@@ -397,7 +398,8 @@ mount /dev/sda1 /overlay
 - 解决：运行模式使用TUN模式
 
 
-## docker程序的端口无法打开
+## 其他问题
+### docker程序的端口无法打开
 docker 24.0.5版本可能无法正常使用默认的bridge模式，需要切换成host模式，例如alist，官网给出的运行命令是
 ```
 docker run -d --restart=unless-stopped -v /etc/alist:/opt/alist/data -p 5244:5244 -e PUID=0 -e PGID=0 -e UMASK=022 --name="alist" xhofe/alist:latest
@@ -409,3 +411,42 @@ docker run -d --restart=unless-stopped -v /etc/alist:/opt/alist/data -p 5244:524
 ```
 docker run -d --restart=unless-stopped -v /etc/alist:/opt/alist/data --network=host -e PUID=0 -e PGID=0 -e UMASK=022 --name="alist" xhofe/alist:latest
 ```
+
+
+### ntfs无法挂载
+
+- 参考：
+	- https://askubuntu.com/questions/500647/unable-to-mount-ntfs-external-hard-drive
+使用 ntfs-3g 挂载报错
+```
+Failed to mount '/dev/sda1': I/O error
+NTFS is either inconsistent, or there is a hardware fault, or it's a
+SoftRAID/FakeRAID hardware. In the first case run chkdsk /f on Windows
+then reboot into Windows twice. The usage of the /f parameter is very
+important! If the device is a SoftRAID/FakeRAID then first activate
+it and mount a different device under the /dev/mapper/ directory, (e.g.
+/dev/mapper/nvidia_eahaabcc1). Please see the 'dmraid' documentation
+
+```
+解决：使用ntfsfix
+```
+root@OpenWrt:~# ntfsfix  /dev/sda1
+Mounting volume... $MFTMirr does not match $MFT (record 3).
+FAILED
+Attempting to correct errors... 
+Processing $MFT and $MFTMirr...
+Reading $MFT... OK
+Reading $MFTMirr... OK
+Comparing $MFTMirr to $MFT... FAILED
+Correcting differences in $MFTMirr record 3...OK
+Processing of $MFT and $MFTMirr completed successfully.
+Setting required flags on partition... OK
+Going to empty the journal ($LogFile)... OK
+Checking the alternate boot sector... OK
+NTFS volume version is 3.1.
+
+```
+
+
+
+
