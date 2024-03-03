@@ -590,6 +590,10 @@ make menuconfig
 make -j$(nproc)
 ```
 
+## 常用项目
+#### 自动挂载，自动网络共享, ipv6
+Extra packages -> automount, autosamba, ipv6helper
+
 
 ## 编译的一些技巧
 ### tmux多窗口
