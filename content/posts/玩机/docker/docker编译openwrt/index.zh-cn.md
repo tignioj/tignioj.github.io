@@ -388,7 +388,7 @@ EOI
 > - 以非零退出代码退出的脚本不会被删除，并将在下次启动时重新执行，直到它们也成功退出。
 
 ### 注意事项
-如果你选择了自定义路由器平台，官方openwrt编译出来的是`.itb`格式的固件，需要用到tftp刷机方，不兼容常见的第三方uboot刷入方式。可参考教程：
+如果你选择了自定义路由器平台，官方openwrt编译出来的是`.itb`格式的固件，需要用到tftp刷机方式，不兼容常见的第三方uboot刷入方式。可参考教程：
 - 官网： https://openwrt.org/docs/guide-user/installation/generic.flashing.tftp
 - 恩山： https://www.right.com.cn/forum/thread-8338290-1-1.html 
 ### 差异配置
