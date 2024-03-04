@@ -359,7 +359,7 @@ sudo apt install libfuse-dev
 我们可以在编译根目录下创建files目录，相当于路由器的根目录。然后往里面新建etc/uci-defaults文件夹，这里面可以写自己定义的uci命令
 
 ```
-mkdir -p files/etc/uci-defautls
+mkdir -p files/etc/uci-defaults
 ```
 
 往`files/etc/uci-defaults/`添加脚本，等同于往路由器的/etc/uci-defaults/中添加脚本。
@@ -442,12 +442,12 @@ make menuconfig
 ### 自定义配置
 默认情况下，openwrt和lede后台地址都是192.168.1.1，有没有办法在编译的时候自定义呢？当然可以，只需要在编译的根目录下创建文件夹files，然后往里面添加初始化脚本即可。files相当于路由器的根目录
 ```
-mkdir -p files/etc/uci-defautls
+mkdir -p files/etc/uci-defaults
 ```
 
 假设我们要自定义ip地址
 ```
-vim files/uci-defaults/99-custom
+vim files/etc/uci-defaults/99-custom
 ```
 
 往里面添加内容
