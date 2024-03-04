@@ -52,9 +52,7 @@ openssl aes-256-cbc -d -pbkdf2 -k $CmDc#RaX30O0M@\!$ -in ../cfg_export_config_fi
 tar -zcvf - etc | openssl aes-256-cbc -pbkdf2 -k $CmDc#RaX30O0M@\!$ -out ../cfg_export_config_file_new.conf
 ```
 ### 导入配置
-配置管理->导入配置文件，选择我们刚修改好的cfg_export_config_file_new.conf
-
-
+配置管理->导入配置文件，选择我们刚修改好的`cfg_export_config_file_new.conf`，重启后就能使用root用户通过ssh访问了，无需密码。
 ### 进入ssh备份
 
 - 参考： https://www.right.com.cn/forum/thread-8306986-1-1.html
