@@ -5,9 +5,11 @@ categories:
   - 玩机
   - 路由器
 title: 在线选择自己的openwrt固件
-draft: "true"
-tags: []
-series: []
+draft: "false"
+tags:
+  - openwrt
+  - immortalwrt
+series:
 ---
 
 ## Immortalwrt
