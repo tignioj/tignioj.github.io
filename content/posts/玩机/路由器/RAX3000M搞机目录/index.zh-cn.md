@@ -18,6 +18,7 @@ description: RAX3000M EMMC 1214版本开启ssh刷入uboot教程
 ---
 > 注意：这是EMMC版本，NAND版本有一些步骤可以参考，但涉及到存储擦写操作请谨慎！！ EMMC 和 NAND的开启ssh步骤完全相同，都是导出配置->解密->修改配置->加密->导入配置
 
+刷机整体步骤：开启ssh ->  刷uboot -> 进入uboot刷固件 ->  结束
 ## 如何判断自己是EMMC还是NAND
 - 网上主流的说法是看路由器后面的标签来区分，找到路由器后面标签偏上的"制造商“，找到上面的字母CH：
 	- NAND： 只有CH
@@ -445,7 +446,7 @@ NTFS volume version is 3.1.
 
 ```
 
-仍旧不行，则用电脑使用Diskgenius重新格式化成ntfs。（最好用ext4格式，稳定有一点）
+仍旧不行，则用电脑使用Diskgenius重新格式化成ntfs。（最好用ext4格式，稳定一点）
 
 
 
