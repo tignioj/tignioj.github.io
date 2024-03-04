@@ -445,6 +445,7 @@ NTFS volume version is 3.1.
 
 ```
 
+仍旧不行，则用电脑使用Diskgenius重新格式化成ntfs。（最好用ext4格式，稳定有一点）
 
 
 
