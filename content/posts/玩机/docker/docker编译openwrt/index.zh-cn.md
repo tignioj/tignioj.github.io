@@ -1,6 +1,6 @@
 ---
 date: 2024-01-25T20:33:52+08:00
-lastmod: 2024-02-27T08:05:29+08:00
+lastmod: 2024-03-04T21:13:31+08:00
 categories:
   - 玩机
   - docker
@@ -189,7 +189,7 @@ LuCI->Modules->Translations -> <*> Chinese Simplified (zh_Hans)
 # Build the firmware image
 make download -j$(nproc)
 ```
-- `-j$(nproc)`, 其中`nproc`会返回你系统的最大核心数量，例如-j8表示8线程编译
+- `-j$(nproc)`, 其中`nproc`会返回你系统的最大线程数量，例如-j8表示8线程编译
 - `V=s`: 打印详细信息
 #### 开始编译
 编译前，请确保有良好的科学环境，终端输入`curl -I www.google.com` ，检查状态码是否为200，如果卡住了说明网络环境不适合编译。
