@@ -650,4 +650,4 @@ tmux attach
 
 
 ## 云编译：github action
-https://github.com/tignioj/Actions-OpenWrt/tree/main
+没研究
