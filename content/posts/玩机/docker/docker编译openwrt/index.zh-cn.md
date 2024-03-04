@@ -356,6 +356,8 @@ sudo apt install libfuse-dev
 
 
 ## 自定义配置文件
+- 参考1： https://openwrt.org/docs/guide-developer/toolchain/use-buildsystem#custom_files 
+- 参考2： https://openwrt.org/docs/guide-developer/uci-defaults
 我们可以在编译根目录下创建files目录，相当于路由器的根目录。然后往里面新建etc/uci-defaults文件夹，这里面可以写自己定义的uci命令
 
 ```
