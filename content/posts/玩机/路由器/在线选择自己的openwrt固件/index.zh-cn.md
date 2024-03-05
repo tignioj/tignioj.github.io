@@ -19,6 +19,7 @@ series:
  luci-app-openclash luci-app-dockerman luci-app-diskman luci-app-v2raya luci-app-samba4 luci-app-frpc luci-app-frps
  luci-app-ddns-go luci-app-fileassistant luci-app-wol luci-app-usb-printer luci-app-wifischedule luci-app-uugamebooster
  luci-app-alist luci-app-autoreboot luci-app-eqos luci-app-qos luci-app-qbittorrent luci-app-upnp luci-app-uhttpd
+  luci-app-ttyd
 ```
 
 第二个空白栏输入初始化命令，例如初始化路由器的LAN地址
@@ -38,9 +39,12 @@ uci commit
 刷机后发现很多插件都是英文版
 ![](Pasted%20image%2020240304111143.png)
 
-这是因为没安装中文包，因此还需要安装语言包，安装插件对应语言包的方法是，把`luci-app-xxxx`格式变成 `luci-i18n-xxxx-zh-cn`，即把`luci-app`改成`luci-i18n`然后后面加上`zh-cn`
+这是因为没安装中文包，因此还需要安装语言包
+- 系统的中文包是`luci-i18n-base-zh-cn`
+- 插件对应中文则把`luci-app-xxxx`格式变成 `luci-i18n-xxxx-zh-cn`
+- 例如终端插件`luci-app-ttyd`中文包是`luci-i18n-ttyd-zh-cn`
 
-> 不是所有app都有语言包，例如openclash和fileassistant，你可以在这里查找 [Index of /releases/23.05.1/packages/x86_64/luci/ (immortalwrt.org)](https://downloads.immortalwrt.org/releases/23.05.1/packages/x86_64/luci/)
+> 不是所有应用都有语言包，例如openclash和fileassistant就没有，你可以在这里查找插件对应的语言包名称 [Index of /releases/23.05.1/packages/x86_64/luci/ (immortalwrt.org)](https://downloads.immortalwrt.org/releases/23.05.1/packages/x86_64/luci/)
 
 如果语言包报错了就删掉。
 
@@ -48,9 +52,9 @@ uci commit
 
 所以根据报错信息，删掉不存在的中文包即可。
 ```
-luci-i18n-dockerman-zh-cn luci-i18n-diskman-zh-cn luci-i18n-v2raya-zh-cn luci-i18n-samba4-zh-cn luci-i18n-frpc-zh-cn luci-i18n-frps-zh-cn
+luci-i18n-base-zh-cn luci-i18n-dockerman-zh-cn luci-i18n-diskman-zh-cn luci-i18n-v2raya-zh-cn luci-i18n-samba4-zh-cn luci-i18n-frpc-zh-cn luci-i18n-frps-zh-cn
 luci-i18n-ddns-go-zh-cn luci-i18n-wol-zh-cn luci-i18n-usb-printer-zh-cn luci-i18n-wifischedule-zh-cn luci-i18n-uugamebooster-zh-cn
-luci-i18n-alist-zh-cn luci-i18n-autoreboot-zh-cn luci-i18n-eqos-zh-cn luci-i18n-qos-zh-cn luci-i18n-qbittorrent-zh-cn luci-i18n-upnp-zh-cn luci-i18n-uhttpd-zh-cn 
+luci-i18n-alist-zh-cn luci-i18n-autoreboot-zh-cn luci-i18n-eqos-zh-cn luci-i18n-qos-zh-cn luci-i18n-qbittorrent-zh-cn luci-i18n-upnp-zh-cn luci-i18n-uhttpd-zh-cn  luci-i18n-ttyd-zh-cn
 ```
 
 然后重新点击 Request Build即可
