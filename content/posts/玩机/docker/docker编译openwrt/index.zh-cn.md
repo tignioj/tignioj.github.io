@@ -189,7 +189,7 @@ LuCI->Modules->Translations -> <*> Chinese Simplified (zh_Hans)
 # Build the firmware image
 make download -j$(nproc)
 ```
-- `-j$(nproc)`, 其中`nproc`会返回你系统的最大线程数量，例如-j8表示8线程编译
+- `-j$(nproc)`, 其中`nproc`会返回你系统的最大线程数量，例如-j8表示7线程编译(会保留一个线程防止系统卡死)
 - `V=s`: 打印详细信息
 #### 开始编译
 编译前，请确保有良好的科学环境，终端输入`curl -I www.google.com` ，检查状态码是否为200，如果卡住了说明网络环境不适合编译。
@@ -342,13 +342,13 @@ opkg install luci-app-alist_1.0.11-1_all.ipk
 
 #### 第三方插件源目前已知问题
 
-###### ERROR: package/feeds/kenzo/alist failed to build
+##### ERROR: package/feeds/kenzo/alist failed to build
 - 解决方案参考： https://github.com/kenzok8/openwrt-packages/issues/363#issuecomment-1426531811
 添加依赖即可
 ```
 sudo apt install libfuse-dev
 ```
-
+##### ERROR: package/feeds/small/v2ray-plugin failed to build.
 
 ### 调整ROOT大小
 - 参考 https://github.com/danshui-git/shuoming/blob/master/overlay.md
