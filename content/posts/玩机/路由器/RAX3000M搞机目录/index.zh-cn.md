@@ -92,7 +92,7 @@ uboot是用来刷入固件的，如果你uboot都刷错了那路由器就成砖�
 Could not open mtd device: /dev/mtd0  
 Can't open device for writing
 ```
-### 方法1：h大的uboot
+### 方法1：hanwckf的uboot
 缺点：无法刷入稍微大一点的固件
 - 下载链接： https://github.com/hanwckf/bl-mt798x/releases/tag/20240123
 - 检查md5，确保文件一致
