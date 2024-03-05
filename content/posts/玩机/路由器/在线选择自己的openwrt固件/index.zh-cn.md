@@ -116,3 +116,6 @@ luci-i18n-alist-zh-cn luci-i18n-autoreboot-zh-cn luci-i18n-eqos-zh-cn luci-i18n-
 
 你也可以在刷好固件后再安装中文包，找到软件包，过滤插件名称，然后找到i18n那行，安装即可
 ![](Pasted%20image%2020240305090730.png)
+
+
+如果里面没有自己要的插件，可以尝试手动安装，插件地址集合： [kenzok8/openwrt-packages: openwrt常用软件包 (github.com)](https://github.com/kenzok8/openwrt-packages)
