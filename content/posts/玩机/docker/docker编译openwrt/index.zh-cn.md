@@ -189,7 +189,7 @@ LuCI->Modules->Translations -> <*> Chinese Simplified (zh_Hans)
 # Build the firmware image
 make download -j$(nproc)
 ```
-- `-j$(nproc)`, 其中`nproc`会返回你系统的最大线程数量，例如-j8表示7线程编译(会保留一个线程防止系统卡死)
+- `-j$(nproc)`, 其中[nproc](https://unix.stackexchange.com/questions/208568/how-to-determine-the-maximum-number-to-pass-to-make-j-option)会返回你系统的最大线程数量，例如-j8表示7线程编译(会保留一个线程防止系统卡死) 
 - `V=s`: 打印详细信息
 #### 开始编译
 编译前，请确保有良好的科学环境，终端输入`curl -I www.google.com` ，检查状态码是否为200，如果卡住了说明网络环境不适合编译。
