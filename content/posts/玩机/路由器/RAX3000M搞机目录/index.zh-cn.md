@@ -325,6 +325,7 @@ mkfs.ext4 /dev/mmcblk0p7
 
 
 ## 插件下载地址
+有些插件依赖安装比较麻烦，不一定都能安装上。
 - github地址: [kenzok8/openwrt-packages: openwrt常用软件包 (github.com)](https://github.com/kenzok8/openwrt-packages)
 - ipk地址： [OpenWrt固件与插件 (dllkids.xyz)](https://op.dllkids.xyz/packages/aarch64_cortex-a53/)
 
