@@ -323,6 +323,11 @@ mkfs.ext4 /dev/mmcblk0p7
 ### 挂载
 去web界面找打挂载点挂载即可
 
+
+## 插件下载地址
+- github地址: [kenzok8/openwrt-packages: openwrt常用软件包 (github.com)](https://github.com/kenzok8/openwrt-packages)
+- ipk地址： [OpenWrt固件与插件 (dllkids.xyz)](https://op.dllkids.xyz/packages/aarch64_cortex-a53/)
+
 ## 扩容overlays
 - 参考： https://www.techkoala.net/openwrt_resize/
 
