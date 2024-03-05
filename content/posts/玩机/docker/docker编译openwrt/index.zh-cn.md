@@ -169,7 +169,7 @@ openwrt编译默认不带luci的web界面，你需要手动勾选安装，找到
 LuCI-> Collections-> luci，双击使得前面的变成`*`符号
 ![](Pasted%20image%2020240226085646.png)
 
-设置web界面为中文， 双击使得前面的变成`*`符号
+设置web界面为中文， 双击空格使得前面的变成`*`符号
 ```
 LuCI->Modules->Translations -> <*> Chinese Simplified (zh_Hans)
 ```
