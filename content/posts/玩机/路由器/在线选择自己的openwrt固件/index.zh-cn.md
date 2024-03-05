@@ -40,7 +40,7 @@ uci commit
 ![](Pasted%20image%2020240304111143.png)
 
 这是因为没安装中文包，因此还需要安装语言包
-- 系统的中文包是`luci-i18n-base-zh-cn`
+- 系统的中文包是`luci-i18n-base-zh-cn`， 软件包管理器的中文包`luci-i18n-opkg-zh-cn`
 - 插件对应中文则把`luci-app-xxxx`格式变成 `luci-i18n-xxxx-zh-cn`
 - 例如终端插件`luci-app-ttyd`中文包是`luci-i18n-ttyd-zh-cn`
 
@@ -52,7 +52,8 @@ uci commit
 
 所以根据报错信息，删掉不存在的中文包即可。
 ```
-luci-i18n-base-zh-cn luci-i18n-dockerman-zh-cn luci-i18n-diskman-zh-cn luci-i18n-v2raya-zh-cn luci-i18n-samba4-zh-cn luci-i18n-frpc-zh-cn luci-i18n-frps-zh-cn
+luci-i18n-opkg-zh-cn luci-i18n-base-zh-cn 
+luci-i18n-dockerman-zh-cn luci-i18n-diskman-zh-cn luci-i18n-v2raya-zh-cn luci-i18n-samba4-zh-cn luci-i18n-frpc-zh-cn luci-i18n-frps-zh-cn
 luci-i18n-ddns-go-zh-cn luci-i18n-wol-zh-cn luci-i18n-usb-printer-zh-cn luci-i18n-wifischedule-zh-cn luci-i18n-uugamebooster-zh-cn
 luci-i18n-alist-zh-cn luci-i18n-autoreboot-zh-cn luci-i18n-eqos-zh-cn luci-i18n-qos-zh-cn luci-i18n-qbittorrent-zh-cn luci-i18n-upnp-zh-cn luci-i18n-uhttpd-zh-cn  luci-i18n-ttyd-zh-cn
 ```
