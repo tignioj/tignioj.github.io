@@ -60,3 +60,7 @@ luci-i18n-alist-zh-cn luci-i18n-autoreboot-zh-cn luci-i18n-eqos-zh-cn luci-i18n-
 
 然后重新点击 Request Build即可
 ![](Pasted%20image%2020240305083925.png)
+
+
+你也可以在刷好固件后再安装中文包，找到软件包，过滤插件名称，然后找到i18n那行，安装即可
+![](Pasted%20image%2020240305090730.png)
