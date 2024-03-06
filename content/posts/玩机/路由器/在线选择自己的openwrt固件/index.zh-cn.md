@@ -83,6 +83,13 @@ echo "All done!"
 
 ![](Pasted%20image%2020240304102407.png)
 
+### 区别uboot
+- custom uboot：指的是第三方的uboot，比如[hanwckf的uboot](https://github.com/hanwckf/bl-mt798x/releases/tag/20240123)，大部分人用的都是第三方的uboot，此类uboot可以刷lede和immortalWRT的刷机包。
+![](Pasted%20image%2020240306193706.png)
+
+- openwrt uboot：官方的uboot，只能刷`itb`格式的uboot，和第三方不兼容，一般用tftpd方式刷入。
+![](Pasted%20image%2020240306193724.png)
+
 
 点击Request Build，就会开始构建，等待几分钟就会构建完成，下载即可。
 ![](Pasted%20image%2020240304103220.png)
