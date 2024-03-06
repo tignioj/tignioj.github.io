@@ -340,7 +340,7 @@ opkg install luci-app-alist_1.0.11-1_all.ipk
 或者在web界面上传安装
 
 
-#### 第三方插件源目前已知问题
+#### 第三方插件源可能出现的问题
 
 ##### ERROR: package/feeds/kenzo/alist failed to build
 - 解决方案参考： https://github.com/kenzok8/openwrt-packages/issues/363#issuecomment-1426531811
@@ -349,6 +349,11 @@ opkg install luci-app-alist_1.0.11-1_all.ipk
 sudo apt install libfuse-dev
 ```
 ##### ERROR: package/feeds/small/v2ray-plugin failed to build.
+- 参考 https://github.com/fw876/helloworld/issues/836
+原因是勾选passwall2的时候，自动勾选了v2ray-plugin，要么取消调v2raya-plugin，要么升级go版本
+![](Pasted%20image%2020240305213308.png)
+
+
 
 ### 调整ROOT大小
 - 参考 https://github.com/danshui-git/shuoming/blob/master/overlay.md
@@ -623,6 +628,29 @@ make -j$(nproc)
 
 
 ## 编译的一些技巧
+
+### make选项
+#### 当多线程编译失败时，可以使用以下命令单线程编译，仅关注错误信息
+```
+make V=s 2>&1 | tee build.log | grep -i -E "^make.*(error|[12345]...Entering dir)"
+```
+
+另一种方法是检查相应的`logs`文件夹，如`make[3] -C package/kernel/mac80211 compile`，那么可以转到`<buildroot>/logs/package/kernel/mac80211`查看`compile.txt`
+
+#### 报错时发出声音
+```
+make ...; echo -e '\a'
+```
+#### 忽视某个包的错误，继续编译其他包
+加入某个包编译错误了，
+```
+# Ignore compilation errors
+IGNORE_ERRORS=1 make ...
+ 
+# Ignore all errors including firmware assembly stage
+make -i ...
+```
+
 ### tmux多窗口
 tmux小技巧往期文章-> [index.zh-cn](../../Linux/tmux小技巧/index.zh-cn.md)
 - 如果是远程ssh连接服务器编译，最好使用`tmux`，可以多窗口，且ssh断掉后进程不会中断，再次ssh进入服务器可以回到tmux会话。
@@ -630,17 +658,18 @@ tmux小技巧往期文章-> [index.zh-cn](../../Linux/tmux小技巧/index.zh-cn.
 ```
 tmux new -s openwrt
 ```
-面板垂直分割，键盘按下快捷键
+面板垂直分割，键盘按下快捷键。以下`<prefix>` 表示同时按下`Ctrl + B`。
+- 例如下面这个命令，表示同时按下`Ctrl + B` 后，松开键盘，再按下`%`
 ```
-Ctrl + B + %
+<prefix> + %
 ```
 面板水平分割
 ```
-Ctrl + B + "
+<prefix> + "
 ```
 退出tmux，但不退出tmux的进程
 ```
-Ctrl + B + Q
+<prefix>  + Q
 ```
 回到tmux
 ```
