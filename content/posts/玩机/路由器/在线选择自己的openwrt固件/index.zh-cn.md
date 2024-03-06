@@ -85,6 +85,9 @@ echo "All done!"
 
 ### 区别uboot
 - custom uboot：指的是第三方的uboot，比如[hanwckf的uboot](https://github.com/hanwckf/bl-mt798x/releases/tag/20240123)，大部分人用的都是第三方的uboot，此类uboot可以刷lede和immortalWRT的刷机包。
+
+![](Pasted%20image%2020240306194327.png)
+
 ![](Pasted%20image%2020240306193706.png)
 
 - openwrt uboot：官方的uboot，只能刷`itb`格式的uboot，和第三方不兼容，一般用tftpd方式刷入。
