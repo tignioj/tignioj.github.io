@@ -130,7 +130,7 @@ luci-i18n-alist-zh-cn luci-i18n-autoreboot-zh-cn luci-i18n-eqos-zh-cn luci-i18n-
 
 
 ##  查询插件信息
-打开(插件地址)[https://github.com/immortalwrt/luci/tree/master/applications]， 点开要了解的插件，找到po/zh_Hands，就可以看到插件说明
+打开[插件地址](https://github.com/immortalwrt/luci/tree/master/applications)， 点开要了解的插件，找到po/zh_Hands，就可以看到插件说明
 ![](Pasted%20image%2020240307173245.png)
 
 
