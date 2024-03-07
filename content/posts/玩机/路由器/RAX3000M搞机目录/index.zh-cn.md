@@ -1,6 +1,6 @@
 ---
 date: 2024-02-21T00:10:40+08:00
-lastmod: 2024-02-25T07:38:50+08:00
+lastmod: 2024-03-08T00:07:54+08:00
 categories:
   - 玩机
   - 路由器
@@ -396,7 +396,7 @@ mount /dev/sda1 /overlay
 如果发现无法启动openclash，可能缺少内核clash，需要安装。
 ### 安装内核方法
 #### 方法1: 修改github地址
-覆写设置->修改github地址，然后点击启动openclash会自动下载安装
+覆写设置->修改github地址，随便选一个，然后点击启动openclash会自动下载安装
 
 #### 方法2: [手动下载](https://github.com/vernesong/OpenClash/releases/tag/Clash)并上传到路由器
 
