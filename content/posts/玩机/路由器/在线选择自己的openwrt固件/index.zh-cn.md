@@ -128,4 +128,11 @@ luci-i18n-alist-zh-cn luci-i18n-autoreboot-zh-cn luci-i18n-eqos-zh-cn luci-i18n-
 ![](Pasted%20image%2020240305090730.png)
 
 
+
+##  查询插件信息
+打开(插件地址)[https://github.com/immortalwrt/luci/tree/master/applications]， 点开要了解的插件，找到po/zh_Hands，就可以看到插件说明
+![](Pasted%20image%2020240307173245.png)
+
+
+
 如果里面没有自己要的插件，可以尝试手动安装，插件地址集合： [kenzok8/openwrt-packages: openwrt常用软件包 (github.com)](https://github.com/kenzok8/openwrt-packages)
