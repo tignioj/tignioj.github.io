@@ -393,10 +393,26 @@ mount /dev/sda1 /overlay
 - 教程： https://www.right.com.cn/forum/thread-8309440-1-1.html
 - 往期文章-> [index.zh-cn](../RAX3000M-openwrt使用ipv6中继/index.zh-cn.md)
 ## openclash
-如果发现无法启动openclash，可能缺少内核clash
-### 安装clash内核
-- 方法1：覆写设置->修改github地址，然后点击启动openclash会自动安装
-- 方法2：[手动下载](https://github.com/vernesong/OpenClash/releases/tag/Clash)并上传到/etc/openclash/core/clash，并给予执行权限。 
+如果发现无法启动openclash，可能缺少内核clash，需要安装。
+### 安装内核方法
+#### 方法1: 修改github地址
+覆写设置->修改github地址，然后点击启动openclash会自动下载安装
+
+#### 方法2: [手动下载](https://github.com/vernesong/OpenClash/releases/tag/Clash)并上传到路由器
+
+RAX3000M选择[clash-linux-armv8.tar.gz](https://github.com/vernesong/OpenClash/releases/download/Clash/clash-linux-armv8.tar.gz)，解压后，上传到`/etc/openclash/core/`目录下，给予执行权限
+```
+chmod +x /etc/openclash/core/clash
+```
+
+有时候你会发现你自己没上传，但是这个目录里面已经有了clash文件，而web界面仍然启动失败，可能因为这个文件是损坏的，验证方法就是手动执行一下 `./clash -v`
+正常结果是
+```
+root@ImmortalWrt:/etc/openclash/core# ./clash -v
+Clash v1.11.0-7-g5497ada linux arm64 with go1.18 2022年 07月 06日 星期三 00:12:50 UTC
+```
+
+异常情况 `Bus error`，这时候你就要删掉这个损坏的clash文件，放入自己下载的文件。
 
 ### 开启openclash无法登录游戏
 - 参考： https://github.com/vernesong/OpenClash/issues/107
