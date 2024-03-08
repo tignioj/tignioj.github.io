@@ -21,6 +21,7 @@ series:
  luci-app-alist luci-app-autoreboot luci-app-eqos luci-app-qos luci-app-qbittorrent luci-app-upnp luci-app-uhttpd
   luci-app-ttyd
 ```
+> 注意，请不要盲目复制粘贴这里的插件，这里的所有插件都是可选的，请根据自己需要逐个添加。或者干脆一个都不选，等刷好固件后再软件包上面下载安装即可！
 
 第二个空白栏输入初始化命令，例如初始化路由器的LAN地址
 ```
