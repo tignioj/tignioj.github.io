@@ -1,6 +1,6 @@
 ---
 date: 2024-02-21T00:10:40+08:00
-lastmod: 2024-03-09T22:02:58+08:00
+lastmod: 2024-03-09T23:51:25+08:00
 categories:
   - 玩机
   - 路由器
@@ -333,14 +333,14 @@ mkfs.ext4 /dev/mmcblk0p7
 
 ## 如何手动[安装docker](https://docs.docker.com/engine/install/binaries/#install-daemon-and-client-binaries-on-linux)到usb
 - 测试环境：ImmortalWRT 23.05.1 
-- 官网的要求
-	- 64位系统
-	- Linux内核版本>=3.10 
-	- `iptables` version 1.4 or higher（实际上也可以用nftables）
-	- `git` 版本>=1.7 
-	-  `ps` 命令可用, 通常由`procps`包提供
-	- [XZ Utils](https://tukaani.org/xz/) >= 4.9 (啥来的)
-	- A [properly mounted](https://github.com/tianon/cgroupfs-mount/blob/master/cgroupfs-mount) `cgroupfs` hierarchy; a single, all-encompassing `cgroup` mount point is not sufficient. See Github issues [#2683](https://github.com/moby/moby/issues/2683), [#3485](https://github.com/moby/moby/issues/3485), [#4568](https://github.com/moby/moby/issues/4568)). (没看懂)
+### 官网对系统的要求
+- 64位系统
+- Linux内核版本>=3.10 
+- `iptables` version 1.4 or higher（实际上也可以用nftables）
+- `git` 版本>=1.7 
+-  `ps` 命令可用, 通常由`procps`包提供
+- [XZ Utils](https://tukaani.org/xz/) >= 4.9 (啥来的)
+- A [properly mounted](https://github.com/tianon/cgroupfs-mount/blob/master/cgroupfs-mount) `cgroupfs` hierarchy; a single, all-encompassing `cgroup` mount point is not sufficient. See Github issues [#2683](https://github.com/moby/moby/issues/2683), [#3485](https://github.com/moby/moby/issues/3485), [#4568](https://github.com/moby/moby/issues/4568)). (没看懂)
 
 
 ### 下载[docker二进制文件](https://download.docker.com/linux/static/stable/aarch64/)
