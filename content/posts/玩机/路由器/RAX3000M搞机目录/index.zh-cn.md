@@ -349,6 +349,7 @@ mkfs.ext4 /dev/mmcblk0p7
 假设u盘挂载到了`/mnt/sda1`, 创建一个名称为`rax3000m_docker`的目录到u盘
 ```
 mkdir -p /mnt/sda1/rax3000m_docker
+cd /mnt/sda1/rax3000m_docker
 ```
 下载docker二进制文件（这种下载方式巨慢，不如手动下载后放进u盘）
 ```
