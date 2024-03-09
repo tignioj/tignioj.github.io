@@ -374,8 +374,8 @@ mkdir -p /mnt/sda1/rax3000m_docker/data-root
 ```
 保存后，执行 `source /etc/profile`表示引用刚刚的环境变量到当前终端
 
-### 启动docker引擎
-然后输入`dockerd`启动docker引擎，发现iptables报错了
+### 启动docker守护进程
+输入`dockerd`启动docker守护进程，发现iptables报错了
 
 ```
  error="exec: \"iptables\": executable file not found in $PATH"
@@ -402,7 +402,10 @@ INFO[2024-03-09T13:13:44.849138009Z] Docker daemon                              
 INFO[2024-03-09T13:13:44.849459217Z] Daemon has completed initialization          
 INFO[2024-03-09T13:13:44.980870194Z] API listen on /var/run/docker.sock   
 ```
-测试运行镜像
+
+
+### 测试运行镜像
+打开新的终端（注意别把守护进程关了）测试一下镜像
 ```
 docker run --rm hello-world
 ```
