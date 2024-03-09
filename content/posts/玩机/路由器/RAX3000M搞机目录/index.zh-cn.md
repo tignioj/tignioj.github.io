@@ -372,7 +372,10 @@ export PATH=$PATH:/mnt/sda1/rax3000m_docker
 ```
 mkdir -p /mnt/sda1/rax3000m_docker/data-root
 ```
-保存后，执行 `source /etc/profile`表示引用刚刚的环境变量到当前终端，然后输入`dockerd`启动docker引擎，发现iptables报错了
+保存后，执行 `source /etc/profile`表示引用刚刚的环境变量到当前终端
+
+### 启动docker引擎
+然后输入`dockerd`启动docker引擎，发现iptables报错了
 
 ```
  error="exec: \"iptables\": executable file not found in $PATH"
