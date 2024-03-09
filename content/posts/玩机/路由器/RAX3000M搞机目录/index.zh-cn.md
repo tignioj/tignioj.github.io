@@ -354,7 +354,7 @@ mkdir -p /mnt/sda1/rax3000m_docker
 ```
 wget https://download.docker.com/linux/static/stable/aarch64/docker-25.0.4.tgz
 ```
-使用wget方式下载假如中途断掉了，可能文件会损坏，因此确认一下md5是否一致，以保证文件的完整性
+假如下载中途断掉了，文件可能会损坏，因此需要确认一下md5是否一致，以保证文件的完整性
 ```
 md5sum docker-25.0.4.tgz 
 9095035fc0700aacfc7262cf353e91e8  docker-25.0.4.tgz
