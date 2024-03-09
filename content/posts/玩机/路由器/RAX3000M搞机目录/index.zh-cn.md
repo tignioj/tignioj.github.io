@@ -386,7 +386,7 @@ mkdir -p /mnt/sda1/rax3000m_docker/data-root
 ```
 dockerd --iptables=false --data-root=/mnt/sda1/rax3000m_docker/data-root
 ```
-启动成功
+启动成功，此时守护进程开启，按下Ctrl+C或者关掉终端，则会关闭守护进程
 ```
 ... 省略部分日志
 INFO[2024-03-09T13:13:43.881084973Z] containerd successfully booted in 0.163237s  
@@ -402,7 +402,10 @@ INFO[2024-03-09T13:13:44.849138009Z] Docker daemon                              
 INFO[2024-03-09T13:13:44.849459217Z] Daemon has completed initialization          
 INFO[2024-03-09T13:13:44.980870194Z] API listen on /var/run/docker.sock   
 ```
-
+如果要后台运行守护进程，则在命令后面加上`&`符号
+```
+dockerd --iptables=false --data-root=/mnt/sda1/rax3000m_docker/data-root &
+```
 
 ### 测试运行镜像
 打开新的终端（注意别把守护进程关了）测试一下镜像
