@@ -329,6 +329,121 @@ mkfs.ext4 /dev/mmcblk0p7
 - github地址: [kenzok8/openwrt-packages: openwrt常用软件包 (github.com)](https://github.com/kenzok8/openwrt-packages)
 - ipk地址： [OpenWrt固件与插件 (dllkids.xyz)](https://op.dllkids.xyz/packages/aarch64_cortex-a53/)
 
+
+
+## 如何手动[安装docker](https://docs.docker.com/engine/install/binaries/#install-daemon-and-client-binaries-on-linux)到usb
+- 测试环境：ImmortalWRT 23.05.1 
+- 官网的要求
+	- 64位系统
+	- Linux内核版本>=3.10 
+	- `iptables` version 1.4 or higher（实际上也可以用nftables）
+	- `git` 版本>=1.7 
+	-  `ps` 命令可用, 通常由`procps`包提供
+	- [XZ Utils](https://tukaani.org/xz/) >= 4.9 (啥来的)
+	- A [properly mounted](https://github.com/tianon/cgroupfs-mount/blob/master/cgroupfs-mount) `cgroupfs` hierarchy; a single, all-encompassing `cgroup` mount point is not sufficient. See Github issues [#2683](https://github.com/moby/moby/issues/2683), [#3485](https://github.com/moby/moby/issues/3485), [#4568](https://github.com/moby/moby/issues/4568)). (没看懂)
+
+
+### 下载[docker二进制文件](https://download.docker.com/linux/static/stable/aarch64/)
+
+下载后，放进你的U盘中（请格式化为ext4格式，不要ntfs），并使用`tar`命令解压(如果解压失败，那就自己先解压出docker文件夹后放进去)
+```
+root@ImmortalWrt:/mnt/sda1/rax3000m_docker# tar -xvzf docker-25.0.4.tgz 
+docker/
+docker/docker
+docker/containerd
+docker/docker-proxy
+docker/ctr
+docker/runc
+docker/dockerd
+docker/containerd-shim-runc-v2
+docker/docker-init
+```
+
+我们把这堆命令放到环境变量，编辑终端的配置文件
+```
+vi /etc/profile
+```
+添加一行
+```
+export PATH=$PATH:/mnt/sda1/rax3000m_docker
+```
+
+创建data-root，镜像文件、会下载到这里
+```
+mkdir -p /mnt/sda1/rax3000m_docker/data-root
+```
+保存后，执行 `source /etc/profile`表示引用刚刚的环境变量到当前终端，然后输入`dockerd`启动docker引擎，发现iptables报错了
+
+```
+ error="exec: \"iptables\": executable file not found in $PATH"
+```
+ 则指定禁用iptables即可
+- docker命令行参考 https://docs.docker.com/reference/cli/dockerd/
+- 配置参考 https://docs.docker.com/config/daemon/
+```
+dockerd --iptables=false --data-root=/mnt/sda1/rax3000m_docker/data-root
+```
+启动成功
+```
+... 省略部分日志
+INFO[2024-03-09T13:13:43.881084973Z] containerd successfully booted in 0.163237s  
+INFO[2024-03-09T13:13:44.719192506Z] [graphdriver] using prior storage driver: overlay2 
+INFO[2024-03-09T13:13:44.722489900Z] Loading containers: start.                   
+WARN[2024-03-09T13:13:44.733961421Z] Could not load necessary modules for IPSEC rules: protocol not supported 
+INFO[2024-03-09T13:13:44.814235829Z] Default bridge (docker0) is assigned with an IP address 172.17.0.0/16. Daemon option --bip can be used to set a preferred IP address 
+INFO[2024-03-09T13:13:44.822904807Z] Loading containers: done.                    
+WARN[2024-03-09T13:13:44.848897662Z] WARNING: No swap limit support               
+WARN[2024-03-09T13:13:44.848993985Z] WARNING: bridge-nf-call-iptables is disabled 
+WARN[2024-03-09T13:13:44.849033838Z] WARNING: bridge-nf-call-ip6tables is disabled 
+INFO[2024-03-09T13:13:44.849138009Z] Docker daemon                                 commit=061aa95 containerd-snapshotter=false storage-driver=overlay2 version=25.0.4
+INFO[2024-03-09T13:13:44.849459217Z] Daemon has completed initialization          
+INFO[2024-03-09T13:13:44.980870194Z] API listen on /var/run/docker.sock   
+```
+测试运行镜像
+```
+docker run --rm hello-world
+```
+报错了
+```
+root@ImmortalWrt:/mnt/sda1/# docker run --rm hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+478afc919002: Pull complete 
+Digest: sha256:d000bc569937abbe195e20322a0bde6b2922d805332fd6d8a68b19f524b7d21d
+Status: Downloaded newer image for hello-world:latest
+docker: Error response from daemon: failed to create endpoint inspiring_napier on network bridge: failed to add the host (vethcf82129) <=> sandbox (vethde4930e) pair interfaces: operation not supported.
+```
+
+加上参数`--net=host`把网络模式改为host模式即可
+```
+root@ImmortalWrt:/mnt/sda1/# docker run --rm --net=host hello-world
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (arm64v8)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+```
+
+
+
+
+
 ## 扩容overlays
 - 参考： https://www.techkoala.net/openwrt_resize/
 
