@@ -374,6 +374,7 @@ docker/containerd-shim-runc-v2
 docker/docker-init
 ```
 
+### 添加环境变量和存储路径
 我们把这堆命令放到环境变量，编辑终端的配置文件
 ```
 vi /etc/profile
