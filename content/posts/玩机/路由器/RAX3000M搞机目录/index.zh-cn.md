@@ -388,7 +388,10 @@ export PATH=$PATH:/mnt/sda1/rax3000m_docker
 ```
 mkdir -p /mnt/sda1/rax3000m_docker/data-root
 ```
-保存后，执行 `source /etc/profile`表示引用刚刚的环境变量到当前终端
+保存后，执行以下命令使得当前终端可以使用dockerd命令
+```
+source /etc/profile
+```
 
 ### 启动docker守护进程
 输入`dockerd`启动docker守护进程，发现iptables报错了
