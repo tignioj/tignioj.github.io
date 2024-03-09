@@ -550,10 +550,23 @@ docker run -d --restart=unless-stopped -v /etc/alist:/opt/alist/data --network=h
 
 
 ### ntfs无法挂载
+卸载`ntfs3-mount`，此脚本实际上就是一行代码`mount -t ntfs3 -o iocharset=utf8 "$@"`，和ntfs-3g-utils冲突，我们要用到后者。
+```
+opkg remove ntfs3-mount
+```
+安装`ntfs-3g-utils`
+```
+opkg update
+opkg install ntfs-3g-utils
+```
+挂载到`/mnt/sda1`
+```
+mkdir -p /mnt/sda1
+ntfs-3g /dev/sda1 /mnt/sda1
+```
 
-- 参考：
-	- https://askubuntu.com/questions/500647/unable-to-mount-ntfs-external-hard-drive
 使用 ntfs-3g 挂载报错
+- 参考 https://askubuntu.com/questions/500647/unable-to-mount-ntfs-external-hard-drive
 ```
 Failed to mount '/dev/sda1': I/O error
 NTFS is either inconsistent, or there is a hardware fault, or it's a
@@ -581,6 +594,12 @@ Going to empty the journal ($LogFile)... OK
 Checking the alternate boot sector... OK
 NTFS volume version is 3.1.
 
+```
+
+然后再次挂载
+
+```
+ntfs-3g /dev/sda1 /mnt/sda1
 ```
 
 仍旧不行，则用电脑使用Diskgenius重新格式化成ntfs。（最好用ext4格式，稳定一点）
