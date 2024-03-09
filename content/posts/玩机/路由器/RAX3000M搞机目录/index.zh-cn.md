@@ -384,7 +384,7 @@ vi /etc/profile
 export PATH=$PATH:/mnt/sda1/rax3000m_docker
 ```
 
-创建data-root，镜像文件、会下载到这里
+创建data-root，镜像文件会下载到这里
 ```
 mkdir -p /mnt/sda1/rax3000m_docker/data-root
 ```
