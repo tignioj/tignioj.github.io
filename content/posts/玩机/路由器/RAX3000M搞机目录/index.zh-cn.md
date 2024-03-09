@@ -355,7 +355,7 @@ mkdir -p /mnt/sda1/rax3000m_docker
 wget https://download.docker.com/linux/static/stable/aarch64/docker-25.0.4.tgz
 ```
 
-下载后，放进你的，并使用`tar`命令解压(如果解压失败，那就自己先解压出docker文件夹后放进去)
+下载后，使用`tar`命令解压(如果解压失败，那就自己先解压出docker文件夹后放进去)
 ```
 root@ImmortalWrt:/mnt/sda1/rax3000m_docker# tar -xvzf docker-25.0.4.tgz 
 docker/
