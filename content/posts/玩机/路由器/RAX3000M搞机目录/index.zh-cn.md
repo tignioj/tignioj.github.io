@@ -342,10 +342,20 @@ mkfs.ext4 /dev/mmcblk0p7
 - [XZ Utils](https://tukaani.org/xz/) >= 4.9 (啥来的)
 - A [properly mounted](https://github.com/tianon/cgroupfs-mount/blob/master/cgroupfs-mount) `cgroupfs` hierarchy; a single, all-encompassing `cgroup` mount point is not sufficient. See Github issues [#2683](https://github.com/moby/moby/issues/2683), [#3485](https://github.com/moby/moby/issues/3485), [#4568](https://github.com/moby/moby/issues/4568)). (没看懂)
 
+> U盘请格式化为ext4格式，不要ntfs，对Linux兼容性不好
 
 ### 下载[docker二进制文件](https://download.docker.com/linux/static/stable/aarch64/)
 
-下载后，放进你的U盘中（请格式化为ext4格式，不要ntfs），并使用`tar`命令解压(如果解压失败，那就自己先解压出docker文件夹后放进去)
+假设u盘挂载到了`/mnt/sda1`, 创建一个名称为`rax3000m_docker`的目录到u盘
+```
+mkdir -p /mnt/sda1/rax3000m_docker
+```
+下载docker二进制文件（这种下载方式巨慢，不如手动下载后放进u盘）
+```
+wget https://download.docker.com/linux/static/stable/aarch64/docker-25.0.4.tgz
+```
+
+下载后，放进你的，并使用`tar`命令解压(如果解压失败，那就自己先解压出docker文件夹后放进去)
 ```
 root@ImmortalWrt:/mnt/sda1/rax3000m_docker# tar -xvzf docker-25.0.4.tgz 
 docker/
