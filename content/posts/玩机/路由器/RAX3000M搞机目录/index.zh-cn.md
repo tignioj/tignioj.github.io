@@ -331,7 +331,7 @@ mkfs.ext4 /dev/mmcblk0p7
 
 
 
-## 如何手动[安装docker](https://docs.docker.com/engine/install/binaries/#install-daemon-and-client-binaries-on-linux)到usb
+## 如何手动[安装docker](https://docs.docker.com/engine/install/binaries/#install-daemon-and-client-binaries-on-linux)到移动硬盘
 - 测试环境：ImmortalWRT 23.05.1 
 ### 官网对系统的要求
 - 64位系统
@@ -342,11 +342,11 @@ mkfs.ext4 /dev/mmcblk0p7
 - [XZ Utils](https://tukaani.org/xz/) >= 4.9 (啥来的)
 - A [properly mounted](https://github.com/tianon/cgroupfs-mount/blob/master/cgroupfs-mount) `cgroupfs` hierarchy; a single, all-encompassing `cgroup` mount point is not sufficient. See Github issues [#2683](https://github.com/moby/moby/issues/2683), [#3485](https://github.com/moby/moby/issues/3485), [#4568](https://github.com/moby/moby/issues/4568)). (没看懂)
 
-> U盘请格式化为ext4格式，不要ntfs，对Linux兼容性不好
+> 移动硬盘请格式化为ext4格式，不要ntfs，对Linux兼容性不好，不建议使用u盘，速度太慢，影响docker运行效率。
 
 ### 下载[docker二进制文件](https://download.docker.com/linux/static/stable/aarch64/)
 
-假设u盘挂载到了`/mnt/sda1`, 创建一个名称为`rax3000m_docker`的目录到u盘
+假设移动硬盘挂载到了`/mnt/sda1`, 这里创建一个名称为`rax3000m_docker`的目录
 ```
 mkdir -p /mnt/sda1/rax3000m_docker
 cd /mnt/sda1/rax3000m_docker
