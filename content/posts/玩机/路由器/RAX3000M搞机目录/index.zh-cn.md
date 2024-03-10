@@ -527,7 +527,7 @@ cp -r /overlay/* /mnt/sda1/
 ```
 cp -r /rom/overlay/* /mnt/sda1/
 ```
-复制成功后，可以再`/mnt/sda1`看到upper和work文件夹
+复制成功后，可以在`/mnt/sda1`看到upper和work文件夹
 
 ### 重新挂载u盘到/overlays
 
