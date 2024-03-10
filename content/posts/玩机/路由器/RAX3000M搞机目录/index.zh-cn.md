@@ -451,7 +451,7 @@ docker: Error response from daemon: failed to create endpoint inspiring_napier o
 ```
 
 加上参数`--net=host`把网络模式改为host模式即可
-> 24版本的docker有bug，不能使用默认的桥接模式，必须使用host网络，否则无法访问
+> 24版本的docker有bug，必须使用host网络，否则无法访问
 ```
 root@ImmortalWrt:/mnt/sda1/# docker run --rm --net=host hello-world
 
