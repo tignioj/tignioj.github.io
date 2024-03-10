@@ -694,7 +694,7 @@ docker run -d --restart=unless-stopped -v /etc/alist:/opt/alist/data -p 5244:524
 docker run -d --restart=unless-stopped -v /etc/alist:/opt/alist/data --network=host -e PUID=0 -e PGID=0 -e UMASK=022 --name="alist" xhofe/alist:latest
 ```
 
-## istore安装的程序打不开
+## istore安装的插件打不开
 移除插件，勾选host网络后重新安装
 
 
