@@ -509,6 +509,11 @@ mkfs.ext4 /dev/sda1
 此时u盘成功格式化成ext4格式
 
 ### 挂载U盘
+创建挂载点
+```
+mkdir -p /mnt/sda1
+```
+挂载
 ```
 mount /dev/sda1 /mnt/sda1
 ```
