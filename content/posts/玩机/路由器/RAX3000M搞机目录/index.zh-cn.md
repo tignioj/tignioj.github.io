@@ -558,7 +558,7 @@ cd /tmp
 wget https://github.com/linkease/openwrt-app-actions/raw/main/applications/luci-app-systools/root/usr/share/systools/istore-reinstall.run
 ```
 
-如果实在下载不了，则手动打开脚本地址，复制页面的内容新建的文本文档里面
+如果实在下载不了，则手动打开[脚本地址](https://github.com/linkease/openwrt-app-actions/raw/main/applications/luci-app-systools/root/usr/share/systools/istore-reinstall.run)，复制页面的内容新建的文本文档里面
 
 ```
 vi istore-reinstall.run
