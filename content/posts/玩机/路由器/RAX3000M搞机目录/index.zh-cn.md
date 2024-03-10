@@ -709,7 +709,7 @@ docker run -d --restart=unless-stopped -v /etc/alist:/opt/alist/data --network=h
 
 ### ntfs无法挂载
 - 卸载`ntfs3-mount`，此脚本实际上就是一行代码`mount -t ntfs3 -o iocharset=utf8 "$@"`，和`ntfs-3g-utils`冲突，我们要用到后者
-- 又因为automount依赖于ntfs3-mount，因此也要卸载automount，卸载automount后连ext4也无法自动挂载了。
+- 又因为`automount`依赖于`ntfs3-mount`，因此也要卸载`automount`，卸载`automount`后连`ext4`也无法自动挂载了。
 ```
 opkg remove automount
 opkg remove ntfs3-mount
