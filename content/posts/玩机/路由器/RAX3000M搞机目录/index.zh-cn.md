@@ -695,7 +695,7 @@ docker run -d --restart=unless-stopped -v /etc/alist:/opt/alist/data --network=h
 ```
 
 ## istore安装的程序打不开
-勾选host网络
+移除插件，勾选host网络后重新安装
 
 
 ### ntfs无法挂载
