@@ -427,6 +427,8 @@ INFO[2024-03-09T13:13:44.980870194Z] API listen on /var/run/docker.sock
 dockerd --iptables=false --data-root=/mnt/sda1/rax3000m_docker/data-root &
 ```
 
+
+
 ### 测试运行镜像
 打开新的终端（注意别把守护进程关了）测试一下镜像
 ```
@@ -562,6 +564,36 @@ Clash v1.11.0-7-g5497ada linux arm64 with go1.18 2022年 07月 06日 星期三 0
 - 参考： https://github.com/vernesong/OpenClash/issues/107
 - 解决：运行模式使用TUN模式
 
+## USB网络共享(iOS未成功)
+参考
+-  https://www.cnblogs.com/cogito/p/it_tools16.html
+- https://openwrt.org/docs/guide-user/network/wan/smartphone.usb.tethering
+
+### 安装内核模块支持
+
+### USB网络共享-RNDIS协议
+```
+opkg update
+opkg install kmod-usb-net-rndis 
+```
+
+### usb驱动
+```
+opkg update
+opkg install kmod-nls-base kmod-usb-core kmod-usb-net kmod-usb-net-cdc-ether kmod-usb2
+```
+
+
+### 手机开启USB网络共享
+小米手机：系统设置->更多连接方式->USB网络共享。如果该选项是灰色的，要么是你的线有问题，要么是驱动没安装好，请到官网教程相关信息。
+
+### 网页添加网络设备
+![](Pasted%20image%2020240310135720.png)
+
+防火墙分配区域到WAN
+![](Pasted%20image%2020240310135749.png)
+点击`保存并应用`后，过几秒可以看到设备获取到了ip地址，此时就可以上网了。
+![](Pasted%20image%2020240310135844.png)
 
 ## 其他问题
 ### docker程序的端口无法打开
