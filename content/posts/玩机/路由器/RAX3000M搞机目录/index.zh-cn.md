@@ -598,7 +598,23 @@ chmod 755 /tmp/is-opkg
 chmod 755 istore-reinstall.run
 ./istore-reinstall.run
 ```
-
+成功日志
+```
+... 省略部分日志
+Installing mount-utils (2.39-2) to root...
+Downloading https://mirrors.vsean.net/openwrt/releases/23.05.1/packages/aarch64_cortex-a53/base/mount-utils_2.39-2_aarch64_cortex-a53.ipk
+Configuring libuci-lua.
+Configuring libbz2-1.0.
+Configuring liblzma.
+Configuring coreutils-stat.
+Configuring bzip2.
+Configuring xz-utils.
+Configuring xz.
+Configuring tar.
+Configuring mount-utils.
+Configuring luci-app-store.
+root@ImmortalWrt:/mnt/sda1# 
+```
 ## ipv6中继
 - 教程： https://www.right.com.cn/forum/thread-8309440-1-1.html
 - 往期文章-> [index.zh-cn](../RAX3000M-openwrt使用ipv6中继/index.zh-cn.md)
