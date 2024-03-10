@@ -332,6 +332,8 @@ mkfs.ext4 /dev/mmcblk0p7
 
 
 ## 如何手动[安装docker](https://docs.docker.com/engine/install/binaries/#install-daemon-and-client-binaries-on-linux)到移动硬盘
+> 如果你是emmc建议直接安装luci-app-dockerman，而不是手动安装docker二进制文件
+
 - 测试环境：ImmortalWRT 23.05.1 
 ### 官网对系统的要求
 - 64位系统
@@ -481,7 +483,7 @@ For more examples and ideas, visit:
 
 
 
-## 扩容overlays
+## 扩容overlays（emmc没必要）
 - 参考： https://www.techkoala.net/openwrt_resize/
 
 #### 插入u盘，格式化成ext4
