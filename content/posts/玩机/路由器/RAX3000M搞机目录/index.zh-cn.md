@@ -522,10 +522,12 @@ mount /dev/sda1 /mnt/sda1
 ```
 cp -r /overlay/* /mnt/sda1/
 ```
+
 如果没有/overlay，看看是否在`/rom/overlay`
 ```
 cp -r /rom/overlay/* /mnt/sda1/
 ```
+复制成功后，可以再`/mnt/sda1`看到upper和work文件夹
 
 ### 重新挂载u盘到/overlays
 
