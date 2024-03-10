@@ -362,6 +362,11 @@ md5sum docker-25.0.4.tgz
 ```
 
 下载后，使用`tar`命令解压(如果解压失败，那就自己先解压出docker文件夹后放进去)
+
+```
+tar -xvzf docker-25.0.4.tgz 
+```
+解压结果
 ```
 root@ImmortalWrt:/mnt/sda1/rax3000m_docker# tar -xvzf docker-25.0.4.tgz 
 docker/
@@ -509,9 +514,12 @@ mount /dev/sda1 /mnt/sda1
 
 #### 复制原来的`/overlay/*`到u盘
 ```
-cp -r /overlay/* /mnt/sda1
+cp -r /overlay/* /mnt/sda1/
 ```
-
+如果没有/overlay，看看是否在`/rom/overlay`
+```
+cp -r /rom/overlay/* /mnt/sda1/
+```
 
 ### 重新挂载u盘到/overlays
 
@@ -534,6 +542,62 @@ mount /dev/sda1 /overlay
 - 根据uuid选中你的u盘，作为外部overlay使用，然后点击保存&应用即可。
 ![](Pasted%20image%2020240302103042.png)
 
+
+## 如何手动安装istore
+- 教程： https://github.com/linkease/istore
+
+### 更新仓库
+```
+opkg update || exit 1
+```
+
+### 下载脚本
+开科学上网后再下载，否则可能失败。
+```
+cd /tmp
+wget https://github.com/linkease/openwrt-app-actions/raw/main/applications/luci-app-systools/root/usr/share/systools/istore-reinstall.run
+```
+
+如果实在下载不了，则手动打开脚本地址，复制页面的内容新建的文本文档里面
+
+```
+vi istore-reinstall.run
+```
+粘贴页面上的内容到`istore-reinstall.run`（注意，该脚本可能会随着页面更新而内容不同，请以网站上的内容为准）
+```
+#!/bin/sh
+ISTORE_REPO=https://istore.linkease.com/repo/all/store
+FCURL="curl --fail --show-error"
+
+curl -V >/dev/null 2>&1 || {
+  echo "prereq: install curl"
+  opkg info curl | grep -Fqm1 curl || opkg update
+  opkg install curl
+}
+
+IPK=`$FCURL "$ISTORE_REPO/Packages.gz" | zcat | grep -m1 '^Filename: luci-app-store.*\.ipk$' | sed -n -e 's/^Filename: \(.\+\)$/\1/p'`
+
+[ -n "$IPK" ] || exit 1
+
+$FCURL "$ISTORE_REPO/$IPK" | tar -xzO ./data.tar.gz | tar -xzO ./bin/is-opkg > /tmp/is-opkg
+
+[ -s "/tmp/is-opkg" ] || exit 1
+
+chmod 755 /tmp/is-opkg
+/tmp/is-opkg update
+# /tmp/is-opkg install taskd
+/tmp/is-opkg opkg install --force-reinstall luci-lib-taskd luci-lib-xterm
+/tmp/is-opkg opkg install --force-reinstall luci-app-store || exit $?
+[ -s "/etc/init.d/tasks" ] || /tmp/is-opkg opkg install --force-reinstall taskd
+[ -s "/usr/lib/lua/luci/cbi.lua" ] || /tmp/is-opkg opkg install luci-compat >/dev/null 2>&1
+```
+
+
+### 执行安装脚本
+```
+chmod 755 istore-reinstall.run
+./istore-reinstall.run
+```
 
 ## ipv6中继
 - 教程： https://www.right.com.cn/forum/thread-8309440-1-1.html
