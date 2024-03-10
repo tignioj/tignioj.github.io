@@ -615,7 +615,10 @@ Configuring mount-utils.
 Configuring luci-app-store.
 root@ImmortalWrt:/mnt/sda1# 
 ```
-此时打开路由器后台web界面可以看到多了个istore选项栏
+此时打开路由器后台web界面可以看到多了个istore选项栏.
+> 注意：istore有些插件依赖docker，对于24版本的docker请勾选上host network，否则会无法访问
+
+
 ## ipv6中继
 - 教程： https://www.right.com.cn/forum/thread-8309440-1-1.html
 - 往期文章-> [index.zh-cn](../RAX3000M-openwrt使用ipv6中继/index.zh-cn.md)
@@ -689,6 +692,9 @@ docker run -d --restart=unless-stopped -v /etc/alist:/opt/alist/data -p 5244:524
 ```
 docker run -d --restart=unless-stopped -v /etc/alist:/opt/alist/data --network=host -e PUID=0 -e PGID=0 -e UMASK=022 --name="alist" xhofe/alist:latest
 ```
+
+## istore安装的程序打不开
+勾选host网络
 
 
 ### ntfs无法挂载
