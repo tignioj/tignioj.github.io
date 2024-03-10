@@ -615,6 +615,7 @@ Configuring mount-utils.
 Configuring luci-app-store.
 root@ImmortalWrt:/mnt/sda1# 
 ```
+此时打开路由器后台web界面可以看到多了个istore选项栏
 ## ipv6中继
 - 教程： https://www.right.com.cn/forum/thread-8309440-1-1.html
 - 往期文章-> [index.zh-cn](../RAX3000M-openwrt使用ipv6中继/index.zh-cn.md)
