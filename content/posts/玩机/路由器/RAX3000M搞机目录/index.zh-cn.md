@@ -485,7 +485,7 @@ For more examples and ideas, visit:
 
 ## 扩容overlays（emmc没必要）
 - 参考： https://www.techkoala.net/openwrt_resize/
-
+> 扩容后，你的系统将和磁盘共存亡，一旦磁盘挂掉，只能重新刷机，请确保磁盘的稳定性，不建议使用机械硬盘。
 #### 插入u盘，格式化成ext4
 ```
 mkfs.ext4 /dev/sda1
@@ -763,6 +763,5 @@ ntfs-3g /dev/sda1 /mnt/sda1
 ```
 
 仍旧不行，则用电脑使用Diskgenius重新格式化成ntfs。（最好用ext4格式，稳定一点）
-
 
 
