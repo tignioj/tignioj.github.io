@@ -128,12 +128,15 @@ root@RAX3000M:/tmp# md5sum mt7981_cmcc_rax3000m-emmc-fip.bin
 
 - 刷入uboot命令
 > 请注意，下面命令是刷入的emmc版本的uboot，nand版本请不要乱刷！此步刷错必成砖！
+
 ```
 root@RAX3000M:/tmp# dd if=/tmp/mt7981_cmcc_rax3000m-emmc-fip.bin of=/dev/mmcblk0p3
 1148+1 records in
 1148+1 records out
 root@RAX3000M:/tmp# sync
 ```
+
+> 请注意，输入以上命令后，请仔细对比结果是否一致，如果不一致，先不要重启，不要重启！立即寻求帮助！QQ群：514064260
 
 - 进入uboot
 	- 断开电源，按住reset不要松开，插上电源，等待红灯亮起后，再松开复位键
@@ -162,6 +165,7 @@ dd if=/dev/zero of=/dev/mmcblk0 bs=512 seek=13312 count=8192 conv=fsync
 dd if=mt7981-cmcc_rax3000m-emmc-fip.bin of=/dev/mmcblk0 bs=512 seek=13312 conv=fsync
 ```
 
+> 请注意，输入以上命令后，请仔细对比结果是否和下面图片一致，如果不一致，先不要重启，不要重启！立即寻求帮助！QQ群：514064260
 
 ![](Pasted%20image%2020240224012602.png)
 
@@ -250,6 +254,7 @@ dd if=openwrt-mediatek-filogic-cmcc_rax3000m-emmc-bl31-uboot.fip of=/dev/mmcblk0
 
 ![](Pasted%20image%2020240228175932.png)
 
+> 请注意，输入以上命令后，请仔细对比结果是否和下面图片一致，如果不一致，先不要重启，不要重启！立即寻求帮助！QQ群：514064260
 
 ![](Pasted%20image%2020240228182730.png)
 
