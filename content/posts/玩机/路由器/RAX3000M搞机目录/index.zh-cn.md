@@ -37,9 +37,24 @@ description: RAX3000M EMMC 1214版本开启ssh刷入uboot教程
 ### 导出配置
 配置管理->导出配置文件
 ### 解密
-解密后你会获得一个etc目录，里面有路由器的配置文件
+正常解密后你会获得一个etc目录，里面有路由器的配置文件
 ```
-openssl aes-256-cbc -d -pbkdf2 -k $CmDc#RaX30O0M@\!$ -in ../cfg_export_config_file.conf -out - | tar -zxvf -
+openssl aes-256-cbc -d -pbkdf2 -k $CmDc#RaX30O0M@\!$ -in cfg_export_config_file.conf -out - | tar -zxvf -
+```
+
+
+> 如果你是6月份生产的，解密可能会报错，因为早期的版本是没有对配置文件进行加密的。
+```
+bad magic number
+
+gzip: stdin: unexpected end of file
+tar: Child returned status 1
+tar: Error is not recoverable: exiting now
+```
+
+对于这种未加密的配置，可以直接使用`tar -xvzf`解压就可以得到配置文件
+```
+tar -xvzf cfg_export_config_file.conf 
 ```
 
 ### 修改配置
@@ -49,9 +64,18 @@ openssl aes-256-cbc -d -pbkdf2 -k $CmDc#RaX30O0M@\!$ -in ../cfg_export_config_fi
 ![](Pasted%20image%2020240223142007.png)
 
 ### 加密
+> 注意：如果你的配置文件是通过openssl解密得到的（例如1214版本），则需要重新加密后才能导入。
+
+需要openssl加密的版本（1214生产）：
 ```
-tar -zcvf - etc | openssl aes-256-cbc -pbkdf2 -k $CmDc#RaX30O0M@\!$ -out ../cfg_export_config_file_new.conf
+tar -zcvf - etc | openssl aes-256-cbc -pbkdf2 -k $CmDc#RaX30O0M@\!$ -out cfg_export_config_file_new.conf
 ```
+
+不需要加密的版本(6月份生产)
+```
+tar -zcvf  cfg_export_config_file_new.conf etc
+```
+
 ### 导入配置
 配置管理->导入配置文件，选择我们刚修改好的`cfg_export_config_file_new.conf`，重启后就能使用root用户通过ssh访问了，无需密码。
 ### 进入ssh备份
