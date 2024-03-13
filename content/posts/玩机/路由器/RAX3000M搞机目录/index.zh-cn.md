@@ -1,6 +1,6 @@
 ---
 date: 2024-02-21T00:10:40+08:00
-lastmod: 2024-03-12T18:51:51+08:00
+lastmod: 2024-03-13T14:49:39+08:00
 categories:
   - 玩机
   - 路由器
@@ -161,7 +161,7 @@ root@RAX3000M:/tmp# sync
 ```
 md5sum mt7981-cmcc_rax3000m-emmc-gpt.bin 
 md5sum mt7981-cmcc_rax3000m-emmc-bl2.bin 
-mt7981-cmcc_rax3000m-emmc-fip.bin 
+md5sum mt7981-cmcc_rax3000m-emmc-fip.bin 
 ```
 
 对比你的md5结果是否和以下结果相同
