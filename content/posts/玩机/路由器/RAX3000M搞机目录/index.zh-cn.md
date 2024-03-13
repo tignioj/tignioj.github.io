@@ -136,7 +136,7 @@ root@RAX3000M:/tmp# dd if=/tmp/mt7981_cmcc_rax3000m-emmc-fip.bin of=/dev/mmcblk0
 root@RAX3000M:/tmp# sync
 ```
 
-> 请注意，输入以上命令后，请仔细对比结果是否一致，如果不一致，先不要重启，不要重启！立即寻求帮助！QQ群：514064260
+> 请注意，输入以上命令后，请仔细对比结果是否一致，如果不一致，先不要重启，不要重启！保留错误信息，立即寻求帮助！QQ群：514064260
 
 - 进入uboot
 	- 断开电源，按住reset不要松开，插上电源，等待红灯亮起后，再松开复位键
@@ -154,6 +154,26 @@ root@RAX3000M:/tmp# sync
 - 备用地址： https://wwi.lanzoup.com/iW3FT1pj2mpa
 - （没刷过这个链接的）immortalwrt官网连接：[Index of /releases/23.05.0/targets/mediatek/filogic/ (immortalwrt.org)](https://downloads.immortalwrt.org/releases/23.05.0/targets/mediatek/filogic/)
 
+
+#### 下载uboot
+下载后，把uboot上传到路由器的`/tmp/uboot`目录下，ssh进去后，执行`cd /tmp/uboot`该目录，对三个文件分别输入输入`md5sum xxx.bin`确保文件的md5一致，以免刷入损坏的文件，如果md5不一致，请停止操作，重新下载
+
+```
+md5sum mt7981-cmcc_rax3000m-emmc-gpt.bin 
+md5sum mt7981-cmcc_rax3000m-emmc-bl2.bin 
+mt7981-cmcc_rax3000m-emmc-fip.bin 
+```
+
+对比你的md5结果是否和以下结果相同
+```
+e6ceec4b9d3e86ef538c8b45c1b6ffed  mt7981-cmcc_rax3000m-emmc-gpt.bin
+
+5b061eed5827146b0a14b774c3c57ab2  mt7981-cmcc_rax3000m-emmc-bl2.bin
+
+f1e0b2f1618857ad4e76c8e1b91e7214  mt7981-cmcc_rax3000m-emmc-fip.bin
+```
+
+#### 刷入uboot
 > 请注意，下面命令是刷入的emmc版本的uboot，nand版本请不要乱刷！此步刷错必成砖！
 
 ```
@@ -165,9 +185,9 @@ dd if=/dev/zero of=/dev/mmcblk0 bs=512 seek=13312 count=8192 conv=fsync
 dd if=mt7981-cmcc_rax3000m-emmc-fip.bin of=/dev/mmcblk0 bs=512 seek=13312 conv=fsync
 ```
 
-> 请注意，输入以上命令后，请仔细对比结果是否和下面图片一致，如果不一致，先不要重启，不要重启！立即寻求帮助！QQ群：514064260
+> 请注意，输入以上命令后，请仔细对比结果是否和下面图片一致，如果不一致，先不要重启，不要重启！保留错误信息，立即寻求帮助！QQ群：514064260
 
-![](Pasted%20image%2020240224012602.png)
+![](Pasted%20image%2020240313144047.png)
 
 查看分区情况
 ```
@@ -254,7 +274,7 @@ dd if=openwrt-mediatek-filogic-cmcc_rax3000m-emmc-bl31-uboot.fip of=/dev/mmcblk0
 
 ![](Pasted%20image%2020240228175932.png)
 
-> 请注意，输入以上命令后，请仔细对比结果是否和下面图片一致，如果不一致，先不要重启，不要重启！立即寻求帮助！QQ群：514064260
+> 请注意，输入以上命令后，请仔细对比结果是否和下面图片一致，如果不一致，先不要重启，不要重启！保留错误信息，立即寻求帮助！QQ群：514064260
 
 ![](Pasted%20image%2020240228182730.png)
 
