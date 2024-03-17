@@ -627,7 +627,7 @@ wget https://github.com/linkease/openwrt-app-actions/raw/main/applications/luci-
 ```
 vi istore-reinstall.run
 ```
-粘贴页面上的内容到`istore-reinstall.run`（注意，该脚本可能会随着页面更新而内容不同，请以网站上的内容为准）
+粘贴页面上的内容到`istore-reinstall.run`，这里我把脚本复制下来了（注意，该脚本可能会随着页面更新而内容不同，请以网站上的内容为准）
 ```
 #!/bin/sh
 ISTORE_REPO=https://istore.linkease.com/repo/all/store
