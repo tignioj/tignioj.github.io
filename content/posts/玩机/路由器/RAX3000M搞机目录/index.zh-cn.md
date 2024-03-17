@@ -327,7 +327,7 @@ Reply from 192.168.1.1: bytes=32 time<1ms TTL=64
 23.05.2 一些使用的问题和解决方案-> [index.zh-cn](../RAX3000M使用官方OpenWRT的23.05.2一些问题以及解决方案/index.zh-cn.md)
 
 ### lede
-进uboot刷即可，但是h大的uboot无法刷入稍微大一点的固件（70M左右），40兆左右的固件则可以刷入，是因为刷h大的uboot步骤没有更新分区表，导致了分配给刷固件的空间有限。因此建议刷immortal的uboot。
+进uboot刷即可，但是hanwckf的uboot无法刷入稍微大一点的固件（70M左右），40兆左右的固件则可以刷入，是因为刷h大的uboot步骤没有更新分区表，导致了分配给刷固件的空间有限。因此建议刷immortal的uboot。
 
 
 
