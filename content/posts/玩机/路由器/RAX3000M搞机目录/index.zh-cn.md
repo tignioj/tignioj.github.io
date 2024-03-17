@@ -145,7 +145,10 @@ root@RAX3000M:/tmp# sync
 	- 浏览器打开192.168.1.1
 
 
-### 方法2：immortalwrt的uboot(推荐)
+### 方法2：immortalwrt的uboot(推荐，支持DHCP)
+> 不是说immortalwrt的uboot只能刷immortalwrt的刷机包，这个uboot可以刷大部分的`.bin`格式的刷机包，例如lede的固件也是可以刷的，其他的刷机包自行测试。
+
+
 - 参考： openwrt RAX3000M官方教程 https://github.com/openwrt/openwrt/pull/13513
 - 参考： immortalwrt刷入教程
 	- https://github.com/AngelaCooljx/Actions-rax3000m-emmc
@@ -243,8 +246,7 @@ opkg install parted
 
 整个命令的作用是，向`/dev/mmcblk0boot0`这个eMMC存储设备的引导分区写入4MB的全零数据，这通常会将该**存储区域清除**。这种操作常用于清理分区的内容，以便重新格式化或重新使用存储区域。
 
-> 进入uboot方式和方法1相同。
-
+> 进入uboot方式和方法1
 
 ### 方法3： openwrt官网uboot
 - 参考： https://github.com/openwrt/openwrt/pull/13513#issue-1909808957
