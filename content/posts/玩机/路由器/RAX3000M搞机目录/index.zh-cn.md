@@ -1,6 +1,6 @@
 ---
 date: 2024-02-21T00:10:40+08:00
-lastmod: 2024-03-13T14:49:39+08:00
+lastmod: 2024-03-17T23:15:27+08:00
 categories:
   - 玩机
   - 路由器
@@ -145,7 +145,7 @@ root@RAX3000M:/tmp# sync
 	- 浏览器打开192.168.1.1
 
 
-### 方法2：immortalwrt的uboot
+### 方法2：immortalwrt的uboot(推荐)
 - 参考： openwrt RAX3000M官方教程 https://github.com/openwrt/openwrt/pull/13513
 - 参考： immortalwrt刷入教程
 	- https://github.com/AngelaCooljx/Actions-rax3000m-emmc
@@ -325,7 +325,7 @@ Reply from 192.168.1.1: bytes=32 time<1ms TTL=64
 23.05.2 一些使用的问题和解决方案-> [index.zh-cn](../RAX3000M使用官方OpenWRT的23.05.2一些问题以及解决方案/index.zh-cn.md)
 
 ### lede
-进uboot刷即可，但是h大的uboot无法刷入稍微大一点的固件（70M左右），40兆左右的固件则可以刷入，是因为刷h大的uboot步骤没有更新分区表，导致了分配给刷固件的空间有线。因此建议刷immortal的uboot。
+进uboot刷即可，但是h大的uboot无法刷入稍微大一点的固件（70M左右），40兆左右的固件则可以刷入，是因为刷h大的uboot步骤没有更新分区表，导致了分配给刷固件的空间有限。因此建议刷immortal的uboot。
 
 
 
