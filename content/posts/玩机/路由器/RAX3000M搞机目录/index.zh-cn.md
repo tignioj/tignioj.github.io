@@ -192,7 +192,7 @@ dd if=mt7981-cmcc_rax3000m-emmc-fip.bin of=/dev/mmcblk0 bs=512 seek=13312 conv=f
 
 ![](Pasted%20image%2020240313144047.png)
 
-查看分区情况
+查看分区情况。
 ```
 parted /dev/mmcblk0 print
 ```
@@ -208,6 +208,7 @@ opkg install parted
 分区后，就只有一个rootfs了，大小变成了629M
 ![](Pasted%20image%2020240228001249.png)
 
+> parted命令报错不要紧，只要刷uboot的命令和结果正确了，就可以按步骤进入uboot刷固件，到时候再安装parted命令查看分区结果。
 
 #### 解释 `dd if=mt7981-cmcc_rax3000m-emmc-gpt.bin of=/dev/mmcblk0 bs=512 seek=0 count=34 conv=fsync`
 
