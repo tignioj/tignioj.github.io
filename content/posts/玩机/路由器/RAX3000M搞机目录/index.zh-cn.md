@@ -332,7 +332,9 @@ Reply from 192.168.1.1: bytes=32 time<1ms TTL=64
 
 
 ### immortalwrt
-镜像和刷入教程： [AngelaCooljx/Actions-rax3000m-emmc: Build ImmortalWrt for CMCC RAX3000M eMMC version using GitHub Actions](https://github.com/AngelaCooljx/Actions-rax3000m-emmc)
+直接进uboot刷即可.
+
+- 镜像和刷入教程： [AngelaCooljx/Actions-rax3000m-emmc: Build ImmortalWrt for CMCC RAX3000M eMMC version using GitHub Actions](https://github.com/AngelaCooljx/Actions-rax3000m-emmc)
 
 
 
