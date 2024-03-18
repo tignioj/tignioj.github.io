@@ -148,7 +148,6 @@ root@RAX3000M:/tmp# sync
 ### 方法2：immortalwrt的uboot(推荐，支持DHCP)
 > 不是说immortalwrt的uboot只能刷immortalwrt的刷机包，这个uboot可以刷大部分的`.bin`格式的刷机包，例如lede的固件也是可以刷的，其他的刷机包自行测试。
 
-
 - 参考： openwrt RAX3000M官方教程 https://github.com/openwrt/openwrt/pull/13513
 - 参考： immortalwrt刷入教程
 	- https://github.com/AngelaCooljx/Actions-rax3000m-emmc
@@ -208,7 +207,7 @@ opkg install parted
 分区后，就只有一个rootfs了，大小变成了629M
 ![](Pasted%20image%2020240228001249.png)
 
-> parted命令报错不要紧，只要刷uboot的命令和结果正确了，就可以按步骤进入uboot刷固件，到时候再安装parted命令查看分区结果。
+> parted命令报错不要紧，只要刷uboot的命令和结果正确了，就可以按步骤进入uboot刷固件，到时候再安装parted命令查看分区结果。有群友说不支持DHCP，但是我自己尝试了几遍后都是支持DHCP的，目前不清楚造成这种差异的原因，如果知道原因的麻烦告知一下。
 
 #### 解释 `dd if=mt7981-cmcc_rax3000m-emmc-gpt.bin of=/dev/mmcblk0 bs=512 seek=0 count=34 conv=fsync`
 
