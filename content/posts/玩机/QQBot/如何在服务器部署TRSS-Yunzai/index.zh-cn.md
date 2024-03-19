@@ -13,8 +13,8 @@ series:
 ---
 
 ## 整体流程
-安装trss->安装trss-yunzai->选择协议登录qq->安装常用插件
-
+安装trss->安装trss-yunzai->选择协议登录qq->安装常用插件 
+- 参考官方教程： https://trss.me/Install/Docker.html
 ## 下载安装TRSS
 root用户执行
 ```
@@ -116,9 +116,3 @@ bash <(curl -L gitee.com/TimeRainStarSky/TRSS_AllBot/raw/main/Install-Docker.sh)
 https://gitee.com/haanxuan/GT-Manual
 
 
-
-
-
-
-
-参考官方教程： https://trss.me/Install/Docker.html
