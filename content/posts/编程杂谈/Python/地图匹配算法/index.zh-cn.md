@@ -83,7 +83,7 @@ cv.destroyAllWindows()
 为了使用surf算法，请勾选这个选项，然后配置OPENCV_EXTRA_MODULES_PATH，接着再次点击配置
 ![](Pasted%20image%2020240321062933.png)
 
-在vs中找到INSTALL右键点击生成。
+在vs中选择Release，然后找到INSTALL右键点击生成。
 ![](Pasted%20image%2020240321063048.png)
 
 
