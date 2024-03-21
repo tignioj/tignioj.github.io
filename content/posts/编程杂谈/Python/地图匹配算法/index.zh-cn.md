@@ -70,18 +70,25 @@ cv.waitKey(0)
 cv.destroyAllWindows()
 ```
 
-但是实测下来，效果并不是很好
+但是实测下来，效果并不是很好。虽然SURF收费，但是可以手动编译opencv免费使用。
+### 编译opencv-python
+- 问题： https://answers.opencv.org/question/221044/option-build_opencv_python3-missing-from-cmake-gui/
 
+- 问题： https://answers.opencv.org/question/237756/at-my-wits-end-with-opencv-build-from-source-please-help/
 
-### SURF
-问题： https://answers.opencv.org/question/221044/option-build_opencv_python3-missing-from-cmake-gui/
-使用cmake-gui编译surf时，发现没有build_opencv_python3选项。则把anaconda的python先从环境变量中删除，防止cmake-gui检测到anaconda的python，然后官网直接下载最新版python让cmake检测到即可。
+https://github.com/opencv/opencv_contrib
+
+使用cmake-gui编译opencv时，发现没有build_opencv_python3选项。则把anaconda的python先从环境变量中删除，防止cmake-gui检测到anaconda的python，然后官网直接下载最新版python让cmake检测到即可。
 
 
 ![](Pasted%20image%2020240321062844.png)
 
 为了使用surf算法，请勾选这个选项，然后配置OPENCV_EXTRA_MODULES_PATH，接着再次点击配置
 ![](Pasted%20image%2020240321062933.png)
+
+指定python版本编译是没用d的，版本必须要和在系统安装的相同，否则无法使用。
+![](Pasted%20image%2020240321072941.png)
+
 
 在vs中选择Release，然后找到INSTALL右键点击生成。
 ![](Pasted%20image%2020240321063048.png)
