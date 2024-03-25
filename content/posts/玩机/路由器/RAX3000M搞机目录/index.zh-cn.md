@@ -117,7 +117,7 @@ Could not open mtd device: /dev/mtd0
 Can't open device for writing
 ```
 ### 方法1：hanwckf的uboot
-缺点：无法刷入稍微大一点的固件
+缺点：无法刷入稍微大一点的固件，原因是没有更新分区表。由于没有找到于hanwckf的uboot相关的刷分区表命令，不敢乱刷分区表，而是仅仅更新了uboot。
 - 下载链接： https://github.com/hanwckf/bl-mt798x/releases/tag/20240123
 - 检查md5，确保文件一致
 
