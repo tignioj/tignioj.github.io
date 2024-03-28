@@ -69,6 +69,9 @@ service dockerd restart
 - web界面的dockerman菜单项缺失，仅仅包含“配置”，则去`系统`->`软件包`， 先点击`更新列表`，然后选择更新`luci-lib-docker` 和`luci-i18n-dockerman-zh-cn`
 
 
+## 尚未解决
+1. 第一次安装了快照版本的initramfs文件，后续更新initramfs失效。
+
 
 > 以下出现的问题均在按照完整的刷机流程刷一遍后得以解决(包括gpt, preloader, uboot, initramfs)
 
