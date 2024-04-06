@@ -210,7 +210,11 @@ opkg install parted
 分区后，就只有一个rootfs了，大小变成了629M
 ![](Pasted%20image%2020240228001249.png)
 
+进入uboot方式和方法1一样。
+
 > parted命令报错不要紧，只要刷uboot的命令和结果正确了，就可以按步骤进入uboot刷固件，到时候再安装parted命令查看分区结果。有群友说不支持DHCP，但是我自己尝试了几遍后都是支持DHCP的，目前不清楚造成这种差异的原因，如果知道原因的麻烦告知一下。
+
+
 
 #### 解释 `dd if=mt7981-cmcc_rax3000m-emmc-gpt.bin of=/dev/mmcblk0 bs=512 seek=0 count=34 conv=fsync`
 
@@ -445,16 +449,17 @@ vi /etc/profile
 ```
 添加一行
 ```
-export PATH=$PATH:/mnt/sda1/rax3000m_docker
+export PATH=$PATH:/mnt/sda1/rax3000m_docker/docker
+```
+
+保存后，执行以下命令使得当前终端可以使用dockerd命令
+```
+source /etc/profile
 ```
 
 创建data-root，镜像文件会下载到这里
 ```
 mkdir -p /mnt/sda1/rax3000m_docker/data-root
-```
-保存后，执行以下命令使得当前终端可以使用dockerd命令
-```
-source /etc/profile
 ```
 
 ### 启动docker守护进程
