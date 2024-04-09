@@ -826,3 +826,6 @@ ntfs-3g /dev/sda1 /mnt/sda1
 仍旧不行，则用电脑使用Diskgenius重新格式化成ntfs。（最好用ext4格式，稳定一点）
 
 
+### 找不到无线设置选项？
+- bug反馈： https://github.com/immortalwrt/immortalwrt/issues/1201
+- emmc设备安装了autosamba会出现此bug，删掉它即可。系统->软件包->过滤框输入 autosamba，找到autosamba并删掉。
