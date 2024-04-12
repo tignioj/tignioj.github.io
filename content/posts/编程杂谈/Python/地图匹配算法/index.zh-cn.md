@@ -96,7 +96,8 @@ https://github.com/opencv/opencv_contrib
 
 
 ## 命令行编译python-opencv指定anaconda虚拟环境
-在opencv根目录下创建一个mybuild文件夹，执行以下命令。注意，自行删除掉换行和反斜杠
+- 参考： https://gist.github.com/raulqf/f42c718a658cddc16f9df07ecc627be7
+- 在opencv根目录下创建一个mybuild文件夹，执行以下命令。注意，自行删除掉换行和反斜杠
 
 
 ```
