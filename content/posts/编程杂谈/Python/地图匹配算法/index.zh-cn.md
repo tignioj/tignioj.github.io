@@ -94,8 +94,78 @@ https://github.com/opencv/opencv_contrib
 ![](Pasted%20image%2020240321063048.png)
 
 
-## SITF
 
- 
+## 命令行编译python-opencv指定anaconda虚拟环境
+在opencv根目录下创建一个mybuild文件夹，执行以下命令。注意，自行删除掉换行和反斜杠
+
+
+```
+cmake ../ -D CMAKE_BUILD_TYPE=Release \  
+-D CMAKE_INSTALL_PREFIX=G:/cmakeProject/opencv_python39_bin_cli/install \  
+-D WITH_TBB=ON \  
+-D ENABLE_FAST_MATH=1 \  
+-D CUDA_FAST_MATH=1 \  
+-D WITH_CUBLAS=1 \  
+-D WITH_CUDA=ON \  
+-D BUILD_opencv_cudacodec=OFF \  
+-D WITH_CUDNN=ON \  
+-D OPENCV_DNN_CUDA=ON \  
+-D CUDA_ARCH_BIN="5.3 6.0 6.1 7.0 7.5 8.0 8.6" \  
+-D CUDA_GENERATION=Auto \  
+-D WITH_V4L=ON \  
+-D WITH_QT=OFF \  
+-D WITH_OPENGL=ON \  
+-D WITH_GSTREAMER=ON \  
+-D OPENCV_GENERATE_PKGCONFIG=ON \  
+-D OPENCV_PC_FILE_NAME=opencv.pc \  
+-D OPENCV_ENABLE_NONFREE=ON \  
+-D OPENCV_EXTRA_MODULES_PATH=G:\cmakeProject\opencv_contrib\modules \  
+-D BUILD_opencv_python2=OFF \  
+-D BUILD_opencv_python3=ON \  
+-D PYTHON_VERSION=39 \  
+-D PYTHON_DEFAULT_EXECUTABLE=G:\software\anaconda\envs\opencvNoneFree \  
+-D PYTHON3_EXECUTABLE=G:\software\anaconda\envs\opencvNoneFree \  
+-D PYTHON3_PACKAGES_PATH=G:/software/anaconda/envs/opencvNoneFree/Lib/site-packages \  
+-D PYTHON3_INCLUDE_DIR=G:/software/anaconda/envs/opencvNoneFree/Lib/site-packages/numpy/core/include \  
+-D OPENCV_PYTHON3_INSTALL_PATH=G:/software/anaconda/envs/opencvNoneFree/Lib/site-packages/numpy/core/include/dist-packages \  
+-D PYTHON3_NUMPY_INCLUDE_DIRS=G:\software\anaconda\envs\opencvNoneFree\Lib\site-packages\numpy\core\include \  
+-D BUILD_EXAMPLES=OFF \  
+-D INSTALL_PYTHON_EXAMPLES=OFF \  
+-D INSTALL_C_EXAMPLES=OFF \
+```
+
+
+
+```
+cmake ../ -D CMAKE_BUILD_TYPE=Release \
+-D OPENCV_ENABLE_NONFREE=ON \
+-D OPENCV_EXTRA_MODULES_PATH=G:\cmakeProject\opencv_contrib\modules \
+-D BUILD_opencv_python2=OFF \
+-D BUILD_opencv_python3=ON \
+-D PYTHON_VERSION=39 \
+-D PYTHON_DEFAULT_EXECUTABLE=G:/software/anaconda/envs/opencvNoneFree/python.exe \
+-D PYTHON3_EXECUTABLE=G:/software/anaconda/envs/opencvNoneFree/python.exe \
+-D PYTHON3_PACKAGES_PATH=G:/software/anaconda/envs/opencvNoneFree/Lib/site-packages \
+-D PYTHON3_INCLUDE_DIR=G:/software/anaconda/envs/opencvNoneFree/include \
+-D PYTHON3_LIBRARY=G:/software/anaconda/envs/opencvNoneFree/libs/python39.lib \
+-D OPENCV_PYTHON3_INSTALL_PATH=G:/software/anaconda/envs/opencvNoneFree/Lib/site-packages \
+-D PYTHON3_NUMPY_INCLUDE_DIRS=G:/software/anaconda/envs/opencvNoneFree/Lib/site-packages/numpy/core/include \
+-D BUILD_EXAMPLES=OFF \
+-D INSTALL_PYTHON_EXAMPLES=OFF \
+-D INSTALL_C_EXAMPLES=OFF \
+```
+
+换成一行后
+```
+cmake ../ -D CMAKE_BUILD_TYPE=Release  -D OPENCV_ENABLE_NONFREE=ON  -D OPENCV_EXTRA_MODULES_PATH=G:\cmakeProject\opencv_contrib\modules  -D BUILD_opencv_python2=OFF  -D BUILD_opencv_python3=ON  -D PYTHON_VERSION=39  -D PYTHON_DEFAULT_EXECUTABLE=G:/software/anaconda/envs/opencvNoneFree/python.exe  -D PYTHON3_EXECUTABLE=G:/software/anaconda/envs/opencvNoneFree/python.exe  -D PYTHON3_PACKAGES_PATH=G:/software/anaconda/envs/opencvNoneFree/Lib/site-packages  -D PYTHON3_INCLUDE_DIR=G:/software/anaconda/envs/opencvNoneFree/include  -D PYTHON3_LIBRARY=G:/software/anaconda/envs/opencvNoneFree/libs/python39.lib  -D OPENCV_PYTHON3_INSTALL_PATH=G:/software/anaconda/envs/opencvNoneFree/Lib/site-packages  -D PYTHON3_NUMPY_INCLUDE_DIRS=G:/software/anaconda/envs/opencvNoneFree/Lib/site-packages/numpy/core/include  -D BUILD_EXAMPLES=OFF  -D INSTALL_PYTHON_EXAMPLES=OFF  -D INSTALL_C_EXAMPLES=OFF
+```
+
+终端切换到你要安装到的虚拟环境，然后执行cmake编译命令，执行完成后，Python3的信息
+![](Pasted%20image%2020240412231704.png)
+
+
+可以看到mybuild生成visual studio项目，用visual stuio 2022 打开它，选择Release，找到CmakeTargets找到Install选择生成
+
+
 ## SURF vs SITF
 https://www.bilibili.com/video/BV1DM4y1A7yJ/?vd_source=cdd8cee3d9edbcdd99486a833d261c72
