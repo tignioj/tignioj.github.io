@@ -86,7 +86,7 @@ https://github.com/opencv/opencv_contrib
 为了使用surf算法，请勾选这个选项，然后配置OPENCV_EXTRA_MODULES_PATH，接着再次点击配置
 ![](Pasted%20image%2020240321062933.png)
 
-指定python版本编译是没用d的，版本必须要和在系统安装的相同，否则无法使用。
+指定python版本编译是没用d的，版本必须要和在系统安装的相同，否则无法使用。这是cmake-gui的缺陷。
 ![](Pasted%20image%2020240321072941.png)
 
 
