@@ -381,8 +381,39 @@ mkfs.ext4 /dev/mmcblk0p7
 ```
 
 ### 挂载
-去web界面找到挂载点挂载即可
+首先检查是不是被自动挂载了，输入lsblk，在`NAME`列找到刚刚创建并格式化的分区，这里对应的是`mmcblk0p7`，对应的`MOUNTPOINTS`那一列如果为空，表示尚未挂载。比如下面的命令表示mmcblk0p7还没有挂载。
+```
+root@ImmortalWrt:~# lsblk
+NAME         MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0          7:0    0 471.3M  0 loop /overlay
+sda            8:0    0 238.5G  0 disk 
+└─sda1         8:1    0 238.5G  0 part /mnt/sda1
+mmcblk0      179:0    0  57.6G  0 disk 
+├─mmcblk0p1  179:1    0   512K  0 part 
+├─mmcblk0p2  179:2    0     2M  0 part 
+├─mmcblk0p3  179:3    0     4M  0 part 
+├─mmcblk0p4  179:4    0    20M  0 part 
+├─mmcblk0p5  179:5    0    64M  0 part 
+├─mmcblk0p6  179:6    0   600M  0 part /rom
+└─mmcblk0p7  179:7    0  56.9G  0 part 
+mmcblk0boot0 179:8    0     4M  1 disk 
+mmcblk0boot1 179:16   0     4M  1 disk
+```
 
+尝试手动挂载到指定目录，例如我想挂载到`/mnt/mmcblk0p7`，则需要先创建该文件夹。你想挂载到什么目录都可以，前提是需要创建该挂载路径。
+```
+mkdir /mnt/mmcblk0p7
+```
+
+执行手动挂载命令，命令格式：  `mount  设备  路径`，例如把`/dev/mmcblk0p7`挂载到 `/mnt/mmcblk0p7`的命令如下
+```
+mount /dev/mmcblk0p7 /mnt/mmcblk0p7
+```
+
+这种手动挂载的方式会在每次重启后失效。这里挂载的目的是为了测试该分区是否能成功挂载，为了让重启也生效，我们需要借助一些自动挂载的工具。
+
+- 工具1：在系统->软件包，先更新软件列表，然后搜索automount并安装， 一般来说固件如果装了automount会自动挂载，装好后没有自动挂载重启一下试试。
+- 工具2：web界面找到挂载点挂载即可，但是这种挂载方式有时候会抽风，不知道为什么
 
 ## 插件下载地址
 有些插件依赖安装比较麻烦，不一定都能安装上。
