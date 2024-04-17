@@ -381,7 +381,7 @@ mkfs.ext4 /dev/mmcblk0p7
 ```
 
 ### 挂载
-首先检查是不是被自动挂载了，输入lsblk，在`NAME`列找到刚刚创建并格式化的分区，这里对应的是`mmcblk0p7`，对应的`MOUNTPOINTS`那一列如果为空，表示尚未挂载。比如下面的命令表示mmcblk0p7还没有挂载。
+首先检查是不是被自动挂载了，输入`lsblk`，在`NAME`列找到刚刚创建并格式化的分区，这里对应的是`mmcblk0p7`，对应的`MOUNTPOINTS`那一列如果为空，表示尚未挂载。比如下面的命令表示mmcblk0p7还没有挂载。
 ```
 root@ImmortalWrt:~# lsblk
 NAME         MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
@@ -399,6 +399,35 @@ mmcblk0      179:0    0  57.6G  0 disk
 mmcblk0boot0 179:8    0     4M  1 disk 
 mmcblk0boot1 179:16   0     4M  1 disk
 ```
+如果你没有lsblk命令，也可以用`df -h`或者`mount`命令检查。
+```
+root@ImmortalWrt:~# df -h
+Filesystem                Size      Used Available Use% Mounted on
+/dev/root               128.8M    128.8M         0 100% /rom
+tmpfs                   240.6M     10.0M    230.6M   4% /tmp
+/dev/loop0              469.3M     81.8M    387.5M  17% /overlay
+overlayfs:/overlay      469.3M     81.8M    387.5M  17% /
+tmpfs                   512.0K         0    512.0K   0% /dev
+/dev/sda1               234.5G     11.5G    211.1G   5% /mnt/sda1
+```
+df命令的输出中没有找到`mmcblk0p7`，说明没挂载，mount命令同理。
+```
+root@ImmortalWrt:~# mount
+/dev/root on /rom type squashfs (ro,relatime,errors=continue)
+proc on /proc type proc (rw,nosuid,nodev,noexec,noatime)
+sysfs on /sys type sysfs (rw,nosuid,nodev,noexec,noatime)
+cgroup2 on /sys/fs/cgroup type cgroup2 (rw,nosuid,nodev,noexec,relatime,nsdelegate)
+tmpfs on /tmp type tmpfs (rw,nosuid,nodev,noatime)
+/dev/loop0 on /overlay type f2fs (rw,lazytime,noatime,background_gc=on,nodiscard,no_heap,user_xattr,inline_xattr,inline_data,inline_dentry,flush_merge,extent_cache,mode=adaptive,active_logs=6,alloc_mode=reuse,checkpoint_merge,fsync_mode=posix,discard_unit=block)
+overlayfs:/overlay on / type overlay (rw,noatime,lowerdir=/,upperdir=/overlay/upper,workdir=/overlay/work,xino=off)
+tmpfs on /dev type tmpfs (rw,nosuid,noexec,noatime,size=512k,mode=755)
+devpts on /dev/pts type devpts (rw,nosuid,noexec,noatime,mode=600,ptmxmode=000)
+debugfs on /sys/kernel/debug type debugfs (rw,noatime)
+bpffs on /sys/fs/bpf type bpf (rw,nosuid,nodev,noexec,noatime,mode=700)
+pstore on /sys/fs/pstore type pstore (rw,noatime)
+/dev/sda1 on /mnt/sda1 type ext4 (rw,relatime)
+```
+
 
 尝试手动挂载到指定目录，例如我想挂载到`/mnt/mmcblk0p7`，则需要先创建该文件夹。你想挂载到什么目录都可以，前提是需要创建该挂载路径。
 ```
@@ -409,6 +438,57 @@ mkdir /mnt/mmcblk0p7
 ```
 mount /dev/mmcblk0p7 /mnt/mmcblk0p7
 ```
+
+然后再输入`lsblk`检查，可以看到`NAME`列中的`mmcblk0p7`，其对应的`MOUNTPOINTS`列多了一行路径
+```
+root@ImmortalWrt:~# lsblk
+NAME         MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0          7:0    0 471.3M  0 loop /overlay
+sda            8:0    0 238.5G  0 disk 
+└─sda1         8:1    0 238.5G  0 part /mnt/sda1
+mmcblk0      179:0    0  57.6G  0 disk 
+├─mmcblk0p1  179:1    0   512K  0 part 
+├─mmcblk0p2  179:2    0     2M  0 part 
+├─mmcblk0p3  179:3    0     4M  0 part 
+├─mmcblk0p4  179:4    0    20M  0 part 
+├─mmcblk0p5  179:5    0    64M  0 part 
+├─mmcblk0p6  179:6    0   600M  0 part /rom
+└─mmcblk0p7  179:7    0  56.9G  0 part /mnt/mmcblk0p7
+mmcblk0boot0 179:8    0     4M  1 disk 
+mmcblk0boot1 179:16   0     4M  1 disk 
+```
+df命令检查，可以看到最后一行多了`/dev/mmcblk0p7`，后面表示挂载到的路径
+```
+root@ImmortalWrt:~# df -h
+Filesystem                Size      Used Available Use% Mounted on
+/dev/root               128.8M    128.8M         0 100% /rom
+tmpfs                   240.6M     10.1M    230.6M   4% /tmp
+/dev/loop0              469.3M     81.8M    387.5M  17% /overlay
+overlayfs:/overlay      469.3M     81.8M    387.5M  17% /
+tmpfs                   512.0K         0    512.0K   0% /dev
+/dev/sda1               234.5G     11.5G    211.1G   5% /mnt/sda1
+/dev/mmcblk0p7           55.7G    601.0M     52.3G   1% /mnt/mmcblk0p7
+```
+
+mount命令检查
+```
+root@ImmortalWrt:~# mount
+/dev/root on /rom type squashfs (ro,relatime,errors=continue)
+proc on /proc type proc (rw,nosuid,nodev,noexec,noatime)
+sysfs on /sys type sysfs (rw,nosuid,nodev,noexec,noatime)
+cgroup2 on /sys/fs/cgroup type cgroup2 (rw,nosuid,nodev,noexec,relatime,nsdelegate)
+tmpfs on /tmp type tmpfs (rw,nosuid,nodev,noatime)
+/dev/loop0 on /overlay type f2fs (rw,lazytime,noatime,background_gc=on,nodiscard,no_heap,user_xattr,inline_xattr,inline_data,inline_dentry,flush_merge,extent_cache,mode=adaptive,active_logs=6,alloc_mode=reuse,checkpoint_merge,fsync_mode=posix,discard_unit=block)
+overlayfs:/overlay on / type overlay (rw,noatime,lowerdir=/,upperdir=/overlay/upper,workdir=/overlay/work,xino=off)
+tmpfs on /dev type tmpfs (rw,nosuid,noexec,noatime,size=512k,mode=755)
+devpts on /dev/pts type devpts (rw,nosuid,noexec,noatime,mode=600,ptmxmode=000)
+debugfs on /sys/kernel/debug type debugfs (rw,noatime)
+bpffs on /sys/fs/bpf type bpf (rw,nosuid,nodev,noexec,noatime,mode=700)
+pstore on /sys/fs/pstore type pstore (rw,noatime)
+/dev/sda1 on /mnt/sda1 type ext4 (rw,relatime)
+/dev/mmcblk0p7 on /mnt/mmcblk0p7 type ext4 (rw,relatime)
+```
+
 
 这种手动挂载的方式会在每次重启后失效。这里挂载的目的是为了测试该分区是否能成功挂载，为了让重启也生效，我们需要借助一些自动挂载的工具。
 
