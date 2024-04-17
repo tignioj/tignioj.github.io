@@ -764,6 +764,39 @@ docker run -d --restart=unless-stopped -v /etc/alist:/opt/alist/data -p 5244:524
 docker run -d --restart=unless-stopped -v /etc/alist:/opt/alist/data --network=host -e PUID=0 -e PGID=0 -e UMASK=022 --name="alist" xhofe/alist:latest
 ```
 
+
+### docker pull提示空间不足
+下面方法任意选一种即可
+#### 方法一：luci界面上修改docker根目录
+找到Docker->配置，把Docker根目录改到空间大的目录
+
+![](Pasted%20image%2020240417175133.png)
+#### 方法二：直接修改dockerd配置
+编辑 `/etc/config/dockerd`，找到`data_root`，修改到空间大的目录
+```
+config globals 'globals'
+        option data_root '/mnt/mmcblk0p7/docker'
+        option log_level 'warn'
+        option iptables '1'
+        option auto_start '1'
+
+config dockerman 'dockerman'
+        option socket_path '/var/run/docker.sock'
+        option status_path '/tmp/.docker_action_status'
+        option debug 'false'
+        option debug_path '/tmp/.docker_debug'
+        option remote_endpoint '0'
+        list ac_allowed_interface 'br-lan'
+```
+
+### 方法三：修改dockerd启动参数（仅适合手动下载dockerd运行的用户）
+前面我们讲到如何手动安装dockerd，在启动的时候加一个参数`--data-root`即可
+```
+dockerd --iptables=false --data-root=/mnt/sda1/rax3000m_docker/data-root
+```
+
+
+
 ### istore安装的插件打不开
 移除插件，勾选host网络后重新安装
 
