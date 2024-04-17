@@ -766,7 +766,7 @@ docker run -d --restart=unless-stopped -v /etc/alist:/opt/alist/data --network=h
 
 
 ### docker pull提示空间不足
-下面方法任意选一种即可，注意先再Docker->概览处停止docker，然后再改配置。改完后再启动docker
+下面方法任意选一种即可，注意先在Docker->概览处停止docker，然后再改配置。改完后再启动docker
 #### 方法一：luci界面上修改docker根目录
 找到Docker->配置，把Docker根目录改到空间大的目录
 
