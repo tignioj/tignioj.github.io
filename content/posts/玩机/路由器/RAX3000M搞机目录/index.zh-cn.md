@@ -459,7 +459,7 @@ mmcblk0      179:0    0  57.6G  0 disk
 mmcblk0boot0 179:8    0     4M  1 disk 
 mmcblk0boot1 179:16   0     4M  1 disk 
 ```
-df命令检查，可以看到最后一行多了`/dev/mmcblk0p7`，后面表示挂载到的路径
+df命令检查，可以看到最后一行的Filesystem列多了`/dev/mmcblk0p7`，后面的Mounted on表示挂载到的路径
 ```
 root@ImmortalWrt:~# df -h
 Filesystem                Size      Used Available Use% Mounted on
@@ -472,7 +472,7 @@ tmpfs                   512.0K         0    512.0K   0% /dev
 /dev/mmcblk0p7           55.7G    601.0M     52.3G   1% /mnt/mmcblk0p7
 ```
 
-mount命令检查
+mount命令检查，可以看到最后一列 `/dev/mmcblk0p7 on /mnt/mmcblk0p7`
 ```
 root@ImmortalWrt:~# mount
 /dev/root on /rom type squashfs (ro,relatime,errors=continue)
