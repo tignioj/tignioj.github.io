@@ -5,9 +5,11 @@ categories:
   - 玩机
   - QQBot
 title: TRSS清理日志
-draft: "true"
-tags: []
-series: []
+draft: "false"
+tags:
+  - TRSS
+  - docker
+series:
 ---
 
 Docker 容器在运行时会生成大量日志文件，这些日志文件可能会占用大量磁盘空间。为了清理 Docker 日志，你可以按照以下步骤操作：
