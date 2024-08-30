@@ -46,7 +46,7 @@ const todoListRef = ref();
 
 - TodoList.vue
 ```js
-const todoList = ref([])  // 这里初始化为一个响应式数组
+const todoList = ref(['1', '2'])  // 这里初始化为一个响应式数组
 defineExpose({  
   todoList
 })
@@ -67,12 +67,13 @@ const todoListRef = ref();  // 未定义(没传参数就是没定义，ref(null)
 ```js
 
 const todoListRef = ref();
-const todoList = ref([]);// 初始化为空数组
+const todoList = ref(['hello', 'world']);// 初始化为一个随机数组（内容不重要）
 
 watch(() => todoListRef.value, (newVal, oldVal) => {  
     // console.log('父组件检测到子组件 todoList 修改', newVal);  
   console.log('父组件检测到todoListRef被赋值', newVal);  
   todoList.value = newVal.todoList  // 成功拿到子模版暴露的值
+  // 此时原数组['hello', 'world']将被丢弃，专而监听['1', '2']数组
 })
 ```
 
@@ -109,6 +110,7 @@ onMounted(()=> {
 	//此时todoListRef早就被初始化完成
 	// todoList.value原本是[]，此时重新赋值，就会丢弃原来的[]
 	todoList.value = todoListRef.value.todoList
+	console.log(todoList.value) // ['1', '2']
 })
 
 ...
@@ -119,13 +121,14 @@ onMounted(()=> {
 
 - TodoList.vue 通过网络请求，更新了数组内容，如何在另一个组件FileManager拿到这个值？
 ```js
-const todoList = ref([])
+const todoList = ref(['1', '2'])
 // 异步更新todoList数组内容
 fetch(url).then(res.json()).then(data=> {
 	if(data.success) {
 		data.arr.forEach(item=>{
-			todoList.value.push(item)
-		})	
+			todoList.value.push(item) 
+		})
+		console.log(todoList.value) // ['1','2','3', '4'] 假设添加了2个新的数据
 	}
 })
 ```
@@ -136,7 +139,7 @@ fetch(url).then(res.json()).then(data=> {
 ```js
 // 初始化为一个数组对象
 // 注意:后续对这个数组的增删，todoList.value仍然是指向同一个数组
-const todoList = ref([]) 
+const todoList = ref(['1','2']) 
 
 defineExpose({todoList})  // 将数据暴露出去
 // 异步更新todoList数组内容
@@ -144,7 +147,8 @@ fetch(url).then(res.json()).then(data=> {
 	if(data.success) {
 		data.arr.forEach(item=>{
 			todoList.value.push(item)
-		})	
+		})
+		console.log(todoList.value) // ['1','2','3', '4'] 假设添加了2个新的数据
 	}
 })
 ```
@@ -164,10 +168,13 @@ onMounted(()=> {
 - Page.vue
 ```js
 const todoListRef = ref();
-const todoList = ref(null);// 无所谓初始化，因为后面会将其关联到子组件的todoList监听的数组对象
+const todoList = ref(['what', 'ever']);// 无所谓初始化，因为后面会将其关联到子组件的todoList监听的数组对象
 onMounted(()=> {
 	// 此时他们监听的就是同一个数组对象了，子组件做出的修改会在Page中也能响应
 	todoList.value = todoListRef.value.todoList
+
+	// 异步请求结束前是['1', '2']，异步请求结束后变成['1','2','3','4']
+	console.log(todoList.value) 
 })
 
 ...
@@ -177,7 +184,7 @@ onMounted(()=> {
 
 
 #### 方法2：子组件不暴露todoList，而是通过emit方式通知父组件
-
+（先跳过）
 - TodoList.vue
 ```js
 const todoList = ref([])
@@ -194,8 +201,9 @@ fetch(url).then(res.json()).then(data=> {
 })
 ```
 
-## 理解v-bind(简写:)与双向绑定v-model
 
+
+## 理解v-bind(简写:)与双向绑定v-model
 
 ### 场景1：Page.vue将自己动态属性传递给子组件
 
@@ -403,7 +411,7 @@ watch(()=> todoList.value, (nv, ov)=> {
   console.log(todoList.value.length) // 0, 异步请求尚未结束
   setTimeout(()=> {  
     console.log(todoList.value.length) // 2 // 异步请求已经结束
-  }, 5000)  // 假设5秒钟后异步请求结束  
+  }, 5000)  // 设置5秒（大于2秒就行）保证异步请求已经结束并且获取到了数据
 })
 ```
 
