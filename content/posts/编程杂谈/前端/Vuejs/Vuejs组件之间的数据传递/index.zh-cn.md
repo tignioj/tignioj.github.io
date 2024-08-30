@@ -13,7 +13,7 @@ series:
 description: 本文将涉及watch, ref, emit, provide, inject
 ---
 ## 理解watch
-### 场景1：引用子组件暴露的数据（错误用法以及纠正）
+### 场景1：引用子组件暴露的数据（讨论使用watch的优缺点）
 
 
 watch指南： https://cn.vuejs.org/guide/essentials/watchers.html
@@ -103,6 +103,7 @@ onMounted(()=> {
 ##### 方法2，在onMount直接赋值
 但是由于Vue渲染顺序是先子模版再父模板，因此如果我们可以直接再`onMount`里面获取子模版暴露的值而无需watch...
 
+- Page.vue
 ```js
 const todoListRef = ref();
 const todoList = ref([]);//也可以为ref(null)，反正在调用.value=xxx的时候就是另一个对象了
@@ -116,6 +117,56 @@ onMounted(()=> {
 ...
 <TodoList ref="todoListRef" />
 ```
+
+不使用watch的一个缺点是，当TodoList组件内部的todoList.value被重新赋值时，无法再次建立关联。例如，TodoList.vue使用filter删除数据
+- TodoList.vue
+```js
+function deleteTodo() {  
+  if(!confirm("确认删除？")){ return }  
+  info("确认删除")  
+
+// 由于filter会创建一个新的数组，所以其他组件无法再监听同一个对象了..
+  todoList.value = todoList.value.filter(item => !item.enable) 
+}
+```
+
+保留原数组的删除方式：splice
+- TodoList.vue
+```js
+for(let i=0; i< todoList.value.length; i++) {  
+	const item = todoList.value[i]  
+    if(item.enable) {  
+	    todoList.value.splice(i, 1)  
+	      i--;  
+    } 
+}
+```
+这种删除方式能保留原来的数组，不会丢失关联。
+
+
+#### 方法3： 监听TodoList.vue中todoList.value每次被赋值的情况
+如果你非要使用filter修改数组，更广泛的说，你需要对value重新赋值的情景，则需要在父组件中监听这一事件
+
+- TodoList.vue
+```js
+function deleteTodo() {  
+  todoList.value = todoList.value.filter(item => !item.enable)
+}
+```
+
+- Page.vue
+```js
+onMounted(()=> {  
+  todoList.value = todoListRef.value.todoList 
+  // 子组件每次value被赋值都会监听到
+  watch(()=> todoListRef.value.todoList, ()=> {  
+      todoList.value = todoListRef.value.todoList  
+  })
+```
+
+
+
+
 
 ### 场景2：监听子组件todoList数组的变化
 
