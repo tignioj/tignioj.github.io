@@ -225,23 +225,34 @@ const todoList = defineModel('myTodoList', {
   default: []  
 })
 ```
+
 需要注意的是，如果Page.vue中定义的todoList设置了默认值（null也是默认值），则defineModel的默认值会被覆盖。
 - Page.vue
 ```js
 const todoList = ref() // 没有设置默认值，则defineModel设置的默认值会生效
 const todoList1 = ref(null) // null为默认值，defineModel设置的默认值会被null覆盖
+const todoList2 = ref(['1', '2'])
 
-<FileManager v-model:todoList="todoList" /> 
-<FileManager v-model:todoList1="todoList1" /> 
+<FileManager 
+	v-model:todoList="todoList" 
+	v-model:todoList1="todoList1" 
+	v-model:todoList2="todoList2" 
+/>  
 ```
 - FileManager.vue
 
 ```js
 //默认值生效
 const todoList = defineModel('todoList', {default: ['hello']}) 
+console.log(todoList.value) // ['hello']
 
 //默认值被null覆盖，不生效
 const todoList1 = defineModel('todoList1', {default: ['hello']}) 
+console.log(todoList.value) // null
+
+//默认值被['1','2']覆盖
+const todoList1 = defineModel('todoList1', {default: ['hello']}) 
+console.log(todoList.value) // ['1', '2']
 ```
 
 
@@ -268,5 +279,140 @@ console.log(props.todoList)
 无论是v-bind还是v-model，通过父模板传递给子模版的数据都应该是只读的，但是由于js对于对象引用传递的特性，你可以修改引用对象内部的内容，但是不推荐子模板直接修改，而是通过emit事件通知父组件修改他们传递过来的数据。简而言之：数据的修改应该由提供者实现。
 
 
-## 理解v-on事件
-(未完待续)
+### 场景2：如何正确初始化数据
+现在FileManager有一个下拉列表，他的值由TodoList.vue组件中定义的todoList数组提供，要求FileManager默认选中第一个值。
+
+- Page.vue
+```js
+const todoListRef=ref()
+const todoList = ref();
+
+onMounted(()=> {
+	todoList.value = todoListRef.value.todoList
+})
+
+<TodoList ref="todoListRef" />
+<FileManager v-model:todoList="todoList"  />
+```
+
+- TodoList.vue动态更新数据，给todo添加2个值
+```js
+const todoList = ref([])
+// 假设从网络上请求了数据，并异步插入数据
+setTimeout(()=> {
+	todoList.value.push('hello')
+	todoList.value.push('world')
+}, 3000)
+```
+
+- FileManager.vue接受来自Page.vue的双向绑定数据
+```js
+// 注意这里Page.vue的ref()括号里面是空的，因此此处default生效
+const todoList = defineModel('todoList', {defautl: ['1', '2']})
+console.log(todoList.value) //  ['1', '2']
+```
+- FileManager.vue模板内容，此时未选择任何数据
+```html
+<select>   
+  <option v-for="(todo, index) in todoList"  
+		  :key="index"
+		  :value="todo.name" >  
+	{{ todo.name }}  
+  </option>  
+</select>
+```
+
+
+现在数据的来源和他们各自产生的变化已经捋清楚，已知TodoList.vue中会进行网络请求更新todoList的值，如何在完成请求后，让FileManager.vue获取到第一个值？
+
+
+我们可以创建一个新的响应式对象todoSelect，用watch监听todoList的变化，当todoList.length>0的时候赋值，于是可能你会想到这样错误的写watch
+- FileManager.vue
+```js
+const todoSelect = ref(null) // 用于存放当前下拉列表选择的值
+const todoList = defineModel('todoList', {defautl: ['1', '2']})
+
+
+watch(()=> todoList.value, (nv, ov)=> {  
+// 非常遗憾，这无法监听todoList.value内部数据被修改的情况，而只能监听value换了另一个对象的变化情况。对于TodoList组件内部异步请求的更新不会改变对象本身，而是往数组里面push内容
+  if(nv.length>0) { // 无效判断，nv甚至可能为空
+    todoSelect.value = nv.value[0]
+  }  
+})
+```
+
+##### 提问1. 上面的`todoList.value`指向的对象地址什么时候发生变化？
+
+要回答这个问题，首先要明确`todoList`的来源，显然来源于 `Page.vue` 定义的 `const todoList = ref()`，可以看到`Page.vue`中，在`onMounte`中修改了一次
+```js
+onMounted(()=> {  
+  console.log('page mounted', todoList.value)  
+  // 此处修改todoList.value，触发watch
+  todoList.value = todoListRef.value.todoList   
+  console.log('page todoList updated')
+
+...
+<TodoList />
+<FileManager :todoList="todoList"/>
+```
+
+执行顺序如下：
+1. TodoList组件被挂载，开始**异步**请求数据更新自己内部的todoList
+2. FileManager组件被挂载，开启监听todoList
+3. Page.vue最后挂载，**修改自己定义的todoList.value指向TodoList组件内部的数据**
+
+
+> 最终答案就是，在Page.vue中的onMount里面修改时，发生变化。
+
+##### 提问2：此时的`todoListRef.value.todoList` 是否有数据？
+
+我们继续完善执行顺序，下面这种情况是无数据的情况：
+
+1. TodoList组件被挂载，开始**异步**请求数据更新自己内部的todoList
+2. FileManager组件被挂载，开启监听todoList
+3. Page.vue最后挂载，**修改自己定义的todoList.value指向TodoList组件内部的数据**
+4. 触发FileManager的watch(()=>todoList.value ...)，假设TodoList的异步请求尚未结束，因此在这里debug的数组没有任何值！但是仍然是同一个数组对象
+5. TodoList组件网络请求成功，往todoList.value指向的数组开始添加数据，并不会修改todoList.value指向的对象（仍然是原来的数组）因此无法再次触发FileManager里面的watch
+
+
+由于异步请求时间的不确定性，因此第五步并非固定的。我们把第五步位置换一下
+
+1. TodoList组件被挂载，开始**异步**请求数据更新自己内部的todoList
+2. TodoList组件网络请求成功，往todoList.value指向的数组开始添加数据
+3. FileManager组件被挂载，开启监听todoList
+4. Page.vue最后挂载，**修改自己定义的todoList.value指向TodoList组件内部的数据** ,注意到第2步中数据已经请求结束，此时获取到了数据
+5. 触发FileManager的watch(()=>todoList.value ...)，由于TodoList的异步请求已经结束，其内部的todoList已经存放了新的内容，因此在这里debug的数组是有值的！
+
+
+#### 验证todoList内部异步更新数据会影响watch()对数据的判断。
+
+这里使用一个setTimeout延迟查看数据
+
+- TodoList.vue
+```js
+const todoList = ref([])
+setTimeout(()=> {
+	todoList.value.push('a')
+	todoList.value.push('b')
+}, 2000)  // 模拟网络延迟2秒
+```
+
+- FileManaer.vue
+```js
+watch(()=> todoList.value, (nv, ov)=> {  
+  console.log(todoList.value.length) // 0, 异步请求尚未结束
+  setTimeout(()=> {  
+    console.log(todoList.value.length) // 2 // 异步请求已经结束
+  }, 5000)  // 假设5秒钟后异步请求结束  
+})
+```
+
+
+### 结论：
+- 不要错误的认为watch(()=> todoList.value) 会监听数组内部的修改。
+- 考虑异步请求更新数据的时机
+
+## 理解provide和inject（跨层传递）
+
+## 理解v-on(缩写@)
+
