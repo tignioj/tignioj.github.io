@@ -15,6 +15,7 @@ description: 本文将涉及watch, ref, emit, provide, inject
 ## 理解watch
 ### 场景1：引用子组件暴露的数据（讨论使用watch的优缺点）
 
+#### 知识补充
 
 watch指南： https://cn.vuejs.org/guide/essentials/watchers.html
 
@@ -29,9 +30,29 @@ watch(
 )
 ```
 
+怎么理解这句话？好比你买了2个长得一样的碗，但是他们并不是同一个碗...
+
+- ()=> 碗1, 里面装了半碗米饭
+- ()=> 碗2，里面盛了一碗水
+
+伪代码：
+```js
+let 桌子上的.碗 = new 碗('半碗米饭');
+
+watch(()=> 桌子上的.碗, ()=>{})
+
+// 此时，并不会触发watch，因为碗还是那个碗1。
+桌子上的.碗.装满米饭()
+
+// 换一个碗,触发watch
+桌子上的.碗 = new 碗('盛满水')
+```
 
 
-举例：一个页面组件分配如下
+
+### 实例：子组件1引用子组件2数据
+
+一个页面组件分配如下
 
 - Page.vue
 ```js
@@ -52,11 +73,11 @@ defineExpose({
 })
 ```
 
-此时希望`FileManager.vue`能拿到这个数组，就需要`Page.vue`先拿到`todoList`，再把它传递给`FileManager.vue`
+此时希望`FileManager.vue`能拿到这个数组，就通过需要`Page.vue`先拿到`todoList`，再把它传递给`FileManager.vue`
 
 ##### 方法1：当TodoListRef被初始化时引用（watch能用，有更简单的办法）
 
-原理：注意到我们在`Page.vue`中初始化`todolistRef`为响应式值`ref`，但是没传参数，vuejs会在某个生命周期将其与子模板中`ref`属性的模板赋值，这个过程经历了todoListRef.value 从未定义到定义的变化。
+原理：注意到我们在`Page.vue`中初始化`todolistRef`为响应式值`ref`，但是没传参数，vuejs会在某个生命周期将其与子模板中`ref`属性的模板赋值，这个过程经历了`todoListRef.value 从未定义到定义的变化。
 ```js
 const todoListRef = ref();  // 未定义(没传参数就是没定义，ref(null)表示定义一个空)
 <TodoList ref="todoListRef" />  // ref属性和todoListRef变量相同，会在某个生命周期给这个响应式变量赋值
@@ -96,11 +117,11 @@ onMounted(()=> {
     todoList.value = nv;  
     console.log('检测到todoListRef.value被修改', nv);  
   })  
-  // 手动改变todoListRef的值
+  // 手动改变todoListRef的值,此时会触发watch
   todoListRef.value = null
 ```
 
-##### 方法2，在onMount直接赋值
+##### 方法2，在onMounted直接赋值
 但是由于Vue渲染顺序是先子模版再父模板，因此如果我们可以直接再`onMount`里面获取子模版暴露的值而无需watch...
 
 - Page.vue
@@ -118,7 +139,7 @@ onMounted(()=> {
 <TodoList ref="todoListRef" />
 ```
 
-不使用watch的一个缺点是，当TodoList组件内部的todoList.value被重新赋值时，无法再次建立关联。例如，TodoList.vue使用filter删除数据
+不使用watch的一个缺点是，当TodoList组件内部的`todoList.value`被重新赋值时，其他组件可能不再监听同一个数据。例如，TodoList.vue使用filter删除数据
 - TodoList.vue
 ```js
 function deleteTodo() {  
