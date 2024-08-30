@@ -201,28 +201,71 @@ fetch(url).then(res.json()).then(data=> {
 
 #### 方法1： 双向绑定：[v-model](https://cn.vuejs.org/guide/components/v-model.html)
 
-##### 无参数v-model
 - Page.vue
-```html
+```js
+const todoList = ref([])
+
 // 方式1：v-model 双向绑定
 <FileManager v-model="todoList" />   // 无参数传递v-model
+
+// 带参数传递v-model,冒号后面的值可以自定义为任何名称
+<FileManager v-model:myTodoList="todoList" />   
 ```
 
 父组件传递过来的v-model，子组件可以在script中通过`defineModel`获取
 - FileManager.vue
 ```js
-const todoList = defineModel('todoList', {  
+// 无参数model
+const todoList = defineModel({  
+  default: []
+})
+
+//获取带参数的model，这里的第一个参数和v-model冒号后面的参数要相同
+const todoList = defineModel('myTodoList', {  
   default: []  
 })
 ```
+需要注意的是，如果Page.vue中定义的todoList设置了默认值（null也是默认值），则defineModel的默认值会被覆盖。
+- Page.vue
+```js
+const todoList = ref() // 没有设置默认值，则defineModel设置的默认值会生效
+const todoList1 = ref(null) // null为默认值，defineModel设置的默认值会被null覆盖
+
+<FileManager v-model:todoList="todoList" /> 
+<FileManager v-model:todoList1="todoList1" /> 
+```
+- FileManager.vue
+
+```js
+//默认值生效
+const todoList = defineModel('todoList', {default: ['hello']}) 
+
+//默认值被null覆盖，不生效
+const todoList1 = defineModel('todoList1', {default: ['hello']}) 
+```
+
 
 #### 方法2：动态属性[v-bind](https://cn.vuejs.org/guide/components/props.html)
 
 - Page.vue
 ```html
-// 方式1：v-model 双向绑定
-<FileManager v-model="todoList" />  
+// v-bind缩写
+<FileManager :todoList="todoList" />  
 ```
+- FileManager.vue通过defineProps获取动态属性
+```js
+const props = defineProps({  
+  todoList: {  
+    type: Array,  
+    default: []  
+  }  
+})
+
+console.log(props.todoList) 
+```
+
+### 总结
+无论是v-bind还是v-model，通过父模板传递给子模版的数据都应该是只读的，但是由于js对于对象引用传递的特性，你可以修改引用对象内部的内容，但是不推荐子模板直接修改，而是通过emit事件通知父组件修改他们传递过来的数据。简而言之：数据的修改应该由提供者实现。
 
 
 ## 理解v-on事件
