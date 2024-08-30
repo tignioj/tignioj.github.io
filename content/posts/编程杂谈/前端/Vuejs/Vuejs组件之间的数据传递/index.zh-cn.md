@@ -287,7 +287,7 @@ console.log(props.todoList)
 无论是v-bind还是v-model，通过父模板传递给子模版的数据都应该是只读的，但是由于js对于对象引用传递的特性，你可以修改引用对象内部的内容，但是不推荐子模板直接修改，而是通过emit事件通知父组件修改他们传递过来的数据。简而言之：数据的修改应该由提供者实现。
 
 
-### 场景2：如何正确初始化数据
+### 场景2：FileManager默认选中第一个值
 现在FileManager有一个下拉列表，他的值由TodoList.vue组件中定义的todoList数组提供，要求FileManager默认选中第一个值。
 
 - Page.vue
@@ -319,7 +319,7 @@ setTimeout(()=> {
 const todoList = defineModel('todoList', {defautl: ['1', '2']})
 console.log(todoList.value) //  ['1', '2']
 ```
-- FileManager.vue模板内容，此时未选择任何数据
+- FileManager.vue模板下拉列表内容，此时未选择任何数据
 ```html
 <select>   
   <option v-for="(todo, index) in todoList"  
@@ -331,11 +331,26 @@ console.log(todoList.value) //  ['1', '2']
 ```
 
 
-现在数据的来源和他们各自产生的变化已经捋清楚，已知TodoList.vue中会进行网络请求更新todoList的值，如何在完成请求后，让FileManager.vue获取到第一个值？
 
-
-我们可以创建一个新的响应式对象todoSelect，用watch监听todoList的变化，当todoList.length>0的时候赋值，于是可能你会想到这样错误的写watch
+我们可以创建一个新的响应式对象todoSelect，这个todoSelect双向绑定optino
 - FileManager.vue
+```js
+const todoSelect = ref(null) // 用于存放当前下拉列表选择的值
+const todoList = defineModel('todoList', {defautl: ['1', '2']})
+
+<select v-model="todoSelect">   
+  <option v-for="(todo, index) in todoList"  
+		  :key="index"
+		  :value="todo.name" >  
+	{{ todo.name }}  
+  </option>  
+</select>
+```
+
+
+
+#### 提问1：如何在完成请求后，让FileManager.vue获取到第一个值？
+现在数据的来源和他们各自产生的变化已经捋清楚，已知TodoList.vue中会进行网络请求更新todoList的值，如何在完成请求后，让FileManager.vue获取到第一个值？你可能会想到watch
 ```js
 const todoSelect = ref(null) // 用于存放当前下拉列表选择的值
 const todoList = defineModel('todoList', {defautl: ['1', '2']})
@@ -349,7 +364,8 @@ watch(()=> todoList.value, (nv, ov)=> {
 })
 ```
 
-##### 提问1. 上面的`todoList.value`指向的对象地址什么时候发生变化？
+
+#### 提问2. 上面的`todoList.value`指向的对象地址什么时候发生变化？
 
 要回答这个问题，首先要明确`todoList`的来源，显然来源于 `Page.vue` 定义的 `const todoList = ref()`，可以看到`Page.vue`中，在`onMounte`中修改了一次
 ```js
@@ -372,7 +388,7 @@ onMounted(()=> {
 
 > 最终答案就是，在Page.vue中的onMount里面修改时，发生变化。
 
-##### 提问2：此时的`todoListRef.value.todoList` 是否有数据？
+#### 提问3：此时的`todoListRef.value.todoList` 是否有数据？
 
 我们继续完善执行顺序，下面这种情况是无数据的情况：
 
@@ -416,11 +432,49 @@ watch(()=> todoList.value, (nv, ov)=> {
 ```
 
 
+#### 讨论其他的几种的写法
+
+##### 方式1：设置deep: true
+这会让todoList的任意一根毫毛变化时候都触发，非常不好，更糟糕的是，每次增删都会使得FileManager重新选择第一个值。
+
+- FileManager.vue
+```js
+const todoSelect = ref(null) // 用于存放当前下拉列表选择的值
+const todoList = defineModel('todoList', {defautl: ['1', '2']})
+
+
+watch(()=> todoList.value, (nv, ov)=> {  
+  if(nv.length>0) {
+    todoSelect.value = nv[0]
+  }  
+}, {deep: true})
+```
+
+#### 方法2：监听数组的长度
+此种方法略胜一筹，对数据内容不敏感，而是每次数组长度变化时触发。
+- FileManager.vue
+```js
+watch(()=> todoList.value?.length, (nv, ov)=> {  
+  if(nv!== ov) {  
+    if(todoList.value.length >0) {  
+      todoSelect.value = todoList.value[0].name  
+    }  
+  }  
+})
+```
+
+
+
 ### 结论：
 - 不要错误的认为watch(()=> todoList.value) 会监听数组内部的修改。
 - 考虑异步请求更新数据的时机
 
 ## 理解provide和inject（跨层传递）
+（待完成）
 
 ## 理解v-on(缩写@)
+
+
+
+
 
