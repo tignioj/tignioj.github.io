@@ -24,16 +24,21 @@ network:
   ethernets:
     ens33:
       addresses:
-        - 192.168.211.132/24  # 获取静态ip地址
+        - 192.168.254.132/24  # 获取静态ip地址
       nameservers:
         addresses: [4.2.2.2, 8.8.8.8]
       routes:
         - to: default
-          via: 192.168.211.2 # 网关IP
+          via: 192.168.254.2 # 网关IP
   version: 2
 ```
 
-保存后，最后应用配置
+需要注意的是，via填写虚拟机的网关ip（也就是路由地址），位置在编辑->虚拟网络编辑器。然后静态ip地址网段要和网关的网段相同，否则无法联网。例如我这里是254
+
+![](Pasted%20image%2020240902181639.png)
+
+
+保存后，最后应用配置 
 ```
 sudo netplan apply
 ```
