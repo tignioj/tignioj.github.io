@@ -75,3 +75,7 @@ const customCompleter = {
 ### 最终效果
 ![](Pasted%20image%2020240905063609.png)
 
+
+
+### 参考
+- https://github.com/ajaxorg/ace/issues/4597
