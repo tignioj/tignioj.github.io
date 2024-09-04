@@ -81,4 +81,5 @@ const customCompleter = {
 - https://github.com/ajaxorg/ace/issues/4597
 - https://github.com/CarterLi/vue3-ace-editor#breaking-change
 - https://stackoverflow.com/questions/13545433/autocompletion-in-ace-editor
+- https://stackoverflow.com/questions/24651222/misspelled-ace-editor-options
 - https://github.com/ajaxorg/ace/wiki/Configuring-Ace  功能对应要导入的库
