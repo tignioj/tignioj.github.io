@@ -79,3 +79,4 @@ const customCompleter = {
 
 ### 参考
 - https://github.com/ajaxorg/ace/issues/4597
+- https://github.com/CarterLi/vue3-ace-editor#breaking-change
