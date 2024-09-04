@@ -78,6 +78,7 @@ const customCompleter = {
 
 
 ### 参考
+- https://github.com/ajaxorg/ace/wiki/How-to-enable-Autocomplete-in-the-Ace-editor 如何开启自动补全
 - https://github.com/ajaxorg/ace/issues/4597
 - https://github.com/CarterLi/vue3-ace-editor#breaking-change
 - https://stackoverflow.com/questions/13545433/autocompletion-in-ace-editor
