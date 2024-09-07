@@ -28,7 +28,7 @@ ace.config.setModuleUrl('ace/ext/language_tools', extTool);
 import extTool from 'ace-builds/src-noconflict/ext-language_tools';
 ```
 
-注意：`ace.config.set('basePath'xxx` 会导致vuejs无法打包，因此改用下列写法
+注意：`ace.config.set('basePath'xxx)` 会导致vuejs[无法打包](https://github.com/ajaxorg/ace/issues/4597)，因此改用下列写法
 ```js
 import ace  from 'ace-builds'  
 import extTool from 'ace-builds/src-noconflict/ext-language_tools';  
