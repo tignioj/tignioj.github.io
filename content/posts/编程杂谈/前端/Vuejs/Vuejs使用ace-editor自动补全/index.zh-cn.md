@@ -32,8 +32,8 @@ import extTool from 'ace-builds/src-noconflict/ext-language_tools';
 ```js
 import ace  from 'ace-builds'  
 import extTool from 'ace-builds/src-noconflict/ext-language_tools';  
-import modeC_Cpp from 'ace-builds/src-noconflict/mode-c_cpp?url';  
-import monokai from "ace-builds/src-noconflict/theme-monokai?url";  
+import modeC_Cpp from 'ace-builds/src-noconflict/mode-c_cpp';  
+import monokai from "ace-builds/src-noconflict/theme-monokai";  
   
 ace.config.setModuleUrl('ace/ext/language_tools', extTool);  
 ace.config.setModuleUrl("ace/mode/c_cpp", modeC_Cpp);  
