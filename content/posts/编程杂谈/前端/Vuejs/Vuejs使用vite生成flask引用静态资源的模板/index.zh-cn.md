@@ -1,6 +1,6 @@
 ---
 date: 2024-09-24T21:00:52+08:00
-lastmod: 2024-09-24T21:00:52+08:00
+lastmod: 2024-09-25T00:06:56+08:00
 categories:
   - 编程杂谈
   - 前端
@@ -11,7 +11,7 @@ tags:
   - Vuejs
   - Flask
   - vite
-series:
+series: 
 ---
 
 ## 问题描述
@@ -103,7 +103,7 @@ export default function flaskPlugin() {
 }
 ```
 
-在 vite.config.js中导入并使用我们刚刚编写的插件
+在 `vite.config.js`中导入并使用我们刚刚编写的插件
 ```js
 import { fileURLToPath, URL } from 'node:url'
 
@@ -160,4 +160,34 @@ export default defineConfig({
   </body>
 </html>
 
+```
+
+
+## 注意事项：
+启用插件后，执行npm run dev会无法预览，可能是flask模板无法直接预览，于是修改`vite.config.js`为仅在build的时候启用该插件
+
+```js
+export default defineConfig(({ command }) => {
+  return {
+    plugins: [
+      vue(),
+      // 仅在 build 模式下启用 flaskPlugin
+      command === 'build' && flaskPlugin()
+    ],
+    resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  },
+    build: {
+      rollupOptions: {
+        output: {
+          entryFileNames: 'assets/[name]-[hash].js',
+          chunkFileNames: 'assets/[name]-[hash].js',
+          assetFileNames: 'assets/[name]-[hash].[ext]',
+        },
+      },
+    },
+  };
+});
 ```
