@@ -1,6 +1,6 @@
 ---
 date: 2024-02-21T00:10:40+08:00
-lastmod: 2024-03-17T23:15:27+08:00
+lastmod: 2024-09-25T21:17:49+08:00
 categories:
   - 玩机
   - 路由器
@@ -148,7 +148,7 @@ root@RAX3000M:/tmp# sync
 	- 浏览器打开192.168.1.1
 
 
-### 方法2：immortalwrt的uboot(推荐，支持DHCP)
+### 方法2：immortalwrt的uboot(推荐)
 > 不是说immortalwrt的uboot只能刷immortalwrt的刷机包，这个uboot可以刷大部分的`.bin`格式的刷机包，例如lede的固件也是可以刷的，其他的刷机包自行测试。
 
 - 参考： openwrt RAX3000M官方教程 https://github.com/openwrt/openwrt/pull/13513
@@ -212,7 +212,7 @@ opkg install parted
 
 进入uboot方式和方法1一样。
 
-> parted命令报错不要紧，只要刷uboot的命令和结果正确了，就可以按步骤进入uboot刷固件，到时候再安装parted命令查看分区结果。有群友说不支持DHCP，但是我自己尝试了几遍后都是支持DHCP的，目前不清楚造成这种差异的原因，如果知道原因的麻烦告知一下。
+> parted命令报错不要紧，只要刷uboot的命令和结果正确了，就可以按步骤进入uboot刷固件，到时候再安装parted命令查看分区结果。
 
 
 
