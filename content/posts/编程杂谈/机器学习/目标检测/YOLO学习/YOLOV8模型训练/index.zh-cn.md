@@ -104,9 +104,7 @@ print("valid labels:", valid_labels)
 
 tree.yaml
 ```yml
-# path: G:\PyCharmProgram\YOLOlearn\yolov8demo\mytreedemo\sp_datasets  
-# 建议用相对目录
-path: sp_datasets  
+path: G:\PyCharmProgram\YOLOlearn\yolov8demo\mytreedemo\sp_datasets  
 train: train/images  
 test: test/images  
 val: valid/images  
@@ -191,7 +189,7 @@ yolo cfg=default_copy.yaml
 - data尽量设置为相对目录，而非绝对目录，因为这个路径会被写入到~/AppData/Roaming/Ultralytics/settings.yaml
 - 调整数据集目录后再次训练，需要删除~/AppData/Roaming/Ultralytics/settings.yaml
 
-如果data设置为绝对路径，生成的settings.yaml如下
+如果data设置为绝对路径，生成的settings.yaml如下，会发现datasets
 ```
 settings_version: 0.0.4
 datasets_dir: E:\game\datasets
@@ -211,6 +209,11 @@ tensorboard: true
 wandb: true
 
 ```
+
+
+更新：关于路径的问题，设置一个path就行，不会影响
+
+
 
 ## 参考
 - https://www.bilibili.com/video/BV1j24y1577q?spm_id_from=333.788.videopod.sections&vd_source=cdd8cee3d9edbcdd99486a833d261c72
