@@ -7,7 +7,7 @@ categories:
   - 目标检测
   - YOLO学习
 title: YOLOV8模型训练
-draft: "true"
+draft: "false"
 tags:
   - YOLO
 series:
