@@ -217,3 +217,4 @@ wandb: true
 
 ## 参考
 - https://www.bilibili.com/video/BV1j24y1577q?spm_id_from=333.788.videopod.sections&vd_source=cdd8cee3d9edbcdd99486a833d261c72
+-  含笔记： https://www.bilibili.com/video/BV1fY411y7Xq?spm_id_from=333.788.recommend_more_video.0&vd_source=cdd8cee3d9edbcdd99486a833d261c72
