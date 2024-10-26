@@ -7,7 +7,7 @@ categories:
   - 目标检测
   - YOLO学习
 title: YOLOV8如何训练自己的数据
-draft: "true"
+draft: "false"
 tags:
   - YOLO
   - 数据标注
