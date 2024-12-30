@@ -1,6 +1,6 @@
 ---
 date: 2024-02-21T00:10:40+08:00
-lastmod: 2024-09-25T21:17:49+08:00
+lastmod: 2024-12-31T03:39:10+08:00
 categories:
   - 玩机
   - 路由器
@@ -975,3 +975,8 @@ ntfs-3g /dev/sda1 /mnt/sda1
 ### 找不到无线设置选项？
 - bug反馈： https://github.com/immortalwrt/immortalwrt/issues/1201
 - emmc设备安装了autosamba会出现此bug，删掉它即可。系统->软件包->过滤框输入 autosamba，找到autosamba并删掉。
+
+
+### samba4网络共享无法访问？
+- 参考: https://learn.microsoft.com/zh-cn/troubleshoot/windows-client/networking/cannot-access-shared-folder-file-explorer
+- 解决方式： windows同时按下`win` + `r` 两个按键，弹出运行框后输入`gpedit.msc`打开`本地组策略编辑器`，找到`计算机配置`->`管理模板`->`网络` ->`Lanman工作站` ，双击`启用不安全的来宾登录` ，把`未配置`改为`已启用`，最后点击`确定`
